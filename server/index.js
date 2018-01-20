@@ -10,6 +10,8 @@ jservice.register("socket", require("./socket.jservice.js"));
 
 jservice.register("socketio", require("./socketio.jservice.js"));
 
+jservice.register("config", require("./config.jservice.js"));
+
 // Start server ---------------------------------------------------------------
 
 var socket = jservice.get("socket");

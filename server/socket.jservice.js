@@ -28,7 +28,7 @@ var start = function() {
     });
 
     socketio.listen(https_server.get_https_server());
-    console.info("socket.jservice started");
+    console.info("socket.jservice: Started");
 };
 
 // Exports --------------------------------------------------------------------
