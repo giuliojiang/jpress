@@ -1,6 +1,17 @@
+STANDARD
+
+    All messages use socket.io event "jpress_txt".
+
+    All messages are JSON objects that have a field "_t" for the type.
+
 FROM SERVER
 
 
 
 FROM CLIENT
 
+    {
+        _t: login_login,
+        user: String,
+        pass: String
+    }

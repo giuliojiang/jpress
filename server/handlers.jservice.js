@@ -1,5 +1,9 @@
 
 
+// Local ----------------------------------------------------------------------
+
+var registered_handlers = {};
+
 // init -----------------------------------------------------------------------
 
 var init = function(jservice) {
@@ -8,13 +12,41 @@ var init = function(jservice) {
 
 // handle ---------------------------------------------------------------------
 
-var handle = function(msgobj, socket) {
+var handle_internal = function(msgobj, socket) {
     console.info("handlers.jservice: Got message: " + JSON.stringify(msgobj));
+
+    var t = msgobj._t;
+    if (!t) {
+        console.debug("handlers.jservice: No _t in message: " + JSON.stringify(msgobj));
+        return;
+    }
+
+    if (t in registered_handlers) {
+        registered_handlers[t](msgobj, socket);
+    } else {
+        console.debug("handlers.jservice: No handler able to handle message type ["+ t +"]");
+    }
+};
+
+var handle = function(msgobj, socket) {
+    try {
+        handle_internal(msgobj, socket);
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+// register -------------------------------------------------------------------
+
+// A handler is a function that takes (msgobj, socket)
+var register = function(name, h) {
+    registered_handlers[name] = h;
 };
 
 // Exports --------------------------------------------------------------------
 
 module.exports = {
     init: init,
-    handle: handle
+    handle: handle,
+    register: register
 };

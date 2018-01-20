@@ -13,13 +13,25 @@
 
         <!-- Controller -->
         <script src="index.controller.js"></script>
+        <script src="posts.controller.js"></script>
 
     </head>
 
     <body ng-app="mainApp" ng-controller="main_controller">
 
+        <nav>
+            <div class="nav-wrapper container">
+                <a href="#" class="brand-logo">Giulio Jiang</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <!--<li><a href="sass.html">Link</a></li>-->
+                </ul>
+            </div>
+        </nav>
+
         <div class="container">
-            <h1>Welcome to Web Base!</h1>
+
+            <div ng-include="'posts.html'"></div>
+
         </div>
 
     </body>
