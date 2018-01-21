@@ -1,24 +1,22 @@
-var jservice = require("./jservice.js");
+var path = require("path");
+var jservice = require(path.join(__dirname, "jservice.js"));
 
 // Register services ----------------------------------------------------------
 
-jservice.register("handlers", require("./handlers.jservice.js"));
+var find_service = function(name) {
+    jservice.register(name, require(path.join(__dirname, name + ".jservice.js")));
+};
 
-jservice.register("https_server", require("./https_server.jservice.js"));
-
-jservice.register("socket", require("./socket.jservice.js"));
-
-jservice.register("socketio", require("./socketio.jservice.js"));
-
-jservice.register("config", require("./config.jservice.js"));
-
-jservice.register("timeout", require("./timeout.jservice.js"));
-
-jservice.register("client_session", require("./client_session.jservice.js"));
-
-jservice.register("token_generator", require("./token_generator.jservice.js"));
-
-jservice.register("handler_login", require("./handler_login.jservice.js"));
+find_service("handlers");
+find_service("https_server");
+find_service("socket");
+find_service("socketio");
+find_service("config");
+find_service("timeout");
+find_service("client_session");
+find_service("token_generator");
+find_service("handler_login");
+find_service("password");
 
 // Start eager services -------------------------------------------------------
 

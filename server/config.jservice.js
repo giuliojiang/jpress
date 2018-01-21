@@ -1,22 +1,10 @@
 
-
 // init -----------------------------------------------------------------------
 
-var init = function(jservice) {
+module.exports.init = function(jservice) {
+    var fs = require("fs");
+    var path = require("path");
 
-};
-
-// config ---------------------------------------------------------------------
-
-var vals = {
-    privkey: "./../local/private.key",
-    cert: "./../local/cert.pem",
-    port: 21555
-};
-
-// Exports --------------------------------------------------------------------
-
-module.exports = {
-    init: init,
-    vals: vals
+    var read_file = fs.readFileSync(path.join(__dirname, "..", "local", "config.json"));
+    module.exports.vals = JSON.parse(read_file);
 };

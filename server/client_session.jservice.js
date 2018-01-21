@@ -36,6 +36,8 @@ var start_session = function() {
         clear_handle = null;
         active_token = null;
     }, 1000 * 3600 * 24); // Clear after 24 hours
+
+    return tok;
 };
 
 // token_valid ----------------------------------------------------------------

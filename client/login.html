@@ -1,0 +1,22 @@
+<div ng-controller="login">
+    <div class="container" ng-keyup="login_key($event.keyCode)">
+        <!--Username-->
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="login_user" type="text" class="validate" ng-model="username">
+                <label for="login_user">username</label>
+            </div>
+        </div>
+        <!--Password-->
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="login_password" type="password" class="validate" ng-model="password">
+                <label for="login_password">password</label>
+            </div>
+        </div>
+        <!--Button-->
+        <div class="row">
+            <a class="waves-effect waves-light btn" ng-click="login()">Login</a>
+        </div>
+    </div>
+</div>

@@ -14,11 +14,8 @@ var init = function(jservice) {
 
 var start = function() {
     socketio.on("connection", function(socket) {
-        console.info("A client connected " + socket);
-
         // Disconnect handler
         socket.on("disconnect", function() {
-            console.info("A client disconnected " + socket);
         });
 
         // Message handler

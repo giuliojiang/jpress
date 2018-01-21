@@ -18,10 +18,17 @@ var listen = function(server) {
     io.listen(server);
 };
 
+// send -----------------------------------------------------------------------
+
+var send = function(socket, msgobj) {
+    socket.emit("jpress_txt", msgobj);
+};
+
 // Exports --------------------------------------------------------------------
 
 module.exports = {
     init: init,
     on: on,
-    listen: listen
+    listen: listen,
+    send: send
 };

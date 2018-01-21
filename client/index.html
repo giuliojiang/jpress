@@ -2,6 +2,8 @@
 
     <head>
 
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
         <!-- Compiled and minified CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 
@@ -17,6 +19,7 @@
         <!-- Controller -->
         <script src="index.controller.js"></script>
         <script src="posts.controller.js"></script>
+        <script src="login.controller.js"></script>
 
         <!-- Services -->
         <script src="socket.service.js"></script>
@@ -27,16 +30,18 @@
 
         <nav>
             <div class="nav-wrapper container">
-                <a href="#" class="brand-logo">Giulio Jiang</a>
+                <a href="#" class="brand-logo" ng-click="main_view_switch('posts')">Giulio Jiang</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <!--<li><a href="sass.html">Link</a></li>-->
+                    <li><a ng-click="main_view_switch('login')">Login</a></li>
                 </ul>
             </div>
         </nav>
 
         <div class="container">
 
-            <div ng-include="'posts.html'"></div>
+            <div ng-show="main_view == 'posts'" ng-include="'posts.html'"></div>
+
+            <div ng-show="main_view == 'login'" ng-include="'login.html'"></div>
 
         </div>
 

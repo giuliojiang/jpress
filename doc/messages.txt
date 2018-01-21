@@ -6,7 +6,11 @@ STANDARD
 
 FROM SERVER
 
-
+    {
+        _t: login_login,
+        status: "ok", // ok, fail
+        token: String
+    }
 
 FROM CLIENT
 
