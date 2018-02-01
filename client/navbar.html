@@ -2,7 +2,8 @@
     <div class="nav-wrapper container">
         <a href="#" class="brand-logo" ng-click="main_view_switch('posts')">Giulio Jiang</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a ng-click="main_view_switch('login')">Login</a></li>
+            <li><a ng-show="logged_in()" ng-click="main_view_switch('write')">Write</a></li>
+            <li><a ng-show="!logged_in()" ng-click="main_view_switch('login')">Login</a></li>
         </ul>
     </div>
 </nav>

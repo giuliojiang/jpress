@@ -1,4 +1,4 @@
-mainApp.controller("login", function($scope, socket) {
+mainApp.controller("login", function($scope, socket, login_handler) {
 
     $scope.username = null;
     $scope.password = null;
@@ -16,13 +16,5 @@ mainApp.controller("login", function($scope, socket) {
             $scope.login();
         }
     };
-
-    // Handlers ---------------------------------------------------------------
-
-    var login_feedback_handler = function(msgobj) {
-        console.info("login_feedback_handler: got " + JSON.stringify(msgobj));
-    };
-
-    socket.register("login_login", login_feedback_handler);
 
 });

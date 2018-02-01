@@ -12,6 +12,12 @@ FROM SERVER
         token: String
     }
 
+    TODO
+    {
+        _t: session_validate_token,
+        status: "ok" / "fail"
+    }
+
 FROM CLIENT
 
     {
@@ -20,8 +26,15 @@ FROM CLIENT
         pass: String
     }
 
+    TODO
     {
         _t: posts_get_page,
         token: String,
         page: Int
+    }
+
+    TODO
+    {
+        _t: session_validate_token,
+        token: String
     }
