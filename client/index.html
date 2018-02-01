@@ -20,30 +20,21 @@
         <script src="index.controller.js"></script>
         <script src="posts.controller.js"></script>
         <script src="login.controller.js"></script>
+        <script src="navbar.controller.js"></script>
 
         <!-- Services -->
         <script src="socket.service.js"></script>
+        <script src="rawhtml.service.js"></script>
+        <script src="switcher.service.js"></script>
 
     </head>
 
     <body ng-app="mainApp" ng-controller="main_controller">
-
-        <nav>
-            <div class="nav-wrapper container">
-                <a href="#" class="brand-logo" ng-click="main_view_switch('posts')">Giulio Jiang</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a ng-click="main_view_switch('login')">Login</a></li>
-                </ul>
-            </div>
-        </nav>
-
+        <div ng-include="'navbar.html'"></div>
         <div class="container">
-
-            <div ng-show="main_view == 'posts'" ng-include="'posts.html'"></div>
-
-            <div ng-show="main_view == 'login'" ng-include="'login.html'"></div>
-
+            <div ng-if="is_active('posts')" ng-include="'posts.html'"></div>
+            <div ng-if="is_active('login')" ng-include="'login.html'"></div>
+            <div ng-if="is_active('write')" ng-include="'write.html'"></div>
         </div>
-
     </body>
 </html>
