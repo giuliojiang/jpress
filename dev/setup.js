@@ -23,14 +23,6 @@ console.info("Server port:");
 
 var actions = [
     (line) => {
-        var port = parseInt(line);
-        console.info("Port: ["+ port +"]");
-        default_conf.port = port;
-
-        console.info("Username:");
-    },
-
-    (line) => {
         console.info("User: ["+ line +"]");
         default_conf.user = line;
 

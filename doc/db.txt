@@ -1,0 +1,11 @@
+POST DATASTORE
+
+    Contains posts.
+    A post is:
+
+    {
+        _id: String      nedb automatic id
+        created: Date    creation date
+        title: String    title plain text
+        body: String     body, markdown string
+    }

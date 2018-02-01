@@ -17,10 +17,15 @@ find_service("client_session");
 find_service("token_generator");
 find_service("handler_login");
 find_service("password");
+find_service("util");
+find_service("handler_posts");
+find_service("db_post");
+find_service("db");
 
 // Start eager services -------------------------------------------------------
 
 jservice.get("handler_login");
+jservice.get("handler_posts");
 
 // Start server ---------------------------------------------------------------
 

@@ -19,3 +19,9 @@ FROM CLIENT
         user: String,
         pass: String
     }
+
+    {
+        _t: posts_get_page,
+        token: String,
+        page: Int
+    }
