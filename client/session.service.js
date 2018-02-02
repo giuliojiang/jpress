@@ -44,7 +44,9 @@ mainApp.service('session', function(socket, $rootScope) {
                 self.set_token(token);
                 $rootScope.$apply();
             } else {
-                console.info("session: token rejected");
+                console.info("session: token rejected. Clearing tokens");
+                self.clear_token();
+                $rootScope.$apply();
             }
         });
 

@@ -23,6 +23,18 @@ var handle_session_validate_token = function(msgobj, socket) {
 
 };
 
+// handle_session_end ---------------------------------------------------------
+
+var handle_session_end = function(msgobj, socket) {
+
+    self.client_session.end_session();
+    self.socketio.send(socket, {
+        _t: "session_validate_token",
+        status: "fail"
+    });
+
+};
+
 // init -----------------------------------------------------------------------
 
 module.exports.init = function(jservice) {
@@ -32,5 +44,5 @@ module.exports.init = function(jservice) {
     self.socketio = jservice.get("socketio");
 
     self.handlers.register("session_validate_token", handle_session_validate_token);
-
+    self.handlers.register("session_end", handle_session_end);
 };

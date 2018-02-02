@@ -36,3 +36,10 @@ FROM CLIENT
         _t: session_validate_token,
         token: String
     }
+
+    TODO SERVER
+    {
+        _t: session_end
+    }
+    To logout.
+    Server wipes current session and sends a session_validate_token with "fail".
