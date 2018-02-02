@@ -22,6 +22,8 @@ mainApp.controller("write", function($scope, rawhtml, socket, session) {
 
     this.$onInit = function() {
 
+        console.info("write: $onInit");
+
         socket.register("write_preview", function(msgobj) {
             var html_str = msgobj.html;
             rawhtml.setHTML($scope.preview_id(), html_str);

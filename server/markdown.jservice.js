@@ -1,24 +1,11 @@
 
 var self = {};
 
-// Private --------------------------------------------------------------------
-
-// Returns a filtered string
-// Replaces tag symbols with safe characters
-var filter_unsafe = function(md_str) {
-
-    var res = md_str.split("<").join("&lt;");
-    res = res.split(">").join("&gt;");
-    return res;
-
-};
-
 // render_markdown ------------------------------------------------------------
 
 module.exports.render_markdown = function(md_str) {
 
-    var safe_md = filter_unsafe(md_str);
-    return self.md.render(safe_md);
+    return self.md.render(md_str);
 
 };
 
@@ -26,10 +13,20 @@ module.exports.render_markdown = function(md_str) {
 
 module.exports.init = function(jservice) {
 
+    self.hljs = require('highlight.js');
+
     self.md = require('markdown-it')({
         breaks: true,
         linkify: true,
-        typographer: true
+        typographer: true,
+        highlight: function (str, lang) {
+            if (lang && self.hljs.getLanguage(lang)) {
+                try {
+                    return self.hljs.highlight(lang, str).value;
+                } catch (__) {}
+            }
+            return ''; // use external default escaping
+        }
     });
 
 
