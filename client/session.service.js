@@ -1,4 +1,4 @@
-mainApp.service('session', function(socket) {
+mainApp.service('session', function(socket, $rootScope) {
 
     var self = this;
     var d = {};
@@ -42,6 +42,7 @@ mainApp.service('session', function(socket) {
                 // Set token status
                 console.info("session: token valid");
                 self.set_token(token);
+                $rootScope.$apply();
             } else {
                 console.info("session: token rejected");
             }
@@ -55,5 +56,6 @@ mainApp.service('session', function(socket) {
             });
         }
     };
+    init();
 
 });

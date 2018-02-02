@@ -21,11 +21,13 @@ find_service("util");
 find_service("handler_posts");
 find_service("db_post");
 find_service("db");
+find_service("handler_session");
 
 // Start eager services -------------------------------------------------------
 
 jservice.get("handler_login");
 jservice.get("handler_posts");
+jservice.get("handler_session");
 
 // Start server ---------------------------------------------------------------
 

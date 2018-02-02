@@ -17,14 +17,14 @@ var handle_internal = function(msgobj, socket) {
 
     var t = msgobj._t;
     if (!t) {
-        console.debug("handlers.jservice: No _t in message: " + JSON.stringify(msgobj));
+        console.info("handlers.jservice: No _t in message: " + JSON.stringify(msgobj));
         return;
     }
 
     if (t in registered_handlers) {
         registered_handlers[t](msgobj, socket);
     } else {
-        console.debug("handlers.jservice: No handler able to handle message type ["+ t +"]");
+        console.info("handlers.jservice: No handler able to handle message type ["+ t +"]");
     }
 };
 
