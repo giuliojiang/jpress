@@ -17,6 +17,12 @@ FROM SERVER
         status: "ok" / "fail"
     }
 
+    TODO SERVER
+    {
+        _t: write_preview,
+        html: String                 HTML rendered string
+    }
+
 FROM CLIENT
 
     {
@@ -37,9 +43,15 @@ FROM CLIENT
         token: String
     }
 
-    TODO SERVER
     {
         _t: session_end
     }
     To logout.
     Server wipes current session and sends a session_validate_token with "fail".
+
+    TODO SERVER
+    {
+        _t: write_preview,
+        txt: String             Markdown string
+    }
+    Request a markdown render preview

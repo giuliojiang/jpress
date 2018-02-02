@@ -8,6 +8,7 @@ mainApp.controller("navbar", function($scope, switcher, session, socket) {
         socket.send({
             _t: "session_end"
         });
+        switcher.show("login");
     };
 
 });
