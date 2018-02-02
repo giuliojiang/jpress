@@ -22,12 +22,15 @@ find_service("handler_posts");
 find_service("db_post");
 find_service("db");
 find_service("handler_session");
+find_service("markdown");
+find_service("handler_write");
 
 // Start eager services -------------------------------------------------------
 
 jservice.get("handler_login");
 jservice.get("handler_posts");
 jservice.get("handler_session");
+jservice.get("handler_write");
 
 // Start server ---------------------------------------------------------------
 

@@ -6,7 +6,8 @@ mainApp.controller("navbar", function($scope, switcher, session, socket) {
 
     $scope.logout = function() {
         socket.send({
-            _t: "session_end"
+            _t: "session_end",
+            token: session.get_token()
         });
         switcher.show("login");
     };

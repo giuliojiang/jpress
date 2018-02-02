@@ -1,4 +1,4 @@
-mainApp.controller("write", function($scope, rawhtml, socket) {
+mainApp.controller("write", function($scope, rawhtml, socket, session) {
 
     $scope.d = {};
     // title
@@ -9,7 +9,8 @@ mainApp.controller("write", function($scope, rawhtml, socket) {
     $scope.preview = function() {
         socket.send({
             _t: "write_preview",
-            txt: $scope.d.text
+            txt: $scope.d.text,
+            token: session.get_token()
         });
     };
 

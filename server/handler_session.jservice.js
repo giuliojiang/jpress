@@ -27,11 +27,13 @@ var handle_session_validate_token = function(msgobj, socket) {
 
 var handle_session_end = function(msgobj, socket) {
 
-    self.client_session.end_session();
-    self.socketio.send(socket, {
-        _t: "session_validate_token",
-        status: "fail"
-    });
+    if (self.client_session.token_valid(msgobj.token)) {
+        self.client_session.end_session();
+        self.socketio.send(socket, {
+            _t: "session_validate_token",
+            status: "fail"
+        });
+    }
 
 };
 
