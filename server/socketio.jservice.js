@@ -24,11 +24,22 @@ var send = function(socket, msgobj) {
     socket.emit("jpress_txt", msgobj);
 };
 
+// alert ----------------------------------------------------------------------
+
+// Sends an alert message to the client
+var alert = function(socket, txt) {
+    send(socket, {
+        _t: "alert",
+         txt: txt
+    });
+};
+
 // Exports --------------------------------------------------------------------
 
 module.exports = {
     init: init,
     on: on,
     listen: listen,
-    send: send
+    send: send,
+    alert: alert
 };

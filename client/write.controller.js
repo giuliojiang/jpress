@@ -18,6 +18,15 @@ mainApp.controller("write", function($scope, socket, session, write_data) {
         return "write_preview_" + $scope.$id;
     };
 
+    $scope.submit = function() {
+        socket.send({
+            _t: "write_submit",
+            txt: $scope.d.text,
+            token: session.get_token(),
+            title: $scope.d.title
+        });
+    };
+
     // init -------------------------------------------------------------------
 
     this.$onInit = function() {

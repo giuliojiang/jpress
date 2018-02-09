@@ -22,6 +22,18 @@ FROM SERVER
         html: String                 HTML rendered string
     }
 
+    {
+        _t: write_submit
+    }
+    Receiving this message signals that the post was saved successfully
+    and the user can be redirected to the homepage
+
+    {
+        _t: alert,
+        txt: String
+    }
+    Generic alert to be displayed to the user.
+
 FROM CLIENT
 
     {
@@ -55,3 +67,11 @@ FROM CLIENT
         token: String
     }
     Request a markdown render preview
+
+    {
+        _t: write_submit,
+        title: String            required
+        txt: String,             Markdown string
+        token: String
+    }
+    Submit a post. It will be written to db

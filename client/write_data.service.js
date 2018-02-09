@@ -1,4 +1,4 @@
-mainApp.service("write_data", function(socket, rawhtml) {
+mainApp.service("write_data", function(socket, rawhtml, switcher, $rootScope, alert) {
 
     var self = this;
 
@@ -8,6 +8,13 @@ mainApp.service("write_data", function(socket, rawhtml) {
     socket.register("write_preview", function(msgobj) {
         var html_str = msgobj.html;
         rawhtml.setHTML(preview_id, html_str);
+    });
+
+    // write_submit handler ---------------------------------------------------
+    socket.register("write_submit", function(msgobj) {
+        switcher.show("posts");
+        $rootScope.$apply();
+        alert.alert("Post submitted");
     });
 
     // set_preview_id ---------------------------------------------------------
