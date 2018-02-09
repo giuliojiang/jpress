@@ -10,13 +10,13 @@ Install npm modules
 make
 ```
 
-Configure editor's username and password, and choose server port
+Configure editor's username and password.
 
 ```
 make run-setup
 ```
 
-Copy your SSL cert files to `local/private.key` and `local/cert.pem`.
+Copy your SSL cert files to `local/private.key` and `local/cert.pem`. For developmet, you can use the script in `local/gen_cert.sh` to self-sign a certificate.
 
 You can run a dev HTTPS server for local testing using
 

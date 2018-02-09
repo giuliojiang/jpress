@@ -10,7 +10,8 @@ var default_conf = {
     "cert": "./../local/cert.pem",
     "port": 21555,
     "user": "user",
-    "passhash": "somehash"
+    "passhash": "somehash",
+    "db": "./../local/"
 };
 
 var rl = readline.createInterface({
@@ -19,11 +20,10 @@ var rl = readline.createInterface({
     terminal: false
 });
 
-console.info("Server port:");
+console.info("Username:");
 
 var actions = [
     (line) => {
-        console.info("User: ["+ line +"]");
         default_conf.user = line;
 
         console.info("Password:");

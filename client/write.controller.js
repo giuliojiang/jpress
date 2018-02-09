@@ -1,4 +1,4 @@
-mainApp.controller("write", function($scope, rawhtml, socket, session) {
+mainApp.controller("write", function($scope, socket, session, write_data) {
 
     $scope.d = {};
     // title
@@ -21,14 +21,8 @@ mainApp.controller("write", function($scope, rawhtml, socket, session) {
     // init -------------------------------------------------------------------
 
     this.$onInit = function() {
-
         console.info("write: $onInit");
-
-        socket.register("write_preview", function(msgobj) {
-            var html_str = msgobj.html;
-            rawhtml.setHTML($scope.preview_id(), html_str);
-        });
-
+        write_data.set_preview_id($scope.preview_id());
     };
 
 });
