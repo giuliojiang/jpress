@@ -62,7 +62,7 @@ var handle_posts_get_page = function(msgobj, socket) {
                     for (var i = 0; i < results.length; i++) {
                         var a_result = results[i];
                         var a_post = {};
-                        a_post.created = a_result.created;
+                        a_post.created = a_result.created.valueOf();
                         a_post.title = a_result.title;
                         // Render markdown body
                         a_post.body = self.markdown.render_markdown(a_result.body);

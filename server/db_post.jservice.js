@@ -41,7 +41,7 @@ module.exports.get_posts = function(skip, limit, callback) {
 
     self.post.find({
     }).sort({
-        created: 1
+        created: -1
     }).skip(skip)
     .limit(limit)
     .exec((err, docs) => {

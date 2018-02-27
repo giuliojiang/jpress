@@ -5,7 +5,8 @@ mainApp.controller("posts", function($scope, socket, posts_handler, rawhtml) {
     };
 
     $scope.format_date = function(d) {
-        return d.toString();
+        console.info("type of d is " + typeof(d));
+        return (new Date(d)).toLocaleDateString();
     };
 
     $scope.generate_post_id = function(post_index) {

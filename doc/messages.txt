@@ -39,9 +39,9 @@ FROM SERVER
         page: Int,
         posts: [
             {
-                created: Date,      date created
-                title: String,      plain text
-                body: String        markdown string
+                created: Date millis,      date created
+                title: String,             plain text
+                body: String               markdown string
             }
         ]
     }
