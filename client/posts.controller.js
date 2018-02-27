@@ -1,4 +1,4 @@
-mainApp.controller("posts", function($scope, socket) {
+mainApp.controller("posts", function($scope, socket, posts_handler) {
 
     $scope.test = "test success";
 
@@ -7,6 +7,13 @@ mainApp.controller("posts", function($scope, socket) {
             _t: "yoyuo",
             tosjhpoif: "ofpiji"
         });
+    };
+
+    // Initialization ---------------------------------------------------------
+
+    $scope.ngOnInit = function() {
+        // Request posts
+        posts_handler.init_request_posts();
     };
 
 });

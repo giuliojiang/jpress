@@ -24,8 +24,20 @@ var handle_posts_get_page = function(msgobj, socket) {
             return;
         } else {
             console.info("Got documents: " + JSON.stringify(results));
-            return;
-            // TODO send the documents to the client
+            var msgobj = {
+                _t: "posts_get_page",
+                page: page_number,
+                posts: []
+            };
+            for (var i = 0; i < results.length; i++) {
+                var a_result = results[i];
+                var a_post = {};
+                a_post.created = a_result.created;
+                a_post.title = a_result.title;
+                a_post.body = a_result.body;
+                msgobj.posts.push(a_post);
+            }
+            self.socketio.send(socket, msgobj);
         }
 
     });
