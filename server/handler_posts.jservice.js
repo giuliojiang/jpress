@@ -26,7 +26,7 @@ var handle_posts_get_page = function(msgobj, socket) {
                 if (err) {
                     callback(err);
                 } else {
-                    if (page_number == 0) {
+                    if (no_pages == 0) {
                         // No posts, send empty result
                         self.socketio.send(socket, {
                             _t: "posts_get_page",
@@ -64,7 +64,8 @@ var handle_posts_get_page = function(msgobj, socket) {
                         var a_post = {};
                         a_post.created = a_result.created;
                         a_post.title = a_result.title;
-                        a_post.body = a_result.body;
+                        // Render markdown body
+                        a_post.body = self.markdown.render_markdown(a_result.body);
                         msgobj.posts.push(a_post);
                     }
                     self.socketio.send(socket, msgobj);
@@ -90,6 +91,7 @@ module.exports.init = function(jservice) {
     self.client_session = jservice.get("client_session");
     self.util = jservice.get("util");
     self.handlers = jservice.get("handlers");
+    self.markdown = jservice.get("markdown");
 
     self.handlers.register("posts_get_page", handle_posts_get_page);
 

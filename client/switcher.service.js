@@ -2,7 +2,9 @@ mainApp.service('switcher', function($rootScope) {
 
     // Known views: posts, write, login, post
 
-    var d = {};
+    var d = {
+        current: "posts"
+    };
 
     // show -------------------------------------------------------------------
 
