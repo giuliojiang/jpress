@@ -11,8 +11,9 @@ mainApp.controller("posts", function($scope, socket, posts_handler) {
 
     // Initialization ---------------------------------------------------------
 
-    $scope.ngOnInit = function() {
+    this.$onInit = function() {
         // Request posts
+        console.info("Posts controller: requesting posts");
         posts_handler.init_request_posts();
     };
 

@@ -34,7 +34,6 @@ FROM SERVER
     }
     Generic alert to be displayed to the user.
 
-    // TODO CLIENT
     {
         _t: posts_get_page,
         page: Int,

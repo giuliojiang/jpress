@@ -33,6 +33,7 @@ module.exports.new_post = function(title, body, callback) {
 };
 
 // get_posts ------------------------------------------------------------------
+// [private]
 
 // Callback format: callback(error, results)
 // results: array of post objects
@@ -63,7 +64,8 @@ module.exports.count_pages = function(callback) {
         if (err) {
             callback(err);
         } else {
-            callback(null, count);
+            var page_count = Math.ceil(count / page_size);
+            callback(null, page_count);
         }
     });
 

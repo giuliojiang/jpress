@@ -3,41 +3,35 @@ mainApp.service('posts_handler', function(socket, session) {
     var self = this;
 
     var current_page = 0;
+    var displayed_posts = [];
 
-    // Initialization
+    // Initialization ---------------------------------------------------------
     self.init_request_posts = function() {
         socket.send({
             _t: "posts_get_page",
-            token: session.get_token(),
             page: current_page
         });
     };
 
-    // ??? handler
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // login_feedback_handler -------------------------------------------------
-
-    var login_feedback_handler = function(msgobj) {
-        console.info("login_feedback_handler: got " + JSON.stringify(msgobj));
-        session.set_token(msgobj.token);
-        switcher.show("posts");
-        $rootScope.$apply();
+    // Get current page -------------------------------------------------------
+    self.get_current_page = function() {
+        return current_page;
     };
 
-    socket.register("login_login", login_feedback_handler);
+    // Get displayed posts ----------------------------------------------------
+    self.get_displayed_posts = function() {
+        return displayed_posts;
+    };
+
+    // posts_get_page handler -------------------------------------------------
+    self.posts_get_page_handler = function(msgobj) {
+        console.info("posts_get_page_handler received " + JSON.stringify(msgobj));
+        current_page = msgobj.page;
+        displayed_posts = msgobj.posts;
+        // TODO display the posts
+    };
+
+    // Handlers registration --------------------------------------------------
+    socket.register("posts_get_page", self.posts_get_page_handler);
 
 });
