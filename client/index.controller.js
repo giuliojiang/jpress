@@ -13,3 +13,7 @@ mainApp.controller("main_controller", function($scope, switcher, alert) {
     };
 
 });
+
+mainApp.config(function($locationProvider) {
+  $locationProvider.html5Mode(true).hashPrefix('!');
+});
