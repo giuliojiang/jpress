@@ -34,6 +34,18 @@ FROM SERVER
     }
     Generic alert to be displayed to the user.
 
+    {
+        _t: posts_get_page,
+        page: Int,
+        posts: [
+            {
+                created: Date millis,      date created
+                title: String,             plain text
+                body: String               markdown string
+            }
+        ]
+    }
+
 FROM CLIENT
 
     {
@@ -42,7 +54,6 @@ FROM CLIENT
         pass: String
     }
 
-    TODO CLIENT SERVER
     {
         _t: posts_get_page,
         token: String,

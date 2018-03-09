@@ -1,7 +1,15 @@
 <div ng-controller="posts">
-
-    <p>{{test}}</p>
-
-    <button ng-click="btntest()">Test</button>
-
+    <div class="section">
+        <div class="row" ng-repeat="a_post in get_posts() track by $index">
+            <div class="col s12">
+                <div class="card blue-grey lighten-5">
+                    <div class="card-content">
+                        <span class="card-title">{{a_post.title}}</span>
+                        <p>{{format_date(a_post.created)}}</p>
+                        <div id="{{generate_post_id($index)}}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
