@@ -41,10 +41,19 @@ FROM SERVER
             {
                 created: Date millis,      date created
                 title: String,             plain text
-                body: String               markdown string
+                body: String               raw html string
             }
         ]
     }
+
+    // TODO CLIENT SERVER
+    {
+        _t: post_single,
+        title: String,             post title
+        created: Date millis,      date created
+        body: String               raw html string
+    }
+    Response: single post
 
 FROM CLIENT
 
@@ -86,3 +95,10 @@ FROM CLIENT
         token: String
     }
     Submit a post. It will be written to db
+
+    // TODO CLIENT SERVER
+    {
+        _t: post_single,
+        postid: String
+    }
+    Request a single post by id
