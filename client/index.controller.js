@@ -1,6 +1,6 @@
 var mainApp = angular.module("mainApp", []);
 
-mainApp.controller("main_controller", function($scope, switcher, alert) {
+mainApp.controller("main_controller", function($scope, switcher, alert, post_handler) {
 
     // Main view --------------------------------------------------------------
 
@@ -12,4 +12,8 @@ mainApp.controller("main_controller", function($scope, switcher, alert) {
         return switcher.is_active(name);
     };
 
+});
+
+mainApp.config(function($locationProvider) {
+  $locationProvider.html5Mode(true).hashPrefix('!');
 });

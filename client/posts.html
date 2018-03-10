@@ -4,7 +4,7 @@
             <div class="col s12">
                 <div class="card blue-grey lighten-5">
                     <div class="card-content">
-                        <span class="card-title">{{a_post.title}}</span>
+                        <a ng-click="title_click(a_post)"><span class="card-title">{{a_post.title}}</span></a>
                         <p>{{format_date(a_post.created)}}</p>
                         <div id="{{generate_post_id($index)}}"></div>
                     </div>

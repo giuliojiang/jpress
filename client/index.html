@@ -2,6 +2,8 @@
 
     <head>
 
+        <base href="/">
+
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
         <!-- Compiled and minified CSS -->
@@ -28,6 +30,7 @@
         <script src="login.controller.js"></script>
         <script src="navbar.controller.js"></script>
         <script src="write.controller.js"></script>
+        <script src="post.controller.js"></script>
 
         <!-- Services -->
         <script src="socket.service.js"></script>
@@ -38,6 +41,10 @@
         <script src="write_data.service.js"></script>
         <script src="alert.service.js"></script>
         <script src="posts_handler.service.js"></script>
+        <script src="jswindow.service.js"></script>
+        <script src="hash.service.js"></script>
+        <script src="dateutil.service.js"></script>
+        <script src="post_handler.service.js"></script>
 
     </head>
 
@@ -47,6 +54,7 @@
             <div ng-if="is_active('posts')" ng-include="'posts.html'"></div>
             <div ng-if="is_active('login')" ng-include="'login.html'"></div>
             <div ng-if="is_active('write')" ng-include="'write.html'"></div>
+            <div ng-if="is_active('post')" ng-include="'post.html'"></div>
         </div>
     </body>
 </html>
