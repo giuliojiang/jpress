@@ -1,6 +1,6 @@
 var mainApp = angular.module("mainApp", []);
 
-mainApp.controller("main_controller", function($scope, switcher, alert) {
+mainApp.controller("main_controller", function($scope, switcher, alert, post_handler) {
 
     // Main view --------------------------------------------------------------
 

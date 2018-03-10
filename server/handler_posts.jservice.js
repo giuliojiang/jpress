@@ -66,6 +66,7 @@ var handle_posts_get_page = function(msgobj, socket) {
                         a_post.title = a_result.title;
                         // Render markdown body
                         a_post.body = self.markdown.render_markdown(a_result.body);
+                        a_post.pid = a_result._id;
                         msgobj.posts.push(a_post);
                     }
                     self.socketio.send(socket, msgobj);

@@ -38,7 +38,7 @@ mainApp.service("hash", function(jswindow, switcher) {
         var decoded_hash = decodeURIComponent(encoded_component);
         // Remove initial hash if present
         if (decoded_hash.startsWith("#")) {
-            decoded_hash = decoded_hash.substring(1, x.length);
+            decoded_hash = decoded_hash.substring(1, decoded_hash.length);
         }
         // Get JSON object
         return JSON.parse(decoded_hash);
@@ -78,6 +78,7 @@ mainApp.service("hash", function(jswindow, switcher) {
     // ========================================================================
 
     self.register = function(route_name, handler) {
+        console.info("HASH HANDLER REGISTERED " + route_name);
         hash_handlers[route_name] = handler;
     };
 

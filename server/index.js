@@ -24,6 +24,7 @@ find_service("db");
 find_service("handler_session");
 find_service("markdown");
 find_service("handler_write");
+find_service("handler_post");
 
 // Start eager services -------------------------------------------------------
 
@@ -31,6 +32,7 @@ jservice.get("handler_login");
 jservice.get("handler_posts");
 jservice.get("handler_session");
 jservice.get("handler_write");
+jservice.get("handler_post");
 
 // Start server ---------------------------------------------------------------
 

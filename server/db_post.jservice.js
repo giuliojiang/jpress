@@ -89,3 +89,24 @@ module.exports.get_posts_page = function(page_number, callback) {
     });
 
 };
+
+// get_post_by_id -------------------------------------------------------------
+
+// Callback format: callback(error, doc)
+module.exports.get_post_by_id = function(post_id, callback) {
+
+    self.post.find({
+        _id: post_id
+    }, (err, docs) => {
+        if (err) {
+            callback(err);
+        } else {
+            if (docs.length != 1) {
+                callback("Found ["+docs.length+"] posts with id ["+post_id+"]");
+            } else {
+                callback(null, docs[0]);
+            }
+        }
+    });
+
+};

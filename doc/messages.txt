@@ -42,11 +42,11 @@ FROM SERVER
                 created: Date millis,      date created
                 title: String,             plain text
                 body: String               raw html string
+                pid: String                post id
             }
         ]
     }
 
-    // TODO CLIENT SERVER
     {
         _t: post_single,
         title: String,             post title
@@ -96,7 +96,6 @@ FROM CLIENT
     }
     Submit a post. It will be written to db
 
-    // TODO CLIENT SERVER
     {
         _t: post_single,
         postid: String

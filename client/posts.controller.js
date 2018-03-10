@@ -1,12 +1,11 @@
-mainApp.controller("posts", function($scope, socket, posts_handler, rawhtml) {
+mainApp.controller("posts", function($scope, socket, posts_handler, rawhtml, dateutil, hash) {
 
     $scope.get_posts = function() {
         return posts_handler.get_displayed_posts();
     };
 
     $scope.format_date = function(d) {
-        console.info("type of d is " + typeof(d));
-        return (new Date(d)).toLocaleDateString();
+        return dateutil.format_date_from_millis(d);
     };
 
     $scope.generate_post_id = function(post_index) {
@@ -22,6 +21,12 @@ mainApp.controller("posts", function($scope, socket, posts_handler, rawhtml) {
         });
 
         return generated_id;
+    };
+
+    $scope.title_click = function(post_obj) {
+        var postid = post_obj.pid;
+        var hashobj = ["post", postid];
+        hash.set_hash(hashobj);
     };
 
     // Initialization ---------------------------------------------------------
