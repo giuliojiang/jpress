@@ -11,7 +11,8 @@ var default_conf = {
     "port": 21555,
     "user": "user",
     "passhash": "somehash",
-    "db": "./../local/"
+    "db": "./../local/",
+    "upload_path": "./../local/uploads/"
 };
 
 var rl = readline.createInterface({

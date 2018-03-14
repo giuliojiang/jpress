@@ -13,7 +13,6 @@ var init = function(jservice) {
 // handle ---------------------------------------------------------------------
 
 var handle_internal = function(msgobj, socket) {
-    console.info("handlers.jservice: Got message: " + JSON.stringify(msgobj));
 
     var t = msgobj._t;
     if (!t) {

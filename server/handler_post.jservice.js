@@ -32,7 +32,7 @@ var handle_post_single = function(msgobj, socket) {
 
         // Send the result to the client
         (callback) => {
-            self.socketio.send(socket, {
+            self.ws.send(socket, {
                 _t: "post_single",
                 title: post_document.title,
                 created: post_document.created.valueOf(),
@@ -54,7 +54,7 @@ module.exports.init = function(jservice) {
 
     self.util = jservice.get("util");
     self.db_post = jservice.get("db_post");
-    self.socketio = jservice.get("socketio");
+    self.ws = jservice.get("ws");
     self.handlers = jservice.get("handlers");
     self.markdown = jservice.get("markdown");
 

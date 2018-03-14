@@ -28,7 +28,7 @@ var handle_posts_get_page = function(msgobj, socket) {
                 } else {
                     if (no_pages == 0) {
                         // No posts, send empty result
-                        self.socketio.send(socket, {
+                        self.ws.send(socket, {
                             _t: "posts_get_page",
                             page: 0,
                             posts: []
@@ -69,7 +69,7 @@ var handle_posts_get_page = function(msgobj, socket) {
                         a_post.pid = a_result._id;
                         msgobj.posts.push(a_post);
                     }
-                    self.socketio.send(socket, msgobj);
+                    self.ws.send(socket, msgobj);
                     callback();
                 }
 
@@ -88,7 +88,7 @@ var handle_posts_get_page = function(msgobj, socket) {
 module.exports.init = function(jservice) {
 
     self.db_post = jservice.get("db_post");
-    self.socketio = jservice.get("socketio");
+    self.ws = jservice.get("ws");
     self.client_session = jservice.get("client_session");
     self.util = jservice.get("util");
     self.handlers = jservice.get("handlers");

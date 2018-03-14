@@ -2,7 +2,7 @@ var handlers;
 var client_session;
 var config;
 var password_service;
-var socketio;
+var ws;
 var timeout_service;
 var client_session;
 
@@ -14,7 +14,7 @@ var quarantine_clients = {};
 
 var login_failed = function(socket) {
     // Send login failed message
-    socketio.send(socket, {
+    ws.send(socket, {
         _t: "login_login",
         status: "fail"
     });
@@ -31,7 +31,7 @@ var login_success = function(socket) {
     var tok = client_session.start_session();
 
     // Send message
-    socketio.send(socket, {
+    ws.send(socket, {
         _t: "login_login",
         status: "ok",
         token: tok
@@ -67,7 +67,7 @@ var init = function(jservice) {
     client_session = jservice.get("client_session");
     config = jservice.get("config");
     password_service = jservice.get("password");
-    socketio = jservice.get("socketio");
+    ws = jservice.get("ws");
     timeout_service = jservice.get("timeout");
     client_session = jservice.get("client_session");
 

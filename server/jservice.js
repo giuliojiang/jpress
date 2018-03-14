@@ -28,7 +28,7 @@ var get = function(name) {
         return the_service;
     }
 
-    throw "JSERVICE: No service named ["+ name +"] found";
+    throw new Error("JSERVICE: No service named ["+ name +"] found");
 };
 
 // Export ---------------------------------------------------------------------

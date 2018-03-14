@@ -1,0 +1,72 @@
+Binary transfer is based on base64 encoding.
+
+TRANSFER DATA
+
+    To initiate a file upload, client sends
+
+    {
+        _t: "_bin_up",
+        token: String      Client's authentication token
+        name: String       Desired filename
+    }
+
+    Server can accept upload request with
+
+    {
+        _t: "_bin_up",
+        transfer_id: String      ID of the file transfer
+        name: String             Desired filename
+    }
+
+    File transfer uses a special message format:
+
+        Client to server
+
+        {
+            _t: "_bin",
+            transfer_id: String
+            data: String
+            token: String
+        }
+
+        transfer_id is used as a token for the file being transferred
+
+        data is a base64 string encoding of the binary data
+
+        {
+            _t: "_bin_end",
+            transfer_id: String
+            token: String
+        }
+        Sent by the client after the final chunk to signal that the file has
+        finished.
+
+    Once the server receives the last chunk and finalizes the data on disk and
+    database, server sends
+
+    {
+        _t: "_bin_up_complete",
+        transfer_id: String,
+        file_id: String          // The _id of the file on database
+    }
+    When file_id is null, the transfer has failed/aborted
+
+SERVER LOGIC
+
+    There is an open set of files being transferred.
+
+    When a message is received:
+
+    -   if it's an unseen transfer ID, lookup in the database and create a Partial Transfer object
+    There is a mapping between token||name => f
+
+    -   if last_chunk is 0, reset the idle timeout of the Partial Transfer and append data
+
+    -   if last_chunk is 1, append data and signal completion of transfer
+    Send to the client the permanent file_id assigned to this file.
+    When the client receives the final file_id, it will know that the transfer has
+    been received by the server.
+
+FILE LIBRARY
+
+    All files uploaded by a user are stored in his file library.
