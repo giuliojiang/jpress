@@ -3,3 +3,5 @@
 *.pem
 config.json
 post
+file
+uploads

@@ -9,8 +9,7 @@ var find_service = function(name) {
 
 find_service("handlers");
 find_service("https_server");
-find_service("socket");
-find_service("socketio");
+find_service("ws");
 find_service("config");
 find_service("timeout");
 find_service("client_session");
@@ -25,6 +24,8 @@ find_service("handler_session");
 find_service("markdown");
 find_service("handler_write");
 find_service("handler_post");
+find_service("handler_binupload");
+find_service("db_file");
 
 // Start eager services -------------------------------------------------------
 
@@ -33,8 +34,8 @@ jservice.get("handler_posts");
 jservice.get("handler_session");
 jservice.get("handler_write");
 jservice.get("handler_post");
+jservice.get("handler_binupload");
 
 // Start server ---------------------------------------------------------------
 
-var socket = jservice.get("socket");
-socket.start();
+jservice.get("ws");

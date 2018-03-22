@@ -16,6 +16,7 @@
     "nedb": "^1.8.0",
     "password-hash": "^1.2.2",
     "randomstring": "^1.1.5",
-    "socket.io": "^2.0.4"
+    "socket.io": "^2.0.4",
+    "ws": "^5.0.0"
   }
 }

@@ -1,6 +1,6 @@
 var mainApp = angular.module("mainApp", []);
 
-mainApp.controller("main_controller", function($scope, switcher, alert, post_handler) {
+mainApp.controller("main_controller", function($scope, switcher, alert, post_handler, binupload) {
 
     // Main view --------------------------------------------------------------
 

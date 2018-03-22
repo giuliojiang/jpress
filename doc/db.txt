@@ -1,4 +1,4 @@
-POST DATASTORE
+POST DATASTORE post
 
     Contains posts.
     A post is:
@@ -8,4 +8,14 @@ POST DATASTORE
         created: Date    creation date
         title: String    title plain text
         body: String     body, markdown string
+    }
+
+
+FILE DATASTORE file
+
+    {
+        _id: String
+        created: Date
+        filename: String    Name of file as user selected it. Editable
+        store_path: String  Location where the file is stored on disk
     }

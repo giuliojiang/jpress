@@ -41,7 +41,11 @@ mainApp.service("hash", function(jswindow, switcher) {
             decoded_hash = decoded_hash.substring(1, decoded_hash.length);
         }
         // Get JSON object
-        return JSON.parse(decoded_hash);
+        try {
+            return JSON.parse(decoded_hash);
+        } catch (err) {
+            return null;
+        }
     };
 
     // Get current hash component
@@ -53,6 +57,9 @@ mainApp.service("hash", function(jswindow, switcher) {
     var handle_hash_change = function() {
         console.info("Detected hash change");
         var hash_obj = get_current_hash_object();
+        if (hash_obj == null) {
+            return;
+        }
         var target_route = hash_obj[0];
         switcher.show(target_route);
         async.setImmediate(function() {

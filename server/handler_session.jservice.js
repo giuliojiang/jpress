@@ -15,7 +15,7 @@ var handle_session_validate_token = function(msgobj, socket) {
         } else {
             console.info("handler_session: session is not valid");
         }
-        self.socketio.send(socket, {
+        self.ws.send(socket, {
             _t: "session_validate_token",
             status: status
         });
@@ -29,7 +29,7 @@ var handle_session_end = function(msgobj, socket) {
 
     if (self.client_session.token_valid(msgobj.token)) {
         self.client_session.end_session();
-        self.socketio.send(socket, {
+        self.ws.send(socket, {
             _t: "session_validate_token",
             status: "fail"
         });
@@ -43,7 +43,7 @@ module.exports.init = function(jservice) {
 
     self.handlers = jservice.get("handlers");
     self.client_session = jservice.get("client_session");
-    self.socketio = jservice.get("socketio");
+    self.ws = jservice.get("ws");
 
     self.handlers.register("session_validate_token", handle_session_validate_token);
     self.handlers.register("session_end", handle_session_end);
