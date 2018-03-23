@@ -7,11 +7,18 @@ mainApp.service("binupload", function(jswindow, session, socket, $timeout) {
     var doc = jswindow.get_window().document;
 
     // Contains objects of form:
-    // {file, callback, transfer_id}
+    // {file, callback, transfer_id, chunk_handle, finalize_handle}
     // file is the file to be uploaded
     // callback is the callback of process_file
+    // transfer_id is the server-assigned transfer id
+    // chunk_handle is the timeout handle for the next waiting chunk
+    // finalize_handle is the timeout handle for the final confirmation
+    //                 response. It needs to be canceled if the server
+    //                 completes or aborts the transfer.
     var upload_queue = [];
     var current_job = null;
+
+    // TODO progress reporter, complete and failure callbacks
 
     // Private methods ========================================================
 
@@ -36,9 +43,21 @@ mainApp.service("binupload", function(jswindow, session, socket, $timeout) {
             return;
         }
 
+        // Cancel the finalization timeout
+        if (current_job.finalize_handle) {
+            $timeout.cancel(current_job.finalize_handle);
+            current_job.finalize_handle = null;
+        }
+
         var file_id = msgobj.file_id;
         if (file_id == null) {
             console.info("SERVER SIGNAL: UPLOAD FAILED");
+
+            // Cancel the next chunk
+            if (current_job.chunk_handle) {
+                $timeout.cancel(current_job.chunk_handle);
+                current_job.chunk_handle = null;
+            }
         } else {
             console.info("Server confirmed: transfer complete");
         }
@@ -65,7 +84,8 @@ mainApp.service("binupload", function(jswindow, session, socket, $timeout) {
         if (socket.unsent_bytes_more_than(MAX_QUEUED_SIZE)) {
             console.info("Chunk wait");
             // Wait for a little bit and retry
-            $timeout(function() {
+            current_job.chunk_handle = $timeout(function() {
+                current_job.chunk_handle = null;
                 priv.upload_data_chunk(data, callback);
             }, 50);
         } else {
@@ -93,6 +113,14 @@ mainApp.service("binupload", function(jswindow, session, socket, $timeout) {
         };
     };
 
+    priv.finalize_current_job = function() {
+        current_job.finalize_handle = $timeout(function() {
+            current_job.finalize_handle = null;
+            current_job.callback();
+            priv.clean_current_job();
+        }, 5000); // Wait 5 seconds
+    };
+
     priv.current_job_start_data_transfer = function() {
 
         var file = current_job.file;
@@ -108,6 +136,7 @@ mainApp.service("binupload", function(jswindow, session, socket, $timeout) {
                     transfer_id: current_job.transfer_id,
                     token: session.get_token(),
                 });
+                priv.finalize_current_job();
                 return;
             }
 
