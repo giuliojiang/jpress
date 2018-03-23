@@ -26,6 +26,7 @@ find_service("handler_write");
 find_service("handler_post");
 find_service("handler_binupload");
 find_service("db_file");
+find_service("fileserver");
 
 // Start eager services -------------------------------------------------------
 
@@ -39,3 +40,4 @@ jservice.get("handler_binupload");
 // Start server ---------------------------------------------------------------
 
 jservice.get("ws");
+jservice.get("fileserver");

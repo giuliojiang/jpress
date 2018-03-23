@@ -30,3 +30,23 @@ module.exports.new_file = function(filename, store_path, callback) {
     });
 
 };
+
+// get_file -------------------------------------------------------------------
+
+// Callback: function(error, file_name, file_path)
+module.exports.get_file = function(file_id, callback) {
+
+    self.file.find({
+        _id: file_id
+    }, (err, docs) => {
+        if (err) {
+            callback(err);
+        } else if (docs.length != 1) {
+            callback(new Error("Found ["+docs.length+"] documents"));
+        } else {
+            var the_doc = docs[0];
+            callback(null, the_doc.filename, the_doc.store_path);
+        }
+    });
+
+};
