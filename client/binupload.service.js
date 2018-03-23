@@ -60,6 +60,7 @@ mainApp.service("binupload", function(jswindow, session, socket, $timeout) {
             }
         } else {
             console.info("Server confirmed: transfer complete");
+            console.info("ID is " + msgobj.file_id);
         }
 
         // Fire upload complete callback for the job
