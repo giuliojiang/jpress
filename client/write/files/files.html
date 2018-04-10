@@ -1,0 +1,21 @@
+<div ng-controller="write.files">
+    <div class="section row">
+        <div class="row" ng-repeat="x in d.files">
+            <div class="col s6">
+                <a href="{{x.url}}">{{x.name}}</a>
+            </div>
+            <!-- Add as image -->
+            <div class="col s2">
+                <a class="waves-effect waves-light btn blue-grey darken-2 jpress_text_button" ng-click="add_as_image(x)">Add as image</a>
+            </div>
+            <!-- Add as link -->
+            <div class="col s2">
+                <a class="waves-effect waves-light btn blue-grey darken-2 jpress_text_button" ng-click="add_as_link(x)">Add as link</a>
+            </div>
+            <!-- Remove -->
+            <div class="col s2">
+                <a class="waves-effect waves-light btn blue-grey darken-2 jpress_text_button" ng-click="remove(x)">Remove (TODO)</a>
+            </div>
+        </div>
+    </div>
+</div>

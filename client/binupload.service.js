@@ -19,7 +19,7 @@ mainApp.service("binupload", function(jswindow, session, socket, $timeout) {
     var current_job = null;
 
     // Other controllers can register an on_complete callback
-    // function(uploaded_file_url, uploaded_file_name)
+    // function(uploaded_file_url, uploaded_file_name, id)
     var on_upload_complete = null;
 
     // TODO progress reporter, complete and failure callbacks
@@ -50,7 +50,7 @@ mainApp.service("binupload", function(jswindow, session, socket, $timeout) {
         // Signal the on_upload_complete callback
         if (on_upload_complete) {
             var file_url = "https://" + socket.get_endpoint() + "/download/" + msgobj.file_id;
-            on_upload_complete(file_url, current_job.file.name);
+            on_upload_complete(file_url, current_job.file.name, msgobj.file_id);
         }
 
         // Cancel the finalization timeout
@@ -289,7 +289,7 @@ mainApp.service("binupload", function(jswindow, session, socket, $timeout) {
         // @cleanup code is run at the end
     };
 
-    // <f> function(uploaded_file_url, uploaded_file_name)
+    // <f> function(uploaded_file_url, uploaded_file_name, id)
     self.register_on_upload_complete = function(f) {
         on_upload_complete = f;
     }
