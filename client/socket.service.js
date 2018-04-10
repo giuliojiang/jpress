@@ -14,15 +14,15 @@ mainApp.service('socket', function(jswindow, $timeout) {
         handlers[t] = func;
     };
 
-    // Private methods ========================================================
-
-    var get_endpoint = function() {
+    self.get_endpoint = function() {
         return jswindow.get_window().location.hostname +":21555";
     };
 
+    // Private methods ========================================================
+
     var connect = function() {
 
-        var ws_endpoint = "wss://" + get_endpoint();
+        var ws_endpoint = "wss://" + self.get_endpoint();
 
         // Let us open a web socket
         lws = new WebSocket(ws_endpoint);

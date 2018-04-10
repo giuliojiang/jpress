@@ -2,14 +2,13 @@ mainApp.controller("write", function($scope, socket, session, write_data) {
 
     $scope.d = {};
     // title
-    // text
 
     // ------------------------------------------------------------------------
 
     $scope.preview = function() {
         socket.send({
             _t: "write_preview",
-            txt: $scope.d.text,
+            txt: write_data.get_text(),
             token: session.get_token()
         });
     };
@@ -21,7 +20,7 @@ mainApp.controller("write", function($scope, socket, session, write_data) {
     $scope.submit = function() {
         socket.send({
             _t: "write_submit",
-            txt: $scope.d.text,
+            txt: write_data.get_text(),
             token: session.get_token(),
             title: $scope.d.title
         });
