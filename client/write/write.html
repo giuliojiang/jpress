@@ -4,9 +4,11 @@
         <input type="text" class="validate" placeholder="title" ng-model="d.title">
     </div>
     <div class="section row">
+        <!-- Writing area -->
         <div class="col s6">
-            <textarea class="materialize-textarea" ng-model="d.text"></textarea>
+            <textarea id="jpress_write_textarea" class="materialize-textarea"></textarea>
         </div>
+        <!-- Preview area -->
         <div class="col s6">
             <div class="jpress_post_container" id="{{preview_id()}}"></div>
         </div>

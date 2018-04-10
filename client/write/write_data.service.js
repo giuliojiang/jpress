@@ -1,4 +1,4 @@
-mainApp.service("write_data", function(socket, rawhtml, switcher, $rootScope, alert) {
+mainApp.service("write_data", function(socket, rawhtml, switcher, $rootScope, alert, util, jswindow) {
 
     var self = this;
 
@@ -20,6 +20,19 @@ mainApp.service("write_data", function(socket, rawhtml, switcher, $rootScope, al
     // set_preview_id ---------------------------------------------------------
     this.set_preview_id = function(new_preview_id) {
         preview_id = new_preview_id;
+    };
+
+    // ========================================================================
+    self.insert_text = function(text) {
+        util.textarea_insert("jpress_write_textarea", text);
+        async.setImmediate(function() {
+            $rootScope.$apply();
+        });
+    };
+
+    // ========================================================================
+    self.get_text = function() {
+        return jswindow.get_window().document.getElementById("jpress_write_textarea").value;
     };
 
 });
