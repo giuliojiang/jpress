@@ -6,7 +6,7 @@
                     <div class="card-content">
                         <a ng-click="title_click(a_post)"><span class="card-title">{{a_post.title}}</span></a>
                         <p>{{format_date(a_post.created)}}</p>
-                        <div id="{{generate_post_id($index)}}"></div>
+                        <div class="jpress_post_container" id="{{generate_post_id($index)}}"></div>
                     </div>
                 </div>
             </div>

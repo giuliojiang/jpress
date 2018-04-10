@@ -8,7 +8,6 @@ var readline = require('readline');
 var default_conf = {
     "privkey": "./../local/private.key",
     "cert": "./../local/cert.pem",
-    "port": 21555,
     "user": "user",
     "passhash": "somehash",
     "db": "./../local/",
