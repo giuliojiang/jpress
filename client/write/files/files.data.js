@@ -34,4 +34,10 @@ mainApp.service("write_files_data", function(util) {
         return files;
     }
 
+    // ========================================================================
+
+    self.reset = function() {
+        files = [];
+    }
+
 });

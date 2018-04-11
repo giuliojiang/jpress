@@ -50,3 +50,37 @@ module.exports.get_file = function(file_id, callback) {
     });
 
 };
+
+// ----------------------------------------------------------------------------
+// Set owner
+
+// <callback> function(err)
+module.exports.set_owner = function(file_id, post_id, callback) {
+    console.info("Setting ownership between ["+ file_id +"] ["+ post_id +"]");
+    self.file.update(
+
+        {
+            _id: file_id
+        },
+
+        {
+            $set: {
+                owner: post_id
+            }
+        },
+
+        {
+            multi: false
+        },
+
+        function(err, num_replaced) {
+            if (err) {
+                callback(err);
+            } else {
+                console.info("Updated ["+ num_replaced +"] entries");
+                callback();
+            }
+        }
+
+    );
+}
