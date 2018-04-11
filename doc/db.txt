@@ -16,6 +16,7 @@ FILE DATASTORE file
     {
         _id: String
         created: Date
-        filename: String    Name of file as user selected it. Editable
-        store_path: String  Location where the file is stored on disk
+        filename: String     Name of file as user selected it. Editable
+        store_path: String   Location where the file is stored on disk
+        owner: String        Post that uses the file
     }

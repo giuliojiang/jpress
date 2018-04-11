@@ -1,6 +1,6 @@
 <div ng-controller="write.files">
     <div class="section row">
-        <div class="row" ng-repeat="x in d.files">
+        <div class="row" ng-repeat="x in get_files()">
             <div class="col s6">
                 <a href="{{x.url}}">{{x.name}}</a>
             </div>

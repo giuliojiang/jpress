@@ -88,11 +88,14 @@ FROM CLIENT
     }
     Request a markdown render preview
 
+    // TODO update
     {
         _t: write_submit,
         title: String            required
         txt: String,             Markdown string
-        token: String
+        token: String,
+        files: [String]          A list of file IDs: all the files 
+                                 uploaded with the current post.
     }
     Submit a post. It will be written to db
 

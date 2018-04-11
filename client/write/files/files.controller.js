@@ -1,27 +1,14 @@
-mainApp.controller("write.files", function($scope, binupload, util, write_data) {
+mainApp.controller("write.files", function($scope, binupload, write_files_data, write_data) {
 
     var self = this;
 
     var priv = {};
 
-    // files: list of files uploaded
-    //        Each file is an object {name, url, is_image, id}
-    $scope.d = {};
-    $scope.d.files = [];
-
     // ========================================================================
 
     priv.add_file = function(url, name, id) {
-        var is_image = util.is_image_name(name);
-        var fileobj = {
-            name: name,
-            url: url,
-            is_image: is_image, 
-            id: id
-        };
-        $scope.d.files.push(fileobj);
+        write_files_data.add_file(url, name, id);
         $scope.$apply();
-        console.info("Now d.files is: " + JSON.stringify($scope.d.files));
     };
 
     // ========================================================================
@@ -40,6 +27,10 @@ mainApp.controller("write.files", function($scope, binupload, util, write_data) 
         // [GitHub](http://github.com)
         var md_code = "["+ a_file.name +"]("+ a_file.url +")";
         write_data.insert_text(md_code);
+    }
+
+    $scope.get_files = function() {
+        return write_files_data.get_files();
     }
 
     // ========================================================================
