@@ -34,6 +34,7 @@ var handle_write_submit = function(msgobj, socket) {
     var token = msgobj.token;
     var title = msgobj.title;
     var txt = msgobj.txt;
+    var files = msgobj.files;
 
     if (!self.client_session.token_valid(token)) {
         self.ws.alert(socket, "Invalid session. Please refresh");
@@ -60,11 +61,39 @@ var handle_write_submit = function(msgobj, socket) {
         return;
     }
 
+    if (!(self.util.is_string_array(files))) {
+        self.ws.alert(socket, "Invalid files");
+        return;
+    }
+
+    var res = {}; // Contains:
+    // pid - post id
+
     async.waterfall([
 
         // Insert in database
         (callback) => {
-            self.db_post.new_post(title, txt, callback);
+            self.db_post.new_post(title, txt, function(err, pid) {
+                if (err) {
+                    callback(err);
+                } else {
+                    res.pid = pid;
+                    callback();
+                }
+            });
+        },
+
+        // Set posts owners
+        (callback) => {
+            self.util.aforeach(
+                function(i, a_file, cb) {
+                    self.db_file.set_owner(a_file, res.pid, cb);
+                },
+                files,
+                function(err) {
+                    callback(err);
+                }
+            )
         }
 
     ], (err) => {
@@ -90,6 +119,8 @@ module.exports.init = function(jservice) {
     self.client_session = jservice.get("client_session");
     self.markdown = jservice.get("markdown");
     self.db_post = jservice.get("db_post");
+    self.util = jservice.get("util");
+    self.db_file = jservice.get("db_file");
 
     self.handlers.register("write_preview", handle_write_preview);
     self.handlers.register("write_submit", handle_write_submit);

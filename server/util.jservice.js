@@ -1,4 +1,5 @@
 var fs = require("fs");
+var async = require("async");
 
 // init -----------------------------------------------------------------------
 
@@ -18,6 +19,21 @@ module.exports.is_number = function(data) {
 
 module.exports.is_string = function(data) {
     return typeof data === 'string';
+};
+
+// is_string_array ============================================================
+
+module.exports.is_string_array = function(data) {
+    if (!(data.constructor === Array)) {
+        return false;
+    }
+    // Check each element
+    for (var i = 0; i < data.length; i++) {
+        if (!module.exports.is_string(data[i])) {
+            return false;
+        }
+    }
+    return true;
 };
 
 // mkdir_sync =================================================================
@@ -87,3 +103,36 @@ module.exports.wstream_append_b64 = function(wstream, b64_data) {
 module.exports.wstream_close = function(wstream, callback) {
     wstream.end(null, null, callback);
 };
+
+// async foreach sequence =====================================================
+
+// <func> function(i, element, callback(err))
+// <list> array of elements to be processed
+// <callback> function(err)
+module.exports.aforeach = function(func, list, callback) {
+    var i = 0;
+    var top = list.length;
+
+    var one = function() {
+        if (i >= top) {
+            callback();
+            return;
+        }
+
+        var x = list[i];
+        
+        async.setImmediate(function() {
+            func(i, x, function(err) {
+                if (err) {
+                    callback(err);
+                } else {
+                    i += 1;
+                    one();
+                }
+            });
+        });
+    };
+
+    one();
+
+}

@@ -1,4 +1,4 @@
-mainApp.controller("write", function($scope, socket, session, write_data) {
+mainApp.controller("write", function($scope, socket, session, write_data, write_files_data) {
 
     $scope.d = {};
     // title
@@ -22,7 +22,8 @@ mainApp.controller("write", function($scope, socket, session, write_data) {
             _t: "write_submit",
             txt: write_data.get_text(),
             token: session.get_token(),
-            title: $scope.d.title
+            title: $scope.d.title,
+            files: write_files_data.get_files_id_list()
         });
     };
 

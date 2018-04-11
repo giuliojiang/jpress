@@ -13,7 +13,7 @@ module.exports.init = function(jservice) {
 
 // new_post -------------------------------------------------------------------
 
-// Callback format: callback(error)
+// Callback format: callback(error, _id)
 module.exports.new_post = function(title, body, callback) {
 
     var doc = {
@@ -26,7 +26,7 @@ module.exports.new_post = function(title, body, callback) {
         if (err) {
             callback(err);
         } else {
-            callback();
+            callback(null, new_doc._id);
         }
     });
 

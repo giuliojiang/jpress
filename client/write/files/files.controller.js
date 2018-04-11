@@ -36,6 +36,7 @@ mainApp.controller("write.files", function($scope, binupload, write_files_data, 
     // ========================================================================
 
     self.$onInit = function() {
+        write_files_data.reset();
         binupload.register_on_upload_complete(function(file_url, file_name, id) {
             console.info("write/upload: upload complete for ["+ file_url +"] ["+ file_name +"]");
             priv.add_file(file_url, file_name, id);
