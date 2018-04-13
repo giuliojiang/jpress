@@ -34,6 +34,7 @@ mainApp.service("hash", function(jswindow, switcher) {
         try {
             return JSON.parse(decoded_hash);
         } catch (err) {
+            console.info("Returning default hash...");
             return d.default_hash_obj;
         }
     };
