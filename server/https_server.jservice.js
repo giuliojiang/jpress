@@ -27,7 +27,7 @@ var get_https_server = function() {
             cert: fs.readFileSync(config.vals.cert)
         }, app);
 
-        var port = 21555;
+        var port = config.vals.port;
         server.listen(port);
         console.info("https_server.jservice: Port " + port);
     }

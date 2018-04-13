@@ -8,4 +8,8 @@ mainApp.service("jswindow", function() {
         return window;
     };
 
+    self.get_globals = function() {
+        return jpress_globals;
+    };
+
 });
