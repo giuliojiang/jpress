@@ -17,6 +17,8 @@ var handle_posts_get_page = function(msgobj, socket) {
         page_number = 0;
     }
 
+    console.info("handler_posts.jservice.js: request for page " + page_number);
+
     async.waterfall([
 
         // Check page number
@@ -53,7 +55,6 @@ var handle_posts_get_page = function(msgobj, socket) {
                 if (err) {
                     callback(err);
                 } else {
-                    console.info("Got documents: " + JSON.stringify(results));
                     var msgobj = {
                         _t: "posts_get_page",
                         page: page_number,

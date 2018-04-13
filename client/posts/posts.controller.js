@@ -1,5 +1,9 @@
 mainApp.controller("posts", function($scope, socket, posts_handler, rawhtml, dateutil, hash) {
 
+    // <posts> controller HASH specification
+    // ["posts", pageindex]
+    // <pageindex> is an integer, 0-based index, for the page number
+
     $scope.get_posts = function() {
         return posts_handler.get_displayed_posts();
     };
@@ -16,7 +20,10 @@ mainApp.controller("posts", function($scope, socket, posts_handler, rawhtml, dat
         async.setImmediate(function() {
             var all_posts = $scope.get_posts();
             var the_post = all_posts[post_index];
-            console.info("the post is " + JSON.stringify(the_post));
+            if (!the_post) {
+                console.error("A post is null? " + JSON.stringify(all_posts[post_index]));
+                console.info(JSON.stringify(all_posts));
+            }
             rawhtml.setHTML(generated_id, the_post.body);
         });
 

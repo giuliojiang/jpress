@@ -48,8 +48,6 @@ mainApp.service('socket', function(jswindow, $timeout) {
                 return;
             }
 
-            console.info("Received message from server: " + JSON.stringify(msgobj));
-
             var the_handler = handlers[t];
             if (!the_handler) {
                 console.error("No handler for type ["+ t +"]");

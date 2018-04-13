@@ -9,8 +9,10 @@ mainApp.service('switcher', function($rootScope) {
     // show -------------------------------------------------------------------
 
     this.show = function(view_name) {
-        console.info("switcher: showing " + view_name);
-        d.current = view_name;
+        if (d.current != view_name) {
+            console.info("switcher: showing " + view_name);
+            d.current = view_name;
+        }
     };
 
     // get_current ------------------------------------------------------------
