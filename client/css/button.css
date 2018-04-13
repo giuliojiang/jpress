@@ -2,3 +2,7 @@
     word-wrap: break-word;
     height: auto;
 }
+
+.jpress_button_no_pointer {
+    cursor: default;
+}

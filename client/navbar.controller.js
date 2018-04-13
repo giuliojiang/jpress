@@ -1,4 +1,4 @@
-mainApp.controller("navbar", function($scope, switcher, session, socket) {
+mainApp.controller("navbar", function($scope, switcher, session, socket, hash) {
 
     $scope.logged_in = function() {
         return session.is_validated();
@@ -10,6 +10,10 @@ mainApp.controller("navbar", function($scope, switcher, session, socket) {
             token: session.get_token()
         });
         switcher.show("login");
+    };
+
+    $scope.to_posts = function() {
+        hash.set_hash(["posts", 0]);
     };
 
 });

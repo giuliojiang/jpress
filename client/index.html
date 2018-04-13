@@ -23,7 +23,7 @@
 
         <!-- Controller -->
         <script src="index.controller.js"></script>
-        <script src="posts.controller.js"></script>
+        <script src="posts/posts.controller.js"></script>
         <script src="login.controller.js"></script>
         <script src="navbar.controller.js"></script>
         <script src="write/write.controller.js"></script>
@@ -39,7 +39,7 @@
         <script src="session.service.js"></script>
         <script src="write/write_data.service.js"></script>
         <script src="alert.service.js"></script>
-        <script src="posts_handler.service.js"></script>
+        <script src="posts/posts_handler.service.js"></script>
         <script src="jswindow.service.js"></script>
         <script src="hash.service.js"></script>
         <script src="dateutil.service.js"></script>
@@ -51,13 +51,14 @@
         <!-- Custom stylesheets -->
         <link rel="stylesheet" type="text/css" href="css/markdown_container.css">
         <link rel="stylesheet" type="text/css" href="css/button.css">
+        <link rel="stylesheet" type="text/css" href="css/link.css">
 
     </head>
 
     <body ng-app="mainApp" ng-controller="main_controller">
         <div ng-include="'navbar.html'"></div>
         <div class="container">
-            <div ng-if="is_active('posts')" ng-include="'posts.html'"></div>
+            <div ng-if="is_active('posts')" ng-include="'posts/posts.html'"></div>
             <div ng-if="is_active('login')" ng-include="'login.html'"></div>
             <div ng-if="is_active('write')" ng-include="'write/write.html'"></div>
             <div ng-if="is_active('post')" ng-include="'post.html'"></div>

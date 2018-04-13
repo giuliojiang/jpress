@@ -1,18 +1,4 @@
-// This service listens and manages changes to the
-// URL's hash component. Allows the user to follow direct links
-// to different parts of the site
-
-// Encoding of URI components:
-// JSON string of [target, data...]
-// The target encodes the path that needs to be activated, for example "posts"
-// data is arbitrary data that will be passed to the controller.
-// The controller will receive the full array, including the target part.
-
-// Targets that can handle hashchange events will register on this service
-// using the register() method.
-// The registered handler has the shape:
-//     function(hash_component)
-// where the hash_component is the type of js array defined above.
+// For documentation see doc/Doc.md
 
 mainApp.service("hash", function(jswindow, switcher) {
 
@@ -22,6 +8,10 @@ mainApp.service("hash", function(jswindow, switcher) {
     // The string is the route name
     // The handler function has type function(hash_component)
     var hash_handlers = {};
+
+    var d = {};
+    d.last_hash = null;
+    d.default_hash_obj = ["posts", 0];
 
     // ========================================================================
     // Private methods
@@ -44,7 +34,8 @@ mainApp.service("hash", function(jswindow, switcher) {
         try {
             return JSON.parse(decoded_hash);
         } catch (err) {
-            return null;
+            console.info("Returning default hash...");
+            return d.default_hash_obj;
         }
     };
 
@@ -55,7 +46,14 @@ mainApp.service("hash", function(jswindow, switcher) {
 
     // Handle hash change
     var handle_hash_change = function() {
-        console.info("Detected hash change");
+        var current_hash = jswindow.get_window().location.hash;
+        console.info("Hash changed to " + current_hash);
+        if (current_hash == d.last_hash) {
+            console.info("Skipping...");
+            return;
+        }
+        d.last_hash = current_hash;
+
         var hash_obj = get_current_hash_object();
         if (hash_obj == null) {
             return;
@@ -64,6 +62,10 @@ mainApp.service("hash", function(jswindow, switcher) {
         switcher.show(target_route);
         async.setImmediate(function() {
             var handler = hash_handlers[target_route];
+            if (!handler) {
+                console.error("No handler registered for target route " + target_route);
+                return;
+            }
             handler(hash_obj);
         });
     };
@@ -77,6 +79,7 @@ mainApp.service("hash", function(jswindow, switcher) {
 
     // Check for current hash during first loading
     var init_check_hash = function() {
+        console.info("hash.service.js: init_check_hash");
         async.setImmediate(function() {
             handle_hash_change();
         });
@@ -84,6 +87,7 @@ mainApp.service("hash", function(jswindow, switcher) {
 
     // ========================================================================
 
+    // <handler> function(hash_component)
     self.register = function(route_name, handler) {
         console.info("HASH HANDLER REGISTERED " + route_name);
         hash_handlers[route_name] = handler;
