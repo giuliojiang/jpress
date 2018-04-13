@@ -1,4 +1,4 @@
-mainApp.controller("write", function($scope, socket, session, write_data, write_files_data) {
+mainApp.controller("write", function($scope, socket, session, write_data, write_files_data, hash) {
 
     $scope.d = {};
     // title
@@ -31,6 +31,7 @@ mainApp.controller("write", function($scope, socket, session, write_data, write_
 
     this.$onInit = function() {
         console.info("write: $onInit");
+        hash.set_hash(["write"]);
         write_data.set_preview_id($scope.preview_id());
     };
 

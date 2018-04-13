@@ -36,12 +36,16 @@ mainApp.controller("posts", function($scope, socket, posts_handler, rawhtml, dat
         hash.set_hash(hashobj);
     };
 
-    // Initialization ---------------------------------------------------------
+    $scope.previous_page = function() {
+        posts_handler.previous_page();
+    };
 
-    this.$onInit = function() {
-        // Request posts
-        console.info("Posts controller: requesting posts");
-        posts_handler.init_request_posts();
+    $scope.get_visual_page_no = function() {
+        return posts_handler.get_current_page() + 1;
+    };
+
+    $scope.next_page = function() {
+        posts_handler.next_page();
     };
 
 });

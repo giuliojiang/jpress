@@ -61,6 +61,10 @@ mainApp.service("hash", function(jswindow, switcher) {
         switcher.show(target_route);
         async.setImmediate(function() {
             var handler = hash_handlers[target_route];
+            if (!handler) {
+                console.error("No handler registered for target route " + target_route);
+                return;
+            }
             handler(hash_obj);
         });
     };

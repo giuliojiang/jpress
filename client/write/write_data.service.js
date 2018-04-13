@@ -1,4 +1,4 @@
-mainApp.service("write_data", function(socket, rawhtml, switcher, $rootScope, alert, util, jswindow) {
+mainApp.service("write_data", function(socket, rawhtml, switcher, $rootScope, alert, util, jswindow, hash) {
 
     var self = this;
 
@@ -12,7 +12,7 @@ mainApp.service("write_data", function(socket, rawhtml, switcher, $rootScope, al
 
     // write_submit handler ---------------------------------------------------
     socket.register("write_submit", function(msgobj) {
-        switcher.show("posts");
+        hash.set_hash(["posts", 0]);
         $rootScope.$apply();
         alert.alert("Post submitted");
     });

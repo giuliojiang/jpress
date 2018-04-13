@@ -5,7 +5,7 @@ mainApp.service('posts_handler', function(socket, session, $rootScope, hash) {
 
     var current_page = 0;
     // each post object has: created, title, body
-    var displayed_posts = [];
+    var displayed_posts = null;
 
     // Get page by page number ------------------------------------------------
     // [private]
@@ -17,12 +17,6 @@ mainApp.service('posts_handler', function(socket, session, $rootScope, hash) {
             "posts",
             page_index
         ]);
-    };
-
-    // Initialization ---------------------------------------------------------
-    self.init_request_posts = function() {
-        current_page = 0;
-        get_page_number(current_page);
     };
 
     // Get current page -------------------------------------------------------
