@@ -9,7 +9,7 @@ mainApp.service("jswindow", function() {
     };
 
     self.get_globals = function() {
-        return jpress_globals;
+        return window.jpress_globals;
     };
 
 });

@@ -32,7 +32,7 @@ var finalize = function() {
     fs.writeFileSync(path.join(__dirname, "..", "local", "config.json"), JSON.stringify(default_conf));
     
     var conf_json = JSON.stringify(default_globals);
-    var globals_js_text = "var jpress_globals = " + conf_json + ";\n";
+    var globals_js_text = "window.jpress_globals = " + conf_json + ";\n";
     fs.writeFileSync(path.join(__dirname, "..", "client", "globals.js"), globals_js_text);
 
     process.exit();
