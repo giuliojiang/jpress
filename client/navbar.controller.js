@@ -9,7 +9,7 @@ mainApp.controller("navbar", function($scope, switcher, session, socket, hash, j
             _t: "session_end",
             token: session.get_token()
         });
-        switcher.show("login");
+        hash.set_hash(["login"]);
     };
 
     $scope.to_posts = function() {
