@@ -1,6 +1,6 @@
 <nav ng-controller="navbar" class="blue-grey darken-2">
     <div class="nav-wrapper container">
-        <a href="#" class="brand-logo" ng-click="to_posts()">Giulio Jiang</a>
+        <a href="#" class="brand-logo" ng-click="to_posts()">{{get_blog_title()}}</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li><a ng-show="logged_in()" ng-click="main_view_switch('write')">Write</a></li>
             <li><a ng-show="logged_in()" ng-click="logout()">Logout</a></li>

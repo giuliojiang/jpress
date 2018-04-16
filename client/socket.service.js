@@ -15,7 +15,9 @@ mainApp.service('socket', function(jswindow, $timeout) {
     };
 
     self.get_endpoint = function() {
-        return jswindow.get_window().location.hostname +":21555";
+        var globals = jswindow.get_globals();
+        var port = globals.port;
+        return jswindow.get_window().location.hostname + ":" + port;
     };
 
     // Private methods ========================================================
