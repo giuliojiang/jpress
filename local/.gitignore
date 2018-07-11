@@ -1,7 +1,0 @@
-*.crt
-*.key
-*.pem
-config.json
-post
-file
-uploads

@@ -27,6 +27,7 @@ var handle_internal = function(msgobj, socket) {
     }
 };
 
+// TODO second argument is now a apimainhandler.ApiResponse
 var handle = function(msgobj, socket) {
     try {
         handle_internal(msgobj, socket);
