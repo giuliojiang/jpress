@@ -1,7 +1,6 @@
 var priv = {};
 var express = require("express");
 var path = require("path");
-var bodyParser = require('body-parser');
 
 module.exports.init = function(jservice) {
 
@@ -13,8 +12,6 @@ module.exports.init = function(jservice) {
 module.exports.createApp = function() {
 
     var app = express();
-
-    app.use(bodyParser.text());
     
     app.put("/api", priv.apiMainHandler.createHandler());
 

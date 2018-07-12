@@ -1,8 +1,10 @@
 var priv = {};
+var express = require("express");
+var bodyParser = require("body-parser");
 
 module.exports.init = function(jservice) {
 
-    priv.handlers = jservice.get("handlers");
+    // priv.handlers = jservice.get("handlers");
 
 };
 
@@ -25,11 +27,17 @@ function ApiResponse (res) {
 
 module.exports.createHandler = function() {
 
-    return function(req, res) {
+    var app = express();
+
+    app.use(bodyParser.text());
+
+    app.put("/", function(req, res) {
         var body = req.body;
         console.info("apimainhandler: request body is ", JSON.stringify(body));
         var msgobj = JSON.parse(body);
-        priv.handlers.handle(msgobj, new ApiResponse(res));
-    };
+        // priv.handlers.handle(msgobj, new ApiResponse(res));
+    });
+
+    return app;
 
 };
