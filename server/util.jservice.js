@@ -1,3 +1,5 @@
+"use strict";
+
 var fs = require("fs");
 var async = require("async");
 
@@ -136,3 +138,35 @@ module.exports.aforeach = function(func, list, callback) {
     one();
 
 }
+
+// ============================================================================
+// String replace function
+
+module.exports.stringReplaceAll = function(theString, oldPattern, newPattern) {
+    return theString.split(oldPattern).join(newPattern);
+};
+
+// ============================================================================
+// Sanitize URL strings
+
+module.exports.sanitizeURL = function(inputURL) {
+
+    return module.exports.stringReplaceAll(inputURL, "..", "");
+    
+};
+
+// ============================================================================
+// Split filename extension
+// Returns the extension, without the leading dot
+
+module.exports.splitext = function(filestring) {
+
+    var splt = filestring.split(".");
+    if (splt.length == 0) {
+        return "";
+    } else {
+        var len = splt.length;
+        return splt[len - 1];
+    }
+
+};
