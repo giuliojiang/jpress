@@ -1,25 +1,34 @@
-<div ng-controller="write">
-    <div class="section row">
-        <!--Title-->
-        <input type="text" class="validate" placeholder="title" ng-model="d.title">
-    </div>
-    <div class="section row">
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="write.js"></script>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    </head>
+    <body ng-app="mainApp" ng-controller="mainController">
         <!-- Writing area -->
-        <div class="col s6">
-            <textarea id="jpress_write_textarea" class="materialize-textarea"></textarea>
+        <div class="w3-row">
+            <textarea ng-model="d.writeInput"></textarea>
         </div>
         <!-- Preview area -->
-        <div class="col s6">
-            <div class="jpress_post_container" id="{{preview_id()}}"></div>
+        <div class="w3-row">
+            <div id="previewElement"></div>
         </div>
-    </div>
-    <!-- Include uploader -->
-    <div ng-include="'write/upload/upload.html'"></div>
-    <!-- Uploaded files list -->
-    <div ng-include="'write/files/files.html'"></div>
-    <!-- Submit and preview buttons -->
-    <div class="section row center">
-            <a class="waves-effect waves-light btn-large green lighten-2" ng-click="preview()">Preview</a>
-            <a class="waves-effect waves-light btn-large light-blue lighten-2" ng-click="submit()">Submit</a>
-    </div>
-</div>
+        <!-- File uploader -->
+        <div class="w3-row">
+            <p>TODO</p>
+        </div>
+        <!-- Uploaded files -->
+        <div class="w3-row">
+            <p>TODO</p>
+        </div>
+        <!-- Preview and submit buttons -->
+        <div class="w3-row">
+            <div class="w3-col s6">
+                <button ng-click="submitButton()">Submit</button>
+            </div>
+            <div class="w3-col s6">
+                <button ng-click="previewButton()">Preview</button>
+            </div>
+        </div>
+    </body>
+</html>
