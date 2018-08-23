@@ -33,7 +33,7 @@ module.exports.createHandler = function(staticBaseDirectory) {
         // Check if the file exists
         var fsFullPath = path.join(staticBaseDirectory, pathUrl);
         
-
+        TODO RESUME
     });
 
 };

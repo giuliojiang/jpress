@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cd server/quicktest && ./test.py"
   },
   "author": "giuliojiang",
   "license": "GPL-2.0",
   "dependencies": {
     "async": "^2.6.0",
     "body-parser": "^1.18.3",
+    "chai": "^4.1.2",
     "express": "^4.16.3",
     "password-hash": "^1.2.2",
     "randomstring": "^1.1.5"
