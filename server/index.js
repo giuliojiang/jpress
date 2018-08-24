@@ -14,6 +14,7 @@ module.exports.createApp = function() {
     find_service("staticmainhandler");
     find_service("util");
     find_service("utilasync");
+    find_service("handlers");
 
     return jservice.get("app").createApp();
 

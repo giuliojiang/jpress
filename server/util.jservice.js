@@ -38,6 +38,12 @@ module.exports.is_string_array = function(data) {
     return true;
 };
 
+// ============================================================================
+// Is object
+module.exports.isObject = function(theObj) {
+    return theObj !== null && typeof theObj === 'object';
+}
+
 // mkdir_sync =================================================================
 
 module.exports.mkdir_sync = function(path) {

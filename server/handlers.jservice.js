@@ -1,52 +1,42 @@
+var mod = {};
+var priv = {};
 
+// Map: string -> handler
+// where handler: msgobj async function(msgobj)
+//     A handler is an async function that takes a msgobj (an JS object)
+//     of the message, and async-returns (a promise) the reply message.
+var registeredHandlers = {};
 
-// Local ----------------------------------------------------------------------
+module.exports.init = function(jservice) {
+    mod.util = jservice.get("util");
+}
 
-var registered_handlers = {};
-
-// init -----------------------------------------------------------------------
-
-var init = function(jservice) {
-
-};
-
-// handle ---------------------------------------------------------------------
-
-var handle_internal = function(msgobj, socket) {
-
-    var t = msgobj._t;
-    if (!t) {
-        console.info("handlers.jservice: No _t in message: " + JSON.stringify(msgobj));
-        return;
+module.exports.register = function(key, handler) {
+    if (registeredHandlers.hasOwnProperty(key)) {
+        throw new Error("Key ["+ key +"] already has a handler");
     }
+    registeredHandlers[key] = handler;
+}
 
-    if (t in registered_handlers) {
-        registered_handlers[t](msgobj, socket);
-    } else {
-        console.info("handlers.jservice: No handler able to handle message type ["+ t +"]");
-    }
-};
-
-// TODO second argument is now a apimainhandler.ApiResponse
-var handle = function(msgobj, socket) {
+// Returns a (promise) msgobj
+module.exports.handle = async function(msgobj) {
     try {
-        handle_internal(msgobj, socket);
+        if (!mod.util.isObject(msgobj)) {
+            return null;
+        }
+        var key = msgobj["_t"];
+        if (!mod.util.is_string(key)) {
+            return null;
+        }
+        if (registeredHandlers.hasOwnProperty(key)) {
+            var theHandler = registeredHandlers[key];
+            return await theHandler(msgobj);
+        } else {
+            console.info("handlers: No handler for key ["+ key +"]");
+            return null;
+        }
     } catch (err) {
-        console.error(err);
+        console.error("handlers: Unexpected error: ", err);
+        return null;
     }
-};
-
-// register -------------------------------------------------------------------
-
-// A handler is a function that takes (msgobj, socket)
-var register = function(name, h) {
-    registered_handlers[name] = h;
-};
-
-// Exports --------------------------------------------------------------------
-
-module.exports = {
-    init: init,
-    handle: handle,
-    register: register
-};
+}

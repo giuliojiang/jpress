@@ -1,41 +1,37 @@
+var mod = {};
 var priv = {};
+
 var express = require("express");
 var bodyParser = require("body-parser");
 
 module.exports.init = function(jservice) {
-
-    // priv.handlers = jservice.get("handlers");
-
-};
-
-function ApiResponse (res) {
-
-    var self = this;
-
-    self.send = function(msgobj) {
-        res.send(JSON.stringify(msgobj));
-    };
-
-    self.alert = function(txt) {
-        res.send(JSON.stringify({
-            _t: "alert",
-            txt: txt
-        }));
-    };
-
+    mod.handlers = jservice.get("handlers");
 };
 
 module.exports.createHandler = function() {
 
     var app = express();
 
-    app.use(bodyParser.text());
+    app.use("/", bodyParser.json());
 
-    app.put("/", function(req, res) {
+    app.post("/", async function(req, res) {
         var body = req.body;
         console.info("apimainhandler: request body is ", JSON.stringify(body));
-        var msgobj = JSON.parse(body);
-        // priv.handlers.handle(msgobj, new ApiResponse(res));
+        var msgobj = body;
+        
+        var resp;
+        try {
+            resp = await mod.handlers.handle(msgobj);
+        } catch (err) {
+            console.error("apimainhandler: Exception in handler. ", err);
+            res.send(JSON.stringify(null));
+            return;
+        }
+
+        res.send(JSON.stringify(resp));
+        return;
+
+        // TODO RESUME: create the handlers for the write page
     });
 
     return app;

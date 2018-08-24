@@ -14,10 +14,10 @@ module.exports.init = function(jservice) {
 module.exports.createApp = function() {
 
     var app = express();
-    
-    app.put("/api", mod.apiMainHandler.createHandler());
 
-    app.get("/s3", mod.s3MainHandler.createHandler());
+    app.use("/api", mod.apiMainHandler.createHandler());
+
+    app.use("/s3", mod.s3MainHandler.createHandler());
 
     app.use("/", mod.staticmainhandler.createHandler(
         path.join(__dirname, "..", "client")
