@@ -12,7 +12,14 @@ module.exports.init = function(jservice) {
 
 // ============================================================================
 // async stat
-module.exports.fsStat = async function(path) {
+module.exports.fsStat = async function(thePath) {
     var promiseStat = util.promisify(fs.stat);
-    return await promiseStat(path);
+    return await promiseStat(thePath);
 }
+
+// ============================================================================
+// async read file
+module.exports.fsReadFile = async function(thePath, theOptions) {
+    var readFilePromisified = util.promisify(fs.readFile);
+    return await readFilePromisified(thePath, theOptions);
+};

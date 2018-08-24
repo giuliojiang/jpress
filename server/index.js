@@ -11,6 +11,9 @@ module.exports.createApp = function() {
     find_service("app");
     find_service("apimainhandler");
     find_service("s3mainhandler");
+    find_service("staticmainhandler");
+    find_service("util");
+    find_service("utilasync");
 
     return jservice.get("app").createApp();
 

@@ -20,12 +20,19 @@ module.exports.run = async function() {
     mod.utilasync = jservice.get("utilasync");
 
     // ------------------------------------------------------------------------
+    {
+        var foo = "bar";
+        expect(foo).to.be.a('string');
 
-    var foo = "bar";
-    expect(foo).to.be.a('string');
+        var stat = await mod.utilasync.fsStat("./etc/afile");
+        expect(stat.isFile()).to.be.true;
+    }
 
-    var stat = await mod.utilasync.fsStat("./etc/afile");
-    expect(stat.isFile()).to.be.true;
+    // ------------------------------------------------------------------------
+    {
+        var fileContents = await mod.utilasync.fsReadFile("./etc/afile", "utf8");
+        expect(fileContents).to.equal("some content");
+    }
 
 };
 
