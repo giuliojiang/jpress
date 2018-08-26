@@ -1,3 +1,5 @@
+"use strict";
+
 var mod = {};
 var priv = {};
 
@@ -31,7 +33,6 @@ module.exports.createHandler = function() {
         res.send(JSON.stringify(resp));
         return;
 
-        // TODO RESUME: create the handlers for the write page
     });
 
     return app;

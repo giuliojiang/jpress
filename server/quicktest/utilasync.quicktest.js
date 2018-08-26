@@ -4,13 +4,6 @@ var mod = {};
 var priv = {};
 var expect = require('chai').expect;
 var quick = require("./lib/quick.js");
-
-process.on('uncaughtException', (err) => {
-    console.error("Uncaught exception");
-    console.error(err);
-    process.exit(1);
-});
-
 var jservice = require("./../jservice.js");
 
 module.exports.run = async function() {

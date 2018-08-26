@@ -1,3 +1,5 @@
+"use strict";
+
 var priv = {};
 var mod = {};
 var express = require("express");

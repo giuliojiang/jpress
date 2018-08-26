@@ -7,7 +7,7 @@ var active_services = {};
 
 var register = function(name, srvc) {
     if (name in services || name in active_services) {
-        console.warn("JSERVICE: A service with name ["+ name +"] already exists");
+        console.warn("JSERVICE: A service with name ["+ name +"] already exists. Overwriting...");
     }
     services[name] = srvc;
 };

@@ -7,15 +7,23 @@ var priv = {};
 //     of the message, and async-returns (a promise) the reply message.
 var registeredHandlers = {};
 
+// Map: message type -> authentication level
+// message type: String
+// authentication level: Integer.
+//     0 requires no authentication
+//     1 requires user logged in
+var authenticationLevels = {};
+
 module.exports.init = function(jservice) {
     mod.util = jservice.get("util");
 }
 
-module.exports.register = function(key, handler) {
+module.exports.register = function(key, authenticationLevel, handler) {
     if (registeredHandlers.hasOwnProperty(key)) {
         throw new Error("Key ["+ key +"] already has a handler");
     }
     registeredHandlers[key] = handler;
+    authenticationLevel[key] = authenticationLevel
 }
 
 // Returns a (promise) msgobj
@@ -28,6 +36,7 @@ module.exports.handle = async function(msgobj) {
         if (!mod.util.is_string(key)) {
             return null;
         }
+        // TODO check authentication level
         if (registeredHandlers.hasOwnProperty(key)) {
             var theHandler = registeredHandlers[key];
             return await theHandler(msgobj);
