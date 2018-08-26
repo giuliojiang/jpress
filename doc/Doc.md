@@ -38,4 +38,9 @@ The client global variable `BASEURL` stores the base url (starting with a /) to 
     _tok: authentication token,
     text: string
 }
+
+{
+    _t: "write_preview",
+    html: string
+}
 ```

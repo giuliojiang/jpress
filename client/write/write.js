@@ -17,13 +17,14 @@ mainApp.controller("mainController", function($scope) {
     };
 
     $scope.previewButton = function() {
-        console.info("Preview button clicked");
         var msgobj = {
             _t: "write_preview",
-            text: "some text"
+            _tok: 0, // TODO token system
+            text: $scope.d.writeInput
         };
         jpress.api.communicate(msgobj, function(resp) {
-            console.info("Response is " + JSON.stringify(resp));
+            var htmlString = resp.html;
+            document.getElementById("previewElement").innerHTML = htmlString;
         });
     };
 });
