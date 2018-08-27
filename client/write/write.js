@@ -21,3 +21,7 @@ mainApp.controller("mainController", function($scope) {
         });
     };
 });
+
+angular.element(function() {
+    angular.bootstrap(document, ['mainApp']);
+});

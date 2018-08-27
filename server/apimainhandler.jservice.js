@@ -18,7 +18,6 @@ module.exports.createHandler = function() {
 
     app.post("/", async function(req, res) {
         var body = req.body;
-        console.info("apimainhandler: request body is ", JSON.stringify(body));
         var msgobj = body;
         
         var resp;

@@ -26,7 +26,6 @@ module.exports.createHandler = function(staticBaseDirectory, jpressContext) {
 
     app.get("*", async function(req, res) {
 
-        console.info("baseurl ["+ req.baseUrl +"] originalurl ["+ req.originalUrl +"] path ["+ req.path +"]");
         var baseUrl = mod.util.sanitizeURL(req.baseUrl);
         var fullUrl = mod.util.sanitizeURL(req.originalUrl);
         var pathUrl = mod.util.sanitizeURL(req.path);
@@ -75,7 +74,6 @@ module.exports.createHandler = function(staticBaseDirectory, jpressContext) {
                 res.sendStatus(500);
                 return;
             }
-            console.info("Read jpress.js. Content is ", JSON.stringify(jpressJsString));
 
             // Replace contents in the javascript file
             if (!jpressContext.googleClientId) {
