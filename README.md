@@ -22,18 +22,30 @@ var fs = require("fs");
 var privateKey  = fs.readFileSync("./key.pem", 'utf8');
 var certificate = fs.readFileSync("./cert.pem", 'utf8');
 
-var jpress = require("jpress");
+var jpressIndex = require("jpress");
+
+process.on('uncaughtException', (err) => {
+    console.error("Uncaught exception: ", err);
+});
 
 var credentials = {key: privateKey, cert: certificate};
 var express = require('express');
-var app = express();
 
-app.use("/", jpress.createApp({
-    googleClientId: "YOUR GOOGLE ID CLIENT"
-}));
+var main = async function() {
+    var app = express();
 
-var httpsServer = https.createServer(credentials, app);
-httpsServer.listen(443);
+    var theJpressApp = await jpressIndex.createApp({
+        googleClientId: "Your ID"
+    });
+
+    app.use("/jpress", theJpressApp);
+    
+    var httpsServer = https.createServer(credentials, app);
+    httpsServer.listen(443);
+    
+};
+
+main();
 ```
 
 You will need a Google API Client ID for the google sign in. Visit https://developers.google.com/identity/sign-in/web/sign-in#before_you_begin to Configure a Project. Replace the Client ID token in the code.
