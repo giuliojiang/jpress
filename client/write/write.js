@@ -12,13 +12,17 @@ mainApp.controller("mainController", function($scope) {
     $scope.previewButton = function() {
         var msgobj = {
             _t: "write_preview",
-            _tok: 0, // TODO token system
+            _tok: jpress.gsignin.token,
             text: $scope.d.writeInput
         };
         jpress.api.communicate(msgobj, function(resp) {
             var htmlString = resp.html;
             document.getElementById("previewElement").innerHTML = htmlString;
         });
+    };
+
+    $scope.signout = function() {
+        jpress.gsignin.signOut();
     };
 });
 

@@ -13,7 +13,7 @@ module.exports.init = async function(jservice) {
 
 };
 
-module.exports.createApp = function(jpressContext) {
+module.exports.createApp = function() {
 
     var app = express();
 
@@ -22,8 +22,7 @@ module.exports.createApp = function(jpressContext) {
     app.use("/s3", mod.s3MainHandler.createHandler());
 
     app.use("/", mod.staticmainhandler.createHandler(
-        path.join(__dirname, "..", "client"),
-        jpressContext
+        path.join(__dirname, "..", "client")
     ));
 
     return app;

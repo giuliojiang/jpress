@@ -13,6 +13,8 @@ module.exports.createHandler = function() {
 
     app.post("/:uploadid", function(req, res) {
 
+        // TODO make proper uploader to S3
+
         var uploadid = req.params.uploadid;
         console.info("s3MainHandler: started upload id ", uploadid);
         var diskFilename = path.join("/tmp", uploadid);

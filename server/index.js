@@ -1,4 +1,5 @@
 var path = require("path");
+var context = require("./context.jservice.js");
 var jservice = require(path.join(__dirname, "jservice.js"));
 
 var find_service = function(name) {
@@ -17,11 +18,13 @@ module.exports.createApp = async function(jpressContext) {
     find_service("handlers");
     find_service("handler_write");
     find_service("msgobj");
+    find_service("authentication");
+    jservice.register("context", context.createContext(jpressContext));
 
     // Start eager services ---------------------------------------------------
     await jservice.get("handler_write");
 
     var theApp = await jservice.get("app");
-    return theApp.createApp(jpressContext);
+    return theApp.createApp();
 
 };

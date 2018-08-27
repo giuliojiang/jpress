@@ -17,10 +17,11 @@ module.exports.init = async function(jservice) {
 
     mod.util = await jservice.get("util");
     mod.utilasync = await jservice.get("utilasync");
+    mod.context = await jservice.get("context");
 
 };
 
-module.exports.createHandler = function(staticBaseDirectory, jpressContext) {
+module.exports.createHandler = function(staticBaseDirectory) {
 
     var app = express();
 
@@ -76,11 +77,8 @@ module.exports.createHandler = function(staticBaseDirectory, jpressContext) {
             }
 
             // Replace contents in the javascript file
-            if (!jpressContext.googleClientId) {
-                throw new Error("jpressContext.googleClientId is not defined");
-            }
             jpressJsString = mod.util.stringReplaceAll(jpressJsString, "JPRESSREPLACE_BASEURL", baseUrl);
-            jpressJsString = mod.util.stringReplaceAll(jpressJsString, "JPRESSREPLACE_GSIGNIN_CLIENTID", jpressContext.googleClientId);
+            jpressJsString = mod.util.stringReplaceAll(jpressJsString, "JPRESSREPLACE_GSIGNIN_CLIENTID", mod.context.getContext().googleClientId);
 
             // Insert script into document
             var scriptElem = dom.window.document.createElement("script");

@@ -13,7 +13,7 @@ module.exports.init = async function(jservice) {
     mod.handlers = await jservice.get("handlers");
     mod.msgobj = await jservice.get("msgobj");
 
-    mod.handlers.register("write_preview", 1, module.exports.handlePreview);
+    mod.handlers.register("write_preview", 2, module.exports.handlePreview);
 
 }
 

@@ -20,6 +20,9 @@ module.exports.is_number = function(data) {
 // is_string ==================================================================
 
 module.exports.is_string = function(data) {
+    if (!data) {
+        return false;
+    }
     return typeof data === 'string';
 };
 
