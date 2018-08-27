@@ -13,10 +13,10 @@ var path = require("path");
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 
-module.exports.init = function(jservice) {
+module.exports.init = async function(jservice) {
 
-    mod.util = jservice.get("util");
-    mod.utilasync = jservice.get("utilasync");
+    mod.util = await jservice.get("util");
+    mod.utilasync = await jservice.get("utilasync");
 
 };
 

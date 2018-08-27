@@ -10,7 +10,7 @@ module.exports.run = async function() {
 
     jservice.register("msgobj", require("./../msgobj.jservice.js"));
 
-    mod.msgobj = jservice.get("msgobj");
+    mod.msgobj = await jservice.get("msgobj");
 
     // ------------------------------------------------------------------------
     // Standard get

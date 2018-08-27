@@ -14,8 +14,8 @@ var registeredHandlers = {};
 //     1 requires user logged in
 var authenticationLevels = {};
 
-module.exports.init = function(jservice) {
-    mod.util = jservice.get("util");
+module.exports.init = async function(jservice) {
+    mod.util = await jservice.get("util");
 }
 
 module.exports.register = function(key, authenticationLevel, handler) {
@@ -23,7 +23,7 @@ module.exports.register = function(key, authenticationLevel, handler) {
         throw new Error("Key ["+ key +"] already has a handler");
     }
     registeredHandlers[key] = handler;
-    authenticationLevel[key] = authenticationLevel
+    authenticationLevels[key] = authenticationLevel
 }
 
 // Returns a (promise) msgobj

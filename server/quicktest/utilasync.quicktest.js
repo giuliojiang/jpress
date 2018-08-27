@@ -10,7 +10,7 @@ module.exports.run = async function() {
 
     jservice.register("utilasync", require("./../utilasync.jservice.js"));
     
-    mod.utilasync = jservice.get("utilasync");
+    mod.utilasync = await jservice.get("utilasync");
 
     // ------------------------------------------------------------------------
     {

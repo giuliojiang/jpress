@@ -8,10 +8,10 @@ var priv = {};
 
 // ============================================================================
 
-module.exports.init = function(jservice) {
+module.exports.init = async function(jservice) {
 
-    mod.handlers = jservice.get("handlers");
-    mod.msgobj = jservice.get("msgobj");
+    mod.handlers = await jservice.get("handlers");
+    mod.msgobj = await jservice.get("msgobj");
 
     mod.handlers.register("write_preview", 1, module.exports.handlePreview);
 

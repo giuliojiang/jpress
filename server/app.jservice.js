@@ -5,11 +5,11 @@ var mod = {};
 var express = require("express");
 var path = require("path");
 
-module.exports.init = function(jservice) {
+module.exports.init = async function(jservice) {
 
-    mod.apiMainHandler = jservice.get("apimainhandler");
-    mod.s3MainHandler = jservice.get("s3mainhandler");
-    mod.staticmainhandler = jservice.get("staticmainhandler");
+    mod.apiMainHandler = await jservice.get("apimainhandler");
+    mod.s3MainHandler = await jservice.get("s3mainhandler");
+    mod.staticmainhandler = await jservice.get("staticmainhandler");
 
 };
 

@@ -6,8 +6,8 @@ var priv = {};
 var express = require("express");
 var bodyParser = require("body-parser");
 
-module.exports.init = function(jservice) {
-    mod.handlers = jservice.get("handlers");
+module.exports.init = async function(jservice) {
+    mod.handlers = await jservice.get("handlers");
 };
 
 module.exports.createHandler = function() {

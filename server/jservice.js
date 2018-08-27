@@ -14,7 +14,7 @@ var register = function(name, srvc) {
 
 // Get ------------------------------------------------------------------------
 
-var get = function(name) {
+var get = async function(name) {
     if (name in active_services) {
         return active_services[name];
     }
@@ -22,7 +22,7 @@ var get = function(name) {
     if (name in services) {
         var the_service = services[name];
         console.info("JSERVICE: initializing jservice ["+ name +"]");
-        the_service.init(module.exports);
+        await the_service.init(module.exports);
         delete services[name];
         active_services[name] = the_service;
         return the_service;

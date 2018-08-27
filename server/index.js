@@ -5,7 +5,7 @@ var find_service = function(name) {
     jservice.register(name, require(path.join(__dirname, name + ".jservice.js")));
 };
 
-module.exports.createApp = function(jpressContext) {
+module.exports.createApp = async function(jpressContext) {
 
     // Register services ----------------------------------------------------------
     find_service("app");
@@ -19,8 +19,9 @@ module.exports.createApp = function(jpressContext) {
     find_service("msgobj");
 
     // Start eager services ---------------------------------------------------
-    jservice.get("handler_write");
+    await jservice.get("handler_write");
 
-    return jservice.get("app").createApp(jpressContext);
+    var theApp = await jservice.get("app");
+    return theApp.createApp(jpressContext);
 
 };
