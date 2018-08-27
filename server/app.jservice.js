@@ -13,7 +13,7 @@ module.exports.init = function(jservice) {
 
 };
 
-module.exports.createApp = function() {
+module.exports.createApp = function(jpressContext) {
 
     var app = express();
 
@@ -22,7 +22,8 @@ module.exports.createApp = function() {
     app.use("/s3", mod.s3MainHandler.createHandler());
 
     app.use("/", mod.staticmainhandler.createHandler(
-        path.join(__dirname, "..", "client")
+        path.join(__dirname, "..", "client"),
+        jpressContext
     ));
 
     return app;

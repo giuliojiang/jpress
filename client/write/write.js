@@ -1,12 +1,5 @@
 "use strict";
 
-// Load other scripts
-{
-    var e = document.createElement("script");
-    e.src = BASEURL + "/lib/api.js";
-    document.head.appendChild(e);
-}
-
 var mainApp = angular.module("mainApp", []);
 mainApp.controller("mainController", function($scope) {
     $scope.d = {};

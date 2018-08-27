@@ -26,7 +26,13 @@ Contains global variable `jpress_globals` with keys:
 
 # Client global variables
 
-The client global variable `BASEURL` stores the base url (starting with a /) to be used to create relative URLs. The BASEURL is dynamically initialized by the server and injected in the HTML file as a script tag.
+`jpress.main.BASEURL` The client global variable `BASEURL` stores the base url (starting with a /) to be used to create relative URLs. The BASEURL is dynamically initialized by the server and injected in the HTML file as a script tag.
+
+`jpress.main.GSIGNIN_CLIENTID` Is used in the google-sign-in library API.
+
+# jpressContext
+
+`jpressContext.googleClientId`
 
 # Messages API
 

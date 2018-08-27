@@ -20,7 +20,7 @@ module.exports.init = function(jservice) {
 
 };
 
-module.exports.createHandler = function(staticBaseDirectory) {
+module.exports.createHandler = function(staticBaseDirectory, jpressContext) {
 
     var app = express();
 
@@ -65,11 +65,32 @@ module.exports.createHandler = function(staticBaseDirectory) {
 
             // Parse the HTML DOM
             var dom = new JSDOM(htmlFileContents);
+
+            // Read the jpress.js file contents
+            var jpressJsString;
+            try {
+                jpressJsString = await mod.utilasync.fsReadFile("./../client/lib/jpress.js", "utf8");
+            } catch (err) {
+                console.error("staticmainhandler: Could not read lib/jpress.js file: ", err);
+                res.sendStatus(500);
+                return;
+            }
+            console.info("Read jpress.js. Content is ", JSON.stringify(jpressJsString));
+
+            // Replace contents in the javascript file
+            if (!jpressContext.googleClientId) {
+                throw new Error("jpressContext.googleClientId is not defined");
+            }
+            jpressJsString = mod.util.stringReplaceAll(jpressJsString, "JPRESSREPLACE_BASEURL", baseUrl);
+            jpressJsString = mod.util.stringReplaceAll(jpressJsString, "JPRESSREPLACE_GSIGNIN_CLIENTID", jpressContext.googleClientId);
+
+            // Insert script into document
             var scriptElem = dom.window.document.createElement("script");
-            scriptElem.text = 'var BASEURL = "' + baseUrl + '";\n';
+            scriptElem.text = jpressJsString;
             var headElement = dom.window.document.head;
             headElement.insertBefore(scriptElem, headElement.firstChild);
 
+            // Send to client
             var finalHtml = dom.serialize();
             res.send(finalHtml);
             return;

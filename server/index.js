@@ -5,7 +5,7 @@ var find_service = function(name) {
     jservice.register(name, require(path.join(__dirname, name + ".jservice.js")));
 };
 
-module.exports.createApp = function() {
+module.exports.createApp = function(jpressContext) {
 
     // Register services ----------------------------------------------------------
     find_service("app");
@@ -21,6 +21,6 @@ module.exports.createApp = function() {
     // Start eager services ---------------------------------------------------
     jservice.get("handler_write");
 
-    return jservice.get("app").createApp();
+    return jservice.get("app").createApp(jpressContext);
 
 };

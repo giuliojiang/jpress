@@ -1,9 +1,5 @@
 "use strict";
 
-if (!window.hasOwnProperty("jpress")) {
-    window.jpress = {};
-}
-
 jpress.api = {};
 
 // ============================================================================
@@ -12,7 +8,7 @@ jpress.api = {};
 // BASEURL is injected dynamically by the server into
 // each HTML page, and contains the base URL component of the
 // main application.
-jpress.api.endpoint = BASEURL + "/api";
+jpress.api.endpoint = jpress.main.BASEURL + "/api";
 
 // ============================================================================
 // Main communication method to the server

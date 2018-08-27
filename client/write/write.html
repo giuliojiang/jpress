@@ -1,10 +1,14 @@
 <html>
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-        <script src="write.js"></script>
+        <script>jpress.main.loadJs(jpress.main.BASEURL + "/write/write.js");</script>
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     </head>
     <body ng-app="mainApp" ng-controller="mainController">
+        <!-- Google sign-in -->
+        <div class="w3-row">
+            <div class="g-signin2" data-onsuccess="jpress_on_google_sign_in"></div>
+        </div>
         <!-- Writing area -->
         <div class="w3-row">
             <textarea ng-model="d.writeInput"></textarea>

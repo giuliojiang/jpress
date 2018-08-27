@@ -7,7 +7,9 @@ process.on('uncaughtException', (err) => {
 
 var app = express();
 
-app.use("/jpress", jpressIndex.createApp());
+app.use("/jpress", jpressIndex.createApp({
+    googleClientId: null
+}));
 
 app.listen(3000, () => {
     console.log("Dev server listening on port 3000");
