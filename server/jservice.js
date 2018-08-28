@@ -22,7 +22,12 @@ var get = async function(name) {
     if (name in services) {
         var the_service = services[name];
         console.info("JSERVICE: initializing jservice ["+ name +"]");
-        await the_service.init(module.exports);
+        try {
+            await the_service.init(module.exports);
+        } catch (err) {
+            console.error("Error in initialization of service ["+ name +"]", err);
+            process.exit(1);
+        }
         delete services[name];
         active_services[name] = the_service;
         return the_service;

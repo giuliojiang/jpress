@@ -1,10 +1,16 @@
 "use strict";
 
+var checkKey = function(theObj, theKey) {
+    if (!theObj.hasOwnProperty(theKey)) {
+        throw new Error("Key ["+ theKey +"] is not defined. This is required in jpress Context");
+    }
+}
+
 module.exports.createContext = function(jpressContext) {
 
-    if (!jpressContext.googleClientId) {
-        throw new Error("googleClientId is not defined. This is required to enable Google API based authentication");
-    }
+    checkKey(jpressContext, "googleClientId");
+    checkKey(jpressContext, "mongoConnectionUrl");
+    checkKey(jpressContext, "mongoCollectionName");
 
     var theModule = {};
 
