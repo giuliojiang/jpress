@@ -15,6 +15,7 @@
     "express": "^4.16.3",
     "google-auth-library": "^1.6.1",
     "jsdom": "^12.0.0",
+    "mongodb": "^3.1.4",
     "showdown": "^1.8.6"
   }
 }
