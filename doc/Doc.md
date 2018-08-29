@@ -27,6 +27,20 @@
 }
 ```
 
+```
+{
+    _t: "write_post",
+    _tok: authentication token,
+    title: string,
+    body: string
+}
+
+{
+    _t: "write_post",
+    status: true/false
+}
+```
+
 # Database
 
 Based on MongoDB

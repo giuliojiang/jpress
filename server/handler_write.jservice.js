@@ -12,8 +12,10 @@ module.exports.init = async function(jservice) {
 
     mod.handlers = await jservice.get("handlers");
     mod.msgobj = await jservice.get("msgobj");
+    mod.mongoposts = await jservice.get("mongoposts");
 
     mod.handlers.register("write_preview", 2, module.exports.handlePreview);
+    mod.handlers.register("write_post", 2, module.exports.handlePost);
 
 }
 
@@ -36,6 +38,36 @@ module.exports.handlePreview = async function(msgobj) {
             return null;
         } else {
             throw err;
+        }
+    }
+
+}
+
+// ============================================================================
+
+module.exports.handlePost = async function(msgobj) {
+
+    try {
+        var titleField = mod.msgobj.getString(msgobj, "title");
+        var bodyField = mod.msgobj.getString(msgobj, "body");
+
+        // Insert into database
+        await mod.mongoposts.newPost(titleField, bodyField);
+
+        // Send OK
+        return {
+            _t: "write_post",
+            status: true
+        };
+    } catch (err) {
+        if (err instanceof mod.msgobj.MsgobjKeyError) {
+            console.info("Got a key error");
+            return null;
+        } else {
+            return {
+                _t: "write_post",
+                status: false
+            };
         }
     }
 

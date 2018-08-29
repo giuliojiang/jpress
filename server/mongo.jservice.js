@@ -18,7 +18,7 @@ priv.collection = null;
 
 // ============================================================================
 module.exports.init = async function(jservice) {
-    mod.context = jservice.get("context");
+    mod.context = await jservice.get("context");
 
     // Connect to database
     var mongoUrl = mod.context.getContext().mongoConnectionUrl;
@@ -26,7 +26,7 @@ module.exports.init = async function(jservice) {
     var client = await mongoClientConnectFunc(mongoUrl);
     priv.db = client.db("test");
     var collectionName = mod.context.getContext().mongoCollectionName;
-    priv.collection = db.collection(collectionName);
+    priv.collection = priv.db.collection(collectionName);
 };
 
 // ============================================================================
@@ -50,11 +50,12 @@ module.exports.insertOne = function(theObj) {
 // Finds documents
 // Parameters
 //     query - MongoDB query object
+//     limit - Max number of results
 // Return
 //     result - Array of objects
-module.exports.find = function(query) {
+module.exports.find = function(query, limit) {
     return new Promise((resolve, reject) => {
-        priv.collection.find(query).toArray(function(err, result) {
+        priv.collection.find(query).limit(limit).toArray(function(err, result) {
             if (err) {
                 reject(err);
             } else {

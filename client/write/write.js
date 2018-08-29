@@ -4,11 +4,27 @@ var mainApp = angular.module("mainApp", []);
 mainApp.controller("mainController", function($scope) {
     $scope.d = {};
     $scope.d.writeInput = "";
+    $scope.d.title = "";
 
+    // ========================================================================
     $scope.submitButton = function() {
-        console.info("Submit button clicked");
+        var msgobj = {
+            _t: "write_post",
+            _tok: jpress.gsignin.token,
+            title: $scope.d.title,
+            body: $scope.d.writeInput
+        };
+        jpress.api.communicate(msgobj, function(resp) {
+            var status = resp.status;
+            if (status) {
+                console.info("Post successful");
+            } else {
+                console.info("Post failed!");
+            }
+        });
     };
 
+    // ========================================================================
     $scope.previewButton = function() {
         var msgobj = {
             _t: "write_preview",
