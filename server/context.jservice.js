@@ -11,6 +11,7 @@ module.exports.createContext = function(jpressContext) {
     checkKey(jpressContext, "googleClientId");
     checkKey(jpressContext, "mongoConnectionUrl");
     checkKey(jpressContext, "mongoCollectionName");
+    checkKey(jpressContext, "enableLogging");
 
     var theModule = {};
 

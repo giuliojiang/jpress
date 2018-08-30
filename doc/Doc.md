@@ -9,6 +9,7 @@
 `jpressContext.googleClientId` The Google API Client ID for Sign-in services
 `jpressContext.mongoConnectionUrl` The MongoDB connection URL
 `jpressContext.mongoCollectionName` The name of the target MongoDB collection in which to work
+`jpressContext.enableLogging` Boolean. Enable or disable verbose logging
 
 # Messages API
 

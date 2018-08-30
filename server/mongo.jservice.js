@@ -64,3 +64,21 @@ module.exports.find = function(query, limit) {
         })
     });
 };
+
+// ============================================================================
+// Delete Many documents
+// Parameters:
+//     query - MongoDB query object
+// Return:
+//     numberDeleted - Number of documents deleted
+module.exports.deleteMany = function(query) {
+    return new Promise((resolve, reject) => {
+        priv.collection.deleteMany(query, function(err, obj) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(obj.result.n);
+            }
+        });
+    });
+}
