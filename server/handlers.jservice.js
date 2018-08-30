@@ -18,6 +18,7 @@ var authenticationLevels = {};
 module.exports.init = async function(jservice) {
     mod.util = await jservice.get("util");
     mod.authentication = await jservice.get("authentication");
+    mod.log = await jservice.get("log");
 }
 
 module.exports.register = function(key, authenticationLevel, handler) {
@@ -92,7 +93,10 @@ module.exports.handle = async function(msgobj) {
         var authenticationPass = await priv.checkAuthenticationLevel(msgobj, key);
         if (!authenticationPass) {
             // Authentication failed
-            return null;
+            mod.log.info("handlers: User has no permission to perform ["+ key +"]");
+            return {
+                _t: "general_unauthorized"
+            };
         }
 
         // Get and call the handler

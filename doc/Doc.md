@@ -13,6 +13,30 @@
 
 # Messages API
 
+## General
+
+TODO
+```
+{
+    _t: "general_logout",
+    _tok: authentication token
+}
+
+{
+    _t: "general_logout"
+}
+```
+
+Sent by server when user attempts to do something he doesn't have the permission to
+```
+{}
+
+{
+    _t: "general_unauthorized"
+}
+```
+
+
 ## Write
 
 ```
@@ -63,8 +87,6 @@ Blog posts
 ```
 
 ## Auth
-
-TODO create the high level module
 
 Logged in users are cached for 5 minutes on the MongoDB database.
 

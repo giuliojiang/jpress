@@ -21,6 +21,8 @@ module.exports.createApp = async function(jpressContext) {
     find_service("authentication");
     find_service("mongoposts");
     find_service("mongo");
+    find_service("mongoauth");
+    find_service("log");
     jservice.register("context", context.createContext(jpressContext));
 
     // Start eager services ---------------------------------------------------

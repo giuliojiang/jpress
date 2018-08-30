@@ -2,10 +2,18 @@
 
 var mod = {};
 var priv = {};
+priv.purgeSafeDuration = 1 * 24 * 60 * 60 * 1000; // Entries older than 1 day
 
 // ============================================================================
 module.exports.init = async function(jservice) {
     mod.mongo = await jservice.get("mongo");
+    mod.log = await jservice.get("log");
+
+    // Purge entries older than 1 day
+    var now = new Date().getTime();
+    now = now - priv.purgeSafeDuration; // Subtract 1 day
+    var purgedNumber = await module.exports.purgeOld(now);
+    mod.log.info("mongoauth: Removed ["+ purgedNumber +"] entries from authentication cache");
 }
 
 // ============================================================================
@@ -52,6 +60,8 @@ module.exports.removeById = async function(docId) {
 
 // ============================================================================
 // Insert new document in database
+// Return:
+//     insertedId: ID of document inserted
 module.exports.insert = async function(googleToken, userId, name, isAdmin, loginTime) {
     var newDoc = {
         table: "auth",
@@ -61,5 +71,6 @@ module.exports.insert = async function(googleToken, userId, name, isAdmin, login
         isAdmin: isAdmin,
         loginTime: loginTime
     };
-    await mod.mongo.insertOne(newDoc);
+    var res = await mod.mongo.insertOne(newDoc);
+    return res.insertedId;
 }
