@@ -49,6 +49,8 @@ Collection is named `jpress`.
 
 ## Posts
 
+Blog posts
+
 ```
 {
     _id
@@ -56,5 +58,37 @@ Collection is named `jpress`.
     datePosted: number, milliseconds datetime
     title: string
     body: string, markdown format
+}
+```
+
+## Auth
+
+TODO create the high level module
+
+Logged in users are cached for 5 minutes on the MongoDB database.
+
+```
+{
+    _id
+    table: "auth",
+    googleToken: token,
+    userId: unique google user id,
+    name: string,
+    isAdmin: true/false,
+    loginTime: datetime milliseconds
+}
+```
+
+## User
+
+TODO create the high level module
+
+Actual registered users (that can write posts)
+
+```
+{
+    _id
+    table: "user",
+    userId: unique google user id
 }
 ```
