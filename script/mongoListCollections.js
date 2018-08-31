@@ -1,7 +1,7 @@
 var MongoClient = require('mongodb').MongoClient;
 var util = require("util");
 
-var uri = "";
+var uri = require("./url.js").url;
 
 var main = async function() {
 

@@ -16,6 +16,7 @@
 ## General
 
 TODO
+User logs out. The message is also sent to the server to avoid an attacker being able to keep using a token stored in cache.
 ```
 {
     _t: "general_logout",
