@@ -62,12 +62,16 @@ priv.checkAuthenticationLevel = async function(msgobj, key) {
         }
 
         if (userData) {
-            actualLevel = 1;
+            // User is logged in correctly
+            if (userData.isAdmin) {
+                actualLevel = 2;
+            } else {
+                actualLevel = 1;
+            }
         } else {
+            // User is not logged in
             actualLevel = 0;
         }
-
-        // TODO admin-level checks with database
 
         return actualLevel >= requiredLevel;
 

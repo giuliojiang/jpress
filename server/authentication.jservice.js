@@ -13,6 +13,7 @@ module.exports.init = async function(jservice) {
     mod.context = await jservice.get("context");
     mod.mongoauth = await jservice.get("mongoauth");
     mod.log = await jservice.get("log");
+    mod.mongouser = await jservice.get("mongouser");
     priv.client = new OAuth2Client(mod.context.getContext().googleClientId);
 
 };
@@ -34,12 +35,12 @@ module.exports.authenticateDirect = async function(googleToken) {
     const userId = payload["sub"];
     var username = payload["name"];
 
-    // TODO Add isAdmin information
+    var isAdmin = await mod.mongouser.userExists(userId);
 
     return {
         id: userId,
         name: username,
-        isAdmin: false // TODO
+        isAdmin: isAdmin
     };
 
 };
