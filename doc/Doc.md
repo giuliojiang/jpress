@@ -7,9 +7,24 @@
 # Server side context jpressContext
 
 `jpressContext.googleClientId` The Google API Client ID for Sign-in services
+
 `jpressContext.mongoConnectionUrl` The MongoDB connection URL
+
 `jpressContext.mongoCollectionName` The name of the target MongoDB collection in which to work
+
 `jpressContext.enableLogging` Boolean. Enable or disable verbose logging
+
+# Template engine
+
+TODO resume
+
+HTML documents go through a custom template engine in NodeJS.
+
+The element in which the header is inserted has the ID `jpress-header`.
+
+The element in which the footer is inserted has the ID `jpress-footer`.
+
+The template engine also injects the contents of `template/jpress.js` into the HTML as first child of head. `jpress.js` also goes through replacement for base URL and google Client ID.
 
 # Messages API
 
@@ -104,8 +119,6 @@ Logged in users are cached for 5 minutes on the MongoDB database.
 ```
 
 ## User
-
-TODO create the high level module
 
 Actual registered users (that can write posts)
 

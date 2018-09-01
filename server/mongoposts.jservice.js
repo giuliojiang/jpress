@@ -29,3 +29,16 @@ module.exports.newPost = async function(title, body) {
 
     await mod.mongo.insertOne(newDoc);
 };
+
+// ============================================================================
+// Get last few posts for the homepage feed
+module.exports.getLastPosts = async function(limit, skip) {
+    var query = {
+        table: "posts"
+    };
+    var sort = {
+        datePosted: -1
+    };
+    var docs = await mod.mongo.findLimitSkipSort(query, skip, limit, sort);
+    return docs;
+}

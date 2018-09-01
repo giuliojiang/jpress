@@ -66,6 +66,27 @@ module.exports.find = function(query, limit) {
 };
 
 // ============================================================================
+// Finds documents, with limit and skip
+// Parameters:
+//     query: MongoDB query object
+//     skip: Number of documents to be skipped
+//     limit: Number of documents to be fetched
+//     sort: MongoDB sort object
+// Return:
+//     docs: Array of documents
+module.exports.findLimitSkipSort = function(query, skip, limit, sort) {
+    return new Promise((resolve, reject) => {
+        priv.collection.find(query).skip(skip).limit(limit).sort(sort).toArray(function(err, result) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+};
+
+// ============================================================================
 // Delete Many documents
 // Parameters:
 //     query - MongoDB query object
