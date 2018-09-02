@@ -16,6 +16,8 @@ const { JSDOM } = jsdom;
 // ============================================================================
 module.exports.init = async function(jservice) {
     mod.utilasync = await jservice.get("utilasync");
+    mod.util = await jservice.get("util");
+    mod.context = await jservice.get("context");
 }
 
 // ============================================================================
@@ -36,10 +38,42 @@ module.exports.createApp = function() {
 }
 
 // ============================================================================
+// Return: nothing
 module.exports.processTemplate = async function(htmlPath, req, res) {
 
-    // TODO resume
+    // Load the HTML template file
+    var mainDom = await module.exports.loadDom(htmlPath);
 
+    // Load header
+    var headerDom = await module.exports.loadDom(priv.headerPath);
+    
+    // Load footer
+    var footerDom = await module.exports.loadDom(priv.footerPath);
+
+    // Load jpressJS
+    var jpressJS = await mod.utilasync.fsReadFile(priv.jsPath, "utf8");
+
+    // Perform jpressJS replacements
+    jpressJS = mod.util.stringReplaceAll(jpressJS, "JPRESSREPLACE_BASEURL", req.baseUrl);
+    jpressJS = mod.util.stringReplaceAll(jpressJS, "JPRESSREPLACE_GSIGNIN_CLIENTID", mod.context.getContext().googleClientId);
+
+    // Insert jpressJS into the document
+    var scriptElem = mainDom.window.document.createElement("script");
+    scriptElem.text = jpressJS;
+    var headElement = mainDom.window.document.head;
+    headElement.insertBefore(scriptElem, headElement.firstChild);
+
+    // Insert header content
+    var headerElem = mainDom.window.document.getElementById("jpress-header");
+    headerElem.innerHTML = headerDom.window.document.body.innerHTML;
+
+    // Insert footer content
+    var footerElem = mainDom.window.document.getElementById("jpress-footer");
+    footerElem.innerHTML = footerDom.window.document.body.innerHTML;
+
+    var finalHtml = mainDom.serialize();
+    res.send(finalHtml);
+    return;
 };
 
 // ============================================================================

@@ -16,8 +16,6 @@
 
 # Template engine
 
-TODO resume
-
 HTML documents go through a custom template engine in NodeJS.
 
 The element in which the header is inserted has the ID `jpress-header`.
