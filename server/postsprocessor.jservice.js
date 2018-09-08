@@ -48,26 +48,27 @@ module.exports.getPosts = async function(pageNumber, baseUrl) {
 // ============================================================================
 module.exports.createPostElement = function(dom, title, bodyMd) {
 
+    mod.log.info("postsprocessor: Creating post with title ["+ title +"]");
+
     var parent = dom.window.document.createElement("div");
+    parent.setAttribute("class", "jgrid-fullsize-x jgrid-v jgrid-card");
 
     // Create title section
     var titleSection = dom.window.document.createElement("div");
-    parent.appendChild(titleSection);
-    titleSection.className = "w3-row";
     // H2 element
     // TODO link to open the specific post
-    var titleElem = dom.window.document.createElement("h2");
+    var titleElem = dom.window.document.createElement("h1");
+    titleElem.innerHTML = title;
     titleSection.appendChild(titleElem);
-    titleElem.innerText = title;
+    parent.appendChild(titleSection);
 
     // Compile body Markdown to HTML
     var bodyHtml = converter.makeHtml(bodyMd);
 
     // Create body section
     var bodySection = dom.window.document.createElement("div");
-    parent.appendChild(bodySection);
-    bodySection.className = "w3-row";
     bodySection.innerHTML = bodyHtml;
+    parent.appendChild(bodySection);
 
     return parent;
 }

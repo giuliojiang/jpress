@@ -22,7 +22,6 @@ jpress.main.loadJs = function(srcUrl) {
 jpress.main.loadCss = function(srcUrl) {
     var elem = document.createElement("link");
     elem.setAttribute("rel", "stylesheet");
-    elem.setAttribute("type", "text/css");
     elem.setAttribute("href", srcUrl);
     document.head.appendChild(elem);
 }
@@ -33,7 +32,11 @@ jpress.main.init = function() {
     jpress.main.loadJs(jpress.main.BASEURL + "/lib/api.js");
     jpress.main.loadJs(jpress.main.BASEURL + "/lib/gsignin.js");
 
+    jpress.main.loadCss("https://fonts.googleapis.com/css?family=PT+Serif");
+    jpress.main.loadCss("https://unpkg.com/purecss@1.0.0/build/pure-min.css");
+    jpress.main.loadCss(jpress.main.BASEURL + "/css/base.css");
     jpress.main.loadCss(jpress.main.BASEURL + "/css/jgrid.css");
+
 }
 
 // ============================================================================

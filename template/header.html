@@ -1,13 +1,8 @@
 <html>
     <body>
-        <!-- Google sign-in -->
-        <div class="w3-row">
-            <div class="w3-col s6">
-                <div class="g-signin2" data-onsuccess="jpress_on_google_sign_in"></div>
-            </div>
-            <div class="w3-col s6">
-                <button onclick="jpress.gsignin.signOut()">Sign out</button>
-            </div>            
+        <div class="jgrid-v">
+            <div class="g-signin2" data-onsuccess="jpress_on_google_sign_in"></div>
+            <button onclick="jpress.gsignin.signOut()" style="width: 150px;">Sign out</button>
         </div>
     </body>
 </html>
