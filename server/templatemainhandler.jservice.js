@@ -10,14 +10,14 @@ priv.headerPath = "./../template/header.html";
 priv.footerPath = "./../template/footer.html";
 
 var express = require("express");
-const jsdom = require("jsdom");
-const { JSDOM } = jsdom;
 
 // ============================================================================
 module.exports.init = async function(jservice) {
     mod.utilasync = await jservice.get("utilasync");
     mod.util = await jservice.get("util");
     mod.context = await jservice.get("context");
+    mod.domutils = await jservice.get("domutils");
+    mod.postsprocessor = await jservice.get("postsprocessor");
 }
 
 // ============================================================================
@@ -25,8 +25,9 @@ module.exports.createApp = function() {
  
     var app = express();
 
-    app.get("/", function(req, res) {
-        module.exports.processTemplate("./../template/index/index.html", req, res);    
+    app.get("/", async function(req, res) {
+        var dom = await mod.postsprocessor.getPosts(0, req.baseUrl);
+        module.exports.processTemplateDOM(dom, req, res);
     });
 
     app.get("/write", function(req, res) {
@@ -37,18 +38,15 @@ module.exports.createApp = function() {
 
 }
 
-// ============================================================================
-// Return: nothing
-module.exports.processTemplate = async function(htmlPath, req, res) {
+module.exports.processTemplateDOM = async function(theDom, req, res) {
 
-    // Load the HTML template file
-    var mainDom = await module.exports.loadDom(htmlPath);
+    var mainDom = theDom;
 
     // Load header
-    var headerDom = await module.exports.loadDom(priv.headerPath);
+    var headerDom = await mod.domutils.loadDom(priv.headerPath);
     
     // Load footer
-    var footerDom = await module.exports.loadDom(priv.footerPath);
+    var footerDom = await mod.domutils.loadDom(priv.footerPath);
 
     // Load jpressJS
     var jpressJS = await mod.utilasync.fsReadFile(priv.jsPath, "utf8");
@@ -74,14 +72,19 @@ module.exports.processTemplate = async function(htmlPath, req, res) {
     var finalHtml = mainDom.serialize();
     res.send(finalHtml);
     return;
-};
+}
 
 // ============================================================================
-// Load an HTML file as jsdom DOM object
-module.exports.loadDom = async function(htmlPath) {
+// Parameters:
+//     htmlPath: the path to the template HTML file
+//     req: expressJS req object
+//     res: expressJS res object
+// Return: nothing
+module.exports.processTemplate = async function(htmlPath, req, res) {
 
-    var content = await mod.utilasync.fsReadFile(htmlPath, "utf8");
-    var dom = new JSDOM(content);
-    return dom;
+    // Load the HTML template file
+    var mainDom = await mod.domutils.loadDom(htmlPath);
 
-}
+    await module.exports.processTemplateDOM(mainDom, req, res);
+
+};

@@ -45,9 +45,6 @@ mainApp.controller("mainController", function($scope) {
         });
     };
 
-    $scope.signout = function() {
-        jpress.gsignin.signOut();
-    };
 });
 
 angular.element(function() {

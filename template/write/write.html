@@ -7,15 +7,6 @@
     <body ng-controller="mainController">
         <!-- Header injection -->
         <div id="jpress-header"></div>
-        <!-- Google sign-in -->
-        <div class="w3-row">
-            <div class="w3-col s6">
-                <div class="g-signin2" data-onsuccess="jpress_on_google_sign_in"></div>
-            </div>
-            <div class="w3-col s6">
-                <button ng-click="signout()">Sign out</button>
-            </div>            
-        </div>
         <!-- Title -->
         <div class="w3-row">
             <input type="text" ng-model="d.title">

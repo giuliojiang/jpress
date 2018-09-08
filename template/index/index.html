@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script>jpress.main.loadJs(jpress.main.BASEURL + "/index/index.js");</script>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    </head>
+    <body ng-controller="mainController">
+        <!-- Header injection -->
+        <div id="jpress-header"></div>
+
+        <!-- List of posts -->
+        <div class="w3-row" id="jpress-posts-container">
+            <!-- This section is populated by the server
+            Template: -->
+            <!-- <div class="w3-row">
+                <h2>A title</h2>
+            </div>
+            <div class="w3-row">
+                <p>Some text</p>
+            </div> -->
+        </div>
+
+        <!-- More posts button -->
+        <div class="w3-row">
+            <button ng-click="morePosts()">More</button>
+        </div>
+
+        <!-- Footer injection -->
+        <div id="jpress-footer"></div>
+    </body>
+</html>
