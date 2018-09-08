@@ -2,30 +2,48 @@
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <script>jpress.main.loadJs(jpress.main.BASEURL + "/index/index.js");</script>
-        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     </head>
     <body ng-controller="mainController">
-        <!-- Header injection -->
-        <div id="jpress-header"></div>
 
-        <!-- List of posts -->
-        <div class="w3-row" id="jpress-posts-container">
-            <!-- This section is populated by the server
-            Template: -->
-            <!-- <div class="w3-row">
-                <h2>A title</h2>
+        <div class="jgrid-layer">
+            <div class="jgrid-h jgrid-fullsize">
+                <!-- Header -->
+                <div class="jgrid-margin" id="jpress-header"></div>
+                <!-- Right side -->
+                <div class="jgrid-v jgrid-scroll-y jgrid-cont-center jgrid-cont-space-between jgrid-expand jgrid-margin">
+                    <!-- Posts area -->
+                    <div class="jgrid-v jgrid-expand jgrid-fullsize-x jgrid-cont-center jgrid-margin" id="jpress-posts-container">
+                        <!-- This section is populated by the server
+                            See bottom for template -->
+                        <div class="jgrid-fullsize-x jgrid-v jgrid-card">
+                            <div>
+                                <h1>The Title</h1>
+                            </div>
+                            <div>
+                                <p>The body</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- More posts -->
+                    <div class="jgrid-margin">
+                        <button ng-click="morePosts()">More</button>
+                    </div>
+                    <!-- Footer area -->
+                    <div class="jgrid-margin jgrid-fullsize-x" id="jpress-footer"></div>
+                </div>
             </div>
-            <div class="w3-row">
-                <p>Some text</p>
-            </div> -->
         </div>
-
-        <!-- More posts button -->
-        <div class="w3-row">
-            <button ng-click="morePosts()">More</button>
-        </div>
-
-        <!-- Footer injection -->
-        <div id="jpress-footer"></div>
     </body>
 </html>
+
+<!--
+Template: -->
+<!-- <div class="w3-row">
+    <h2>A title</h2>
+</div>
+<div class="w3-row">
+    <p>Some text</p>
+</div> -->
+
+
+-->

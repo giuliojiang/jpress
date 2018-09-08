@@ -18,10 +18,22 @@ jpress.main.loadJs = function(srcUrl) {
 };
 
 // ============================================================================
+
+jpress.main.loadCss = function(srcUrl) {
+    var elem = document.createElement("link");
+    elem.setAttribute("rel", "stylesheet");
+    elem.setAttribute("type", "text/css");
+    elem.setAttribute("href", srcUrl);
+    document.head.appendChild(elem);
+}
+
+// ============================================================================
 // Load the other JS files
 jpress.main.init = function() {
     jpress.main.loadJs(jpress.main.BASEURL + "/lib/api.js");
     jpress.main.loadJs(jpress.main.BASEURL + "/lib/gsignin.js");
+
+    jpress.main.loadCss(jpress.main.BASEURL + "/css/jgrid.css");
 }
 
 // ============================================================================
