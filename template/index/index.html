@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script>jpress.main.loadJs(jpress.main.BASEURL + "/index/index.js");</script>
+    </head>
+    <body ng-controller="mainController">
+
+        <div class="jgrid-layer">
+            <div class="jgrid-h jgrid-fullsize">
+                <!-- Header -->
+                <div class="jgrid-sidebar" id="jpress-header"></div>
+                <!-- Right side -->
+                <div class="jgrid-v jgrid-scroll-y jgrid-cont-center jgrid-cont-space-between jgrid-expand">
+                    <!-- Posts area -->
+                    <div class="jgrid-v jgrid-expand jgrid-fullsize-x jgrid-cont-center" id="jpress-posts-container">
+                        <!-- This section is populated by the server
+                            See bottom for template -->
+                    </div>
+                    <!-- More posts -->
+                    <div class="jgrid-padding">
+                        <!-- Link populated by the server -->
+                        <a id="jpress-index-more-link">More</a>
+                        <!-- <button class="pure-button" ng-click="morePosts()">More</button> -->
+                    </div>
+                    <!-- Footer area -->
+                    <div class="jgrid-fullsize-x" id="jpress-footer"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+<!--
+    <div class="jgrid-fullsize-x jgrid-v jgrid-card">
+        <div>
+            <h1>The Title</h1>
+        </div>
+        <div>
+            <p>The body</p>
+        </div>
+    </div>
+-->

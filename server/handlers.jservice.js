@@ -1,51 +1,118 @@
+var mod = {};
+var priv = {};
 
+// Map: string -> handler
+// where handler: msgobj async function(msgobj)
+//     A handler is an async function that takes a msgobj (an JS object)
+//     of the message, and async-returns (a promise) the reply message.
+var registeredHandlers = {};
 
-// Local ----------------------------------------------------------------------
+// Map: message type -> authentication level
+// message type: String
+// authentication level: Integer.
+//     0 requires no authentication
+//     1 requires user logged in
+//     2 requires user admin
+var authenticationLevels = {};
 
-var registered_handlers = {};
+module.exports.init = async function(jservice) {
+    mod.util = await jservice.get("util");
+    mod.authentication = await jservice.get("authentication");
+    mod.log = await jservice.get("log");
+}
 
-// init -----------------------------------------------------------------------
-
-var init = function(jservice) {
-
-};
-
-// handle ---------------------------------------------------------------------
-
-var handle_internal = function(msgobj, socket) {
-
-    var t = msgobj._t;
-    if (!t) {
-        console.info("handlers.jservice: No _t in message: " + JSON.stringify(msgobj));
-        return;
+module.exports.register = function(key, authenticationLevel, handler) {
+    if (registeredHandlers.hasOwnProperty(key)) {
+        throw new Error("Key ["+ key +"] already has a handler");
     }
+    registeredHandlers[key] = handler;
+    authenticationLevels[key] = authenticationLevel;
+}
 
-    if (t in registered_handlers) {
-        registered_handlers[t](msgobj, socket);
+// ============================================================================
+// Returns: boolean
+//     true: user is allowed to perform the message
+//     false: user is not allowed or an error occurred
+priv.checkAuthenticationLevel = async function(msgobj, key) {
+    if (authenticationLevels.hasOwnProperty(key)) {
+
+        // Get required authentication level
+        var requiredLevel = authenticationLevels[key];
+
+        // Level 0 does not require any authentication
+        if (requiredLevel == 0) {
+            return true;
+        }
+
+        // Get user sign in token
+        var tok = msgobj["_tok"];
+        if (!mod.util.is_string(tok)) {
+            return null;
+        }
+
+        // Contact google servers for user data
+        var actualLevel = 0;
+        var userData;
+        try {
+            userData = await mod.authentication.authenticate(tok);
+        } catch (err) {
+            console.error("handlers: Authentication error: ", err);
+            // Failure to login
+            return false;
+        }
+
+        if (userData) {
+            // User is logged in correctly
+            if (userData.isAdmin) {
+                actualLevel = 2;
+            } else {
+                actualLevel = 1;
+            }
+        } else {
+            // User is not logged in
+            actualLevel = 0;
+        }
+
+        return actualLevel >= requiredLevel;
+
     } else {
-        console.info("handlers.jservice: No handler able to handle message type ["+ t +"]");
+        console.info("handlers: No authentication info for key ["+ key +"]");
+        return false;
     }
 };
 
-var handle = function(msgobj, socket) {
+// ============================================================================
+// Returns a (promise) msgobj
+module.exports.handle = async function(msgobj) {
     try {
-        handle_internal(msgobj, socket);
+        if (!mod.util.isObject(msgobj)) {
+            return null;
+        }
+        var key = msgobj["_t"];
+        if (!mod.util.is_string(key)) {
+            return null;
+        }
+        
+        // Check authentication levels
+        var authenticationPass = await priv.checkAuthenticationLevel(msgobj, key);
+        if (!authenticationPass) {
+            // Authentication failed
+            mod.log.info("handlers: User has no permission to perform ["+ key +"]");
+            return {
+                _t: "general_unauthorized"
+            };
+        }
+
+        // Get and call the handler
+        if (registeredHandlers.hasOwnProperty(key)) {
+            var theHandler = registeredHandlers[key];
+            return await theHandler(msgobj);
+        } else {
+            console.info("handlers: No handler for key ["+ key +"]");
+            return null;
+        }
     } catch (err) {
-        console.error(err);
+        console.error("handlers: Unexpected error: ", err);
+        return null;
     }
-};
-
-// register -------------------------------------------------------------------
-
-// A handler is a function that takes (msgobj, socket)
-var register = function(name, h) {
-    registered_handlers[name] = h;
-};
-
-// Exports --------------------------------------------------------------------
-
-module.exports = {
-    init: init,
-    handle: handle,
-    register: register
-};
+}

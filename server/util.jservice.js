@@ -1,9 +1,11 @@
+"use strict";
+
 var fs = require("fs");
 var async = require("async");
 
 // init -----------------------------------------------------------------------
 
-module.exports.init = function(jservice) {
+module.exports.init = async function(jservice) {
 
 };
 
@@ -18,6 +20,9 @@ module.exports.is_number = function(data) {
 // is_string ==================================================================
 
 module.exports.is_string = function(data) {
+    if (!data) {
+        return false;
+    }
     return typeof data === 'string';
 };
 
@@ -35,6 +40,12 @@ module.exports.is_string_array = function(data) {
     }
     return true;
 };
+
+// ============================================================================
+// Is object
+module.exports.isObject = function(theObj) {
+    return theObj !== null && typeof theObj === 'object';
+}
 
 // mkdir_sync =================================================================
 
@@ -136,3 +147,35 @@ module.exports.aforeach = function(func, list, callback) {
     one();
 
 }
+
+// ============================================================================
+// String replace function
+
+module.exports.stringReplaceAll = function(theString, oldPattern, newPattern) {
+    return theString.split(oldPattern).join(newPattern);
+};
+
+// ============================================================================
+// Sanitize URL strings
+
+module.exports.sanitizeURL = function(inputURL) {
+
+    return module.exports.stringReplaceAll(inputURL, "..", "");
+    
+};
+
+// ============================================================================
+// Split filename extension
+// Returns the extension, without the leading dot
+
+module.exports.splitext = function(filestring) {
+
+    var splt = filestring.split(".");
+    if (splt.length == 0) {
+        return "";
+    } else {
+        var len = splt.length;
+        return splt[len - 1];
+    }
+
+};

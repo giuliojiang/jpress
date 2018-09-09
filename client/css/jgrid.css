@@ -1,0 +1,107 @@
+/* Set defaults for all divs */
+
+div {
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+/* Layers */
+
+.jgrid-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.jgrid-layer-small {
+    position: relative;
+    top: 25%;
+    bottom: 25%;
+    left: 25%;
+    right: 25%;
+    width: 50%;
+    height: 50%;
+}
+
+.jgrid-layer-0 {
+    z-index: 0;
+}
+
+.jgrid-layer-1 {
+    z-index: 100;
+}
+
+.jgrid-layer-2 {
+    z-index: 200;
+}
+
+.jgrid-layer-top1 {
+    z-index: 1000;
+}
+
+.jgrid-layer-top2 {
+    z-index: 1100;
+}
+
+/* Utilities */
+
+.jgrid-padding {
+    padding: 10px;
+}
+
+.jgrid-expand {
+    flex-grow: 1;
+}
+
+.jgrid-fullsize {
+    height: 100%;
+    width: 100%;
+}
+
+.jgrid-fullsize-x {
+    width: 100%;
+}
+
+.jgrid-fullsize-y {
+    height: 100%;
+}
+
+.jgrid-scroll-x {
+    overflow-x: auto;
+}
+
+.jgrid-scroll-y {
+    overflow-y: auto;
+}
+
+.jgrid-scroll {
+    overflow: auto;
+}
+
+.jgrid-card {
+    background-color: #f4f4f4;
+}
+
+/* Row and Column based containers */
+
+.jgrid-v {
+    display: flex;
+    flex-direction: column;
+}
+
+.jgrid-h {
+    display: flex;
+    flex-direction: row;
+}
+
+/* Additional properties for containers */
+
+.jgrid-cont-center {
+    align-items: center;
+}
+
+.jgrid-cont-space-between {
+    justify-content: space-between;
+}

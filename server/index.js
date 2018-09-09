@@ -1,43 +1,36 @@
 var path = require("path");
+var context = require("./context.jservice.js");
 var jservice = require(path.join(__dirname, "jservice.js"));
-
-// Register services ----------------------------------------------------------
 
 var find_service = function(name) {
     jservice.register(name, require(path.join(__dirname, name + ".jservice.js")));
 };
 
-find_service("handlers");
-find_service("https_server");
-find_service("ws");
-find_service("config");
-find_service("timeout");
-find_service("client_session");
-find_service("token_generator");
-find_service("handler_login");
-find_service("password");
-find_service("util");
-find_service("handler_posts");
-find_service("db_post");
-find_service("db");
-find_service("handler_session");
-find_service("markdown");
-find_service("handler_write");
-find_service("handler_post");
-find_service("handler_binupload");
-find_service("db_file");
-find_service("fileserver");
+module.exports.createApp = async function(jpressContext) {
 
-// Start eager services -------------------------------------------------------
+    // Register services ----------------------------------------------------------
+    find_service("app");
+    find_service("apimainhandler");
+    find_service("util");
+    find_service("utilasync");
+    find_service("handlers");
+    find_service("handler_write");
+    find_service("msgobj");
+    find_service("authentication");
+    find_service("mongoposts");
+    find_service("mongo");
+    find_service("mongoauth");
+    find_service("log");
+    find_service("mongouser");
+    find_service("templatemainhandler");
+    find_service("domutils");
+    find_service("postsprocessor");
+    jservice.register("context", context.createContext(jpressContext));
 
-jservice.get("handler_login");
-jservice.get("handler_posts");
-jservice.get("handler_session");
-jservice.get("handler_write");
-jservice.get("handler_post");
-jservice.get("handler_binupload");
+    // Start eager services ---------------------------------------------------
+    await jservice.get("handler_write");
 
-// Start server ---------------------------------------------------------------
+    var theApp = await jservice.get("app");
+    return theApp.createApp();
 
-jservice.get("ws");
-jservice.get("fileserver");
+};

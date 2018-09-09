@@ -1,0 +1,21 @@
+{
+  "name": "jpress",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cd server/quicktest && ./test.py"
+  },
+  "author": "giuliojiang",
+  "license": "GPL-2.0",
+  "dependencies": {
+    "async": "^2.6.0",
+    "body-parser": "^1.18.3",
+    "chai": "^4.1.2",
+    "express": "^4.16.3",
+    "google-auth-library": "^1.6.1",
+    "jsdom": "^12.0.0",
+    "mongodb": "^3.1.4",
+    "showdown": "^1.8.6"
+  }
+}

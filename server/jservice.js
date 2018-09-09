@@ -7,14 +7,14 @@ var active_services = {};
 
 var register = function(name, srvc) {
     if (name in services || name in active_services) {
-        console.warn("JSERVICE: A service with name ["+ name +"] already exists");
+        console.warn("JSERVICE: A service with name ["+ name +"] already exists. Overwriting...");
     }
     services[name] = srvc;
 };
 
 // Get ------------------------------------------------------------------------
 
-var get = function(name) {
+var get = async function(name) {
     if (name in active_services) {
         return active_services[name];
     }
@@ -22,7 +22,12 @@ var get = function(name) {
     if (name in services) {
         var the_service = services[name];
         console.info("JSERVICE: initializing jservice ["+ name +"]");
-        the_service.init(module.exports);
+        try {
+            await the_service.init(module.exports);
+        } catch (err) {
+            console.error("Error in initialization of service ["+ name +"]", err);
+            process.exit(1);
+        }
         delete services[name];
         active_services[name] = the_service;
         return the_service;

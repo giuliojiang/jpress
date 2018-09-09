@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script>jpress.main.loadJs(jpress.main.BASEURL + "/write/write.js");</script>
+    </head>
+    <body ng-controller="mainController">
+        <!-- Header injection -->
+        <div id="jpress-header"></div>
+        <!-- Title -->
+        <div class="w3-row">
+            <input type="text" ng-model="d.title">
+        </div>
+        <!-- Writing area -->
+        <div class="w3-row">
+            <textarea ng-model="d.writeInput"></textarea>
+        </div>
+        <!-- Preview area -->
+        <div class="w3-row">
+            <div id="previewElement"></div>
+        </div>
+        <!-- File uploader -->
+        <div class="w3-row">
+            <p>TODO</p>
+        </div>
+        <!-- Uploaded files -->
+        <div class="w3-row">
+            <p>TODO</p>
+        </div>
+        <!-- Preview and submit buttons -->
+        <div class="w3-row">
+            <div class="w3-col s6">
+                <button ng-click="submitButton()">Submit</button>
+            </div>
+            <div class="w3-col s6">
+                <button ng-click="previewButton()">Preview</button>
+            </div>
+        </div>
+        <!-- Footer injection -->
+        <div id="jpress-footer"></div>
+    </body>
+</html>
