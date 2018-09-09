@@ -81,3 +81,28 @@
     text-size-adjust: 100%;
     width: 129.9px;
 }
+
+
+#jpress-index-more-link {
+    background-color: rgb(233, 233, 233);
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+    display: inline;
+    font-family: "PT Serif",
+    serif;
+    height: auto;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+    text-decoration-color: rgb(0, 0, 0);
+    text-decoration-line: none;
+    text-decoration-style: solid;
+    text-size-adjust: 100%;
+    width: auto;
+}
+
+.jpress-link {
+    text-decoration: none;
+    color: rgb(77, 77, 77);
+}
