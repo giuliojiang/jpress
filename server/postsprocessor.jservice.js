@@ -59,6 +59,7 @@ module.exports.createPostElement = function(dom, title, bodyMd) {
     // TODO link to open the specific post
     var titleElem = dom.window.document.createElement("h1");
     titleElem.innerHTML = title;
+    titleElem.setAttribute("class", "jpress-post-title");
     titleSection.appendChild(titleElem);
     parent.appendChild(titleSection);
 
@@ -67,6 +68,7 @@ module.exports.createPostElement = function(dom, title, bodyMd) {
 
     // Create body section
     var bodySection = dom.window.document.createElement("div");
+    bodySection.setAttribute("class", "jpress-post-body");
     bodySection.innerHTML = bodyHtml;
     parent.appendChild(bodySection);
 

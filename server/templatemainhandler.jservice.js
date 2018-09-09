@@ -54,6 +54,7 @@ module.exports.processTemplateDOM = async function(theDom, req, res) {
     // Perform jpressJS replacements
     jpressJS = mod.util.stringReplaceAll(jpressJS, "JPRESSREPLACE_BASEURL", req.baseUrl);
     jpressJS = mod.util.stringReplaceAll(jpressJS, "JPRESSREPLACE_GSIGNIN_CLIENTID", mod.context.getContext().googleClientId);
+    jpressJS = mod.util.stringReplaceAll(jpressJS, "JPRESSREPLACE_BLOG_NAME", mod.context.getContext().blogName);
 
     // Insert jpressJS into the document
     var scriptElem = mainDom.window.document.createElement("script");

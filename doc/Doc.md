@@ -4,6 +4,8 @@
 
 `jpress.main.GSIGNIN_CLIENTID` Is used in the google-sign-in library API.
 
+`jpress.main.BLOG_NAME` Is the name of the blog as displayed.
+
 # Server side context jpressContext
 
 `jpressContext.googleClientId` The Google API Client ID for Sign-in services
@@ -13,6 +15,8 @@
 `jpressContext.mongoCollectionName` The name of the target MongoDB collection in which to work
 
 `jpressContext.enableLogging` Boolean. Enable or disable verbose logging
+
+`jpressContext.blogName` Name of the blog
 
 # Template engine
 

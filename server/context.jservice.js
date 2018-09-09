@@ -8,6 +8,7 @@ var checkKey = function(theObj, theKey) {
 
 module.exports.createContext = function(jpressContext) {
 
+    checkKey(jpressContext, "blogName");
     checkKey(jpressContext, "googleClientId");
     checkKey(jpressContext, "mongoConnectionUrl");
     checkKey(jpressContext, "mongoCollectionName");

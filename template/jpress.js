@@ -8,6 +8,7 @@ jpress.main = {};
 // These values are search-replaced on the server side dynamically
 jpress.main.BASEURL = "JPRESSREPLACE_BASEURL";
 jpress.main.GSIGNIN_CLIENTID = "JPRESSREPLACE_GSIGNIN_CLIENTID";
+jpress.main.BLOG_NAME = "JPRESSREPLACE_BLOG_NAME";
 
 // ============================================================================
 
@@ -29,14 +30,18 @@ jpress.main.loadCss = function(srcUrl) {
 // ============================================================================
 // Load the other JS files
 jpress.main.init = function() {
-    jpress.main.loadJs(jpress.main.BASEURL + "/lib/api.js");
-    jpress.main.loadJs(jpress.main.BASEURL + "/lib/gsignin.js");
-
-    jpress.main.loadCss("https://fonts.googleapis.com/css?family=PT+Serif");
-    jpress.main.loadCss("https://unpkg.com/purecss@1.0.0/build/pure-min.css");
-    jpress.main.loadCss(jpress.main.BASEURL + "/css/base.css");
-    jpress.main.loadCss(jpress.main.BASEURL + "/css/jgrid.css");
-
+    setTimeout(function() {
+        jpress.main.loadJs(jpress.main.BASEURL + "/lib/api.js");
+        jpress.main.loadJs(jpress.main.BASEURL + "/lib/gsignin.js");
+    
+        jpress.main.loadCss("https://fonts.googleapis.com/css?family=PT+Serif");
+        jpress.main.loadCss("https://unpkg.com/purecss@1.0.0/build/pure-min.css");
+        jpress.main.loadCss(jpress.main.BASEURL + "/css/base.css");
+        jpress.main.loadCss(jpress.main.BASEURL + "/css/jgrid.css");
+    
+        document.getElementById("jpress-main-title").innerHTML = jpress.main.BLOG_NAME;
+    }, 10);
+    
 }
 
 // ============================================================================
