@@ -8,7 +8,6 @@ var path = require("path");
 module.exports.init = async function(jservice) {
 
     mod.apiMainHandler = await jservice.get("apimainhandler");
-    mod.s3MainHandler = await jservice.get("s3mainhandler");
     mod.templatemainhandler = await jservice.get("templatemainhandler");
 
 };

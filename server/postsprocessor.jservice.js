@@ -66,7 +66,6 @@ module.exports.createPostElement = function(dom, title, bodyMd, baseUrl, postId)
     // Create title section
     var titleSection = dom.window.document.createElement("div");
     // H2 element
-    // TODO link to open the specific post
     var titleElem = dom.window.document.createElement("a");
     titleElem.innerHTML = title;
     titleElem.setAttribute("class", "jpress-post-title");

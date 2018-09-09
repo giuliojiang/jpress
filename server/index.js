@@ -11,7 +11,6 @@ module.exports.createApp = async function(jpressContext) {
     // Register services ----------------------------------------------------------
     find_service("app");
     find_service("apimainhandler");
-    find_service("s3mainhandler");
     find_service("util");
     find_service("utilasync");
     find_service("handlers");
