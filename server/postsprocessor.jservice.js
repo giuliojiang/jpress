@@ -31,6 +31,11 @@ module.exports.getPosts = async function(pageNumber, baseUrl) {
     // Query database for posts
     var posts = await mod.mongoposts.getLastPosts(priv.pageLimit, pageNumber * priv.pageLimit);
 
+    // Case when there are no posts at this page number
+    if (posts.length == 0) {
+        return await module.exports.generateLinkbackPage(mainDom, baseUrl);
+    }
+
     // Inject posts into the template
     var container = mainDom.window.document.getElementById("jpress-posts-container");
     if (!container) {
@@ -77,4 +82,28 @@ module.exports.createPostElement = function(dom, title, bodyMd) {
     parent.appendChild(bodySection);
 
     return parent;
+}
+
+// ============================================================================
+module.exports.generateLinkbackPage = async function(dom, baseUrl) {
+    var container = dom.window.document.getElementById("jpress-posts-container");
+
+    // Message element
+    var msgElem = dom.window.document.createElement("div");
+    container.appendChild(msgElem);
+    msgElem.setAttribute("class", "jpress-homepage-message");
+    msgElem.innerHTML = "No posts";
+
+    // Back to homepage button
+    var backButton = dom.window.document.createElement("a");
+    container.appendChild(backButton);
+    backButton.setAttribute("class", "jpress-homepage-backbutton");
+    backButton.innerHTML = "Back to homepage";
+    backButton.setAttribute("href", baseUrl + "/");
+
+    // Hide the more posts button
+    var moreElem = dom.window.document.getElementById("jpress-index-more-link");
+    moreElem.style.display = "none";
+
+    return dom;
 }

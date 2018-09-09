@@ -32,6 +32,10 @@ module.exports.createApp = function() {
 
     app.get("/more/:page", async function(req, res) {
         var pageNumber = parseInt(req.params.page);
+        if (!mod.util.is_number(pageNumber)) {
+            res.sendStatus(404);
+            return;
+        }
         var dom = await mod.postsprocessor.getPosts(pageNumber, req.baseUrl);
         module.exports.processTemplateDOM(dom, req, res);
     });
