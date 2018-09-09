@@ -15,6 +15,16 @@ div {
     right: 0;
 }
 
+.jgrid-layer-small {
+    position: relative;
+    top: 25%;
+    bottom: 25%;
+    left: 25%;
+    right: 25%;
+    width: 50%;
+    height: 50%;
+}
+
 .jgrid-layer-0 {
     z-index: 0;
 }
@@ -36,6 +46,10 @@ div {
 }
 
 /* Utilities */
+
+.jgrid-padding {
+    padding: 10px;
+}
 
 .jgrid-expand {
     flex-grow: 1;
@@ -62,13 +76,12 @@ div {
     overflow-y: auto;
 }
 
-.jgrid-card {
-    background-color: #f4f4f4;
+.jgrid-scroll {
+    overflow: auto;
 }
 
-.jgrid-sidebar {
+.jgrid-card {
     background-color: #f4f4f4;
-    width: 20vw;
 }
 
 /* Row and Column based containers */

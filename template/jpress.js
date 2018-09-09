@@ -28,6 +28,12 @@ jpress.main.loadCss = function(srcUrl) {
 }
 
 // ============================================================================
+
+jpress.main.gotoRelative = function(relUrl) {
+    document.location = jpress.main.BASEURL + relUrl;
+}
+
+// ============================================================================
 // Load the other JS files
 jpress.main.init = function() {
     setTimeout(function() {
