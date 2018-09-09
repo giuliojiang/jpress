@@ -5,6 +5,8 @@
 // entries for blog posts.
 // ============================================================================
 
+var ObjectId = require('mongodb').ObjectID;
+
 var mod = {};
 var priv = {};
 priv.tableName = "posts";
@@ -12,6 +14,7 @@ priv.tableName = "posts";
 // ============================================================================
 module.exports.init = async function(jservice) {
     mod.mongo = await jservice.get("mongo");
+    mod.log = await jservice.get("log");
 };
 
 // ============================================================================
@@ -40,5 +43,16 @@ module.exports.getLastPosts = async function(limit, skip) {
         datePosted: -1
     };
     var docs = await mod.mongo.findLimitSkipSort(query, skip, limit, sort);
+    return docs;
+}
+
+// ============================================================================
+module.exports.getSinglePost = async function(postId) {
+    var query = {
+        _id: new ObjectId(postId)
+    }
+    mod.log.info("mongoposts: getSinglePost. Query is " + JSON.stringify(query));
+    var docs = await mod.mongo.find(query, 1);
+    mod.log.info("mongoposts: getSinglePost. docs are " + JSON.stringify(docs));
     return docs;
 }

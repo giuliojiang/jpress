@@ -5,7 +5,7 @@ var async = require("async");
 
 // init -----------------------------------------------------------------------
 
-module.exports.init = function(jservice) {
+module.exports.init = async function(jservice) {
 
 };
 

@@ -8,7 +8,7 @@ var priv = {};
 
 // ============================================================================
 
-module.exports.init = function(jservice) {
+module.exports.init = async function(jservice) {
 
 }
 

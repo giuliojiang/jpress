@@ -6,7 +6,7 @@ var priv = {};
 const util = require("util");
 const fs = require("fs");
 
-module.exports.init = function(jservice) {
+module.exports.init = async function(jservice) {
 
 };
 

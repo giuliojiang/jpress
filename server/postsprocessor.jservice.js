@@ -6,7 +6,8 @@ const converter = new showdown.Converter();
 var mod = {};
 var priv = {};
 priv.pageLimit = 10; // Number of posts per page
-priv.templatePath = "./../template/index/index.html";
+priv.blogTemplatePath = "./../template/index/index.html";
+priv.singlePostTemplatePath = "./../template/post/post.html";
 
 // ============================================================================
 module.exports.init = async function(jservice) {
@@ -26,7 +27,7 @@ module.exports.init = async function(jservice) {
 module.exports.getPosts = async function(pageNumber, baseUrl) {
 
     // Load the main template
-    var mainDom = await mod.domutils.loadDom(priv.templatePath);
+    var mainDom = await mod.domutils.loadDom(priv.blogTemplatePath);
 
     // Query database for posts
     var posts = await mod.mongoposts.getLastPosts(priv.pageLimit, pageNumber * priv.pageLimit);
@@ -43,7 +44,7 @@ module.exports.getPosts = async function(pageNumber, baseUrl) {
     }
     for (var i = 0; i < posts.length; i++) {
         var aPostDoc = posts[i];
-        var aPostElement = module.exports.createPostElement(mainDom, aPostDoc.title, aPostDoc.body);
+        var aPostElement = module.exports.createPostElement(mainDom, aPostDoc.title, aPostDoc.body, baseUrl, aPostDoc._id);
         container.appendChild(aPostElement);
     }
 
@@ -55,7 +56,7 @@ module.exports.getPosts = async function(pageNumber, baseUrl) {
 }
 
 // ============================================================================
-module.exports.createPostElement = function(dom, title, bodyMd) {
+module.exports.createPostElement = function(dom, title, bodyMd, baseUrl, postId) {
 
     mod.log.info("postsprocessor: Creating post with title ["+ title +"]");
 
@@ -66,9 +67,10 @@ module.exports.createPostElement = function(dom, title, bodyMd) {
     var titleSection = dom.window.document.createElement("div");
     // H2 element
     // TODO link to open the specific post
-    var titleElem = dom.window.document.createElement("h1");
+    var titleElem = dom.window.document.createElement("a");
     titleElem.innerHTML = title;
     titleElem.setAttribute("class", "jpress-post-title");
+    titleElem.setAttribute("href", baseUrl + "/post/" + postId);
     titleSection.appendChild(titleElem);
     parent.appendChild(titleSection);
 
@@ -85,6 +87,8 @@ module.exports.createPostElement = function(dom, title, bodyMd) {
 }
 
 // ============================================================================
+// Return:
+//     dom: HTML DOM object
 module.exports.generateLinkbackPage = async function(dom, baseUrl) {
     var container = dom.window.document.getElementById("jpress-posts-container");
 
@@ -107,3 +111,30 @@ module.exports.generateLinkbackPage = async function(dom, baseUrl) {
 
     return dom;
 }
+
+// ============================================================================
+// Return:
+//     dom: HTML DOM object
+module.exports.getSinglePost = async function(baseUrl, postId) {
+    var docs = await mod.mongoposts.getSinglePost(postId);
+    mod.log.info("postsprocessor: getSinglePost. Number of documents: " + docs.length);
+    if (docs.length == 1) {
+        return await module.exports.getSinglePostExists(baseUrl, docs[0]);
+    } else {
+        return null;
+    }
+};
+
+module.exports.getSinglePostExists = async function(baseUrl, theDoc) {
+    var dom = await mod.domutils.loadDom(priv.singlePostTemplatePath);
+
+    var container = dom.window.document.getElementById("jpress-posts-container");
+
+    var postElem = module.exports.createPostElement(dom, theDoc.title, theDoc.body, baseUrl, theDoc._id);
+    container.appendChild(postElem);
+
+    // Set page title
+    dom.window.document.head.title = theDoc.title;
+
+    return dom;
+};

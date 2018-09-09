@@ -3,7 +3,7 @@ var express = require("express");
 var path = require("path");
 var fs = require("fs");
 
-module.exports.init = function() {
+module.exports.init = async function() {
 
 }
 

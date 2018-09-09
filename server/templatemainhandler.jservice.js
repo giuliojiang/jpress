@@ -18,6 +18,7 @@ module.exports.init = async function(jservice) {
     mod.context = await jservice.get("context");
     mod.domutils = await jservice.get("domutils");
     mod.postsprocessor = await jservice.get("postsprocessor");
+    mod.log = await jservice.get("log");
 }
 
 // ============================================================================
@@ -27,7 +28,7 @@ module.exports.createApp = function() {
 
     app.get("/", async function(req, res) {
         var dom = await mod.postsprocessor.getPosts(0, req.baseUrl);
-        module.exports.processTemplateDOM(dom, req, res);
+        await module.exports.processTemplateDOM(dom, req, res);
     });
 
     app.get("/more/:page", async function(req, res) {
@@ -37,7 +38,18 @@ module.exports.createApp = function() {
             return;
         }
         var dom = await mod.postsprocessor.getPosts(pageNumber, req.baseUrl);
-        module.exports.processTemplateDOM(dom, req, res);
+        await module.exports.processTemplateDOM(dom, req, res);
+    });
+
+    app.get("/post/:postid", async function(req, res) {
+        var postId = req.params.postid;
+        var dom = await mod.postsprocessor.getSinglePost(req.baseUrl, postId);
+        if (dom == null) {
+            mod.log.info("templatemainhandler: get post. Dom is null");
+            res.sendStatus(404);
+        } else {
+            await module.exports.processTemplateDOM(dom, req, res);
+        }
     });
 
     app.get("/write", function(req, res) {
