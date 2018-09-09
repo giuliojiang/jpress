@@ -42,6 +42,10 @@ module.exports.getPosts = async function(pageNumber, baseUrl) {
         container.appendChild(aPostElement);
     }
 
+    // Set destination for More link
+    var moreElem = mainDom.window.document.getElementById("jpress-index-more-link");
+    moreElem.setAttribute("href", baseUrl + "/more/" + (pageNumber + 1));
+
     return mainDom;
 }
 

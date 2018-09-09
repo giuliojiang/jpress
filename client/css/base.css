@@ -26,6 +26,7 @@
 #jpress-main-title {
     background-color: #bcbcbc;
     font-size: 30px;
+    cursor: pointer;
 }
 
 .jpress-post-body {

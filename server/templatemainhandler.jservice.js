@@ -30,6 +30,12 @@ module.exports.createApp = function() {
         module.exports.processTemplateDOM(dom, req, res);
     });
 
+    app.get("/more/:page", async function(req, res) {
+        var pageNumber = parseInt(req.params.page);
+        var dom = await mod.postsprocessor.getPosts(pageNumber, req.baseUrl);
+        module.exports.processTemplateDOM(dom, req, res);
+    });
+
     app.get("/write", function(req, res) {
         module.exports.processTemplate("./../template/write/write.html", req, res);
     });

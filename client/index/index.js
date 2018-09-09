@@ -7,6 +7,11 @@ mainApp.controller("mainController", function($scope) {
     $scope.morePosts = function() {
         console.info("More posts button pressed");
     };
+
+    this.$onInit = function() {
+        console.info("controller init");
+        jpress.style.enableLayers();
+    }
 });
 
 angular.element(function() {
