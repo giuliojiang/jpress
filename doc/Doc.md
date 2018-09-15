@@ -80,7 +80,8 @@ Sent by server when user attempts to do something he doesn't have the permission
 
 {
     _t: "write_post",
-    status: true/false
+    status: true/false,
+    message: string, error message to be displayed to the user if present
 }
 ```
 

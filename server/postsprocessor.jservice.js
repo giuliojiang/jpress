@@ -15,6 +15,7 @@ module.exports.init = async function(jservice) {
     mod.domutils = await jservice.get("domutils");
     mod.mongoposts = await jservice.get("mongoposts");
     mod.log = await jservice.get("log");
+    mod.context = await jservice.get("context");
 
 }
 
@@ -51,6 +52,14 @@ module.exports.getPosts = async function(pageNumber, baseUrl) {
     // Set destination for More link
     var moreElem = mainDom.window.document.getElementById("jpress-index-more-link");
     moreElem.setAttribute("href", baseUrl + "/more/" + (pageNumber + 1));
+
+    // Set page title
+    if (pageNumber == 0) {
+        mainDom.window.document.title = mod.context.getContext().blogName + " - Home";
+    } else {
+        mainDom.window.document.title = 
+            mod.context.getContext().blogName + " - Archive page " + (pageNumber + 1);
+    }
 
     return mainDom;
 }
@@ -108,6 +117,9 @@ module.exports.generateLinkbackPage = async function(dom, baseUrl) {
     var moreElem = dom.window.document.getElementById("jpress-index-more-link");
     moreElem.style.display = "none";
 
+    // Set title
+    dom.window.document.title = mod.context.getContext().blogName + " - Not found";
+
     return dom;
 }
 
@@ -133,7 +145,7 @@ module.exports.getSinglePostExists = async function(baseUrl, theDoc) {
     container.appendChild(postElem);
 
     // Set page title
-    dom.window.document.head.title = theDoc.title;
+    dom.window.document.title = mod.context.getContext().blogName + " - " + theDoc.title;
 
     return dom;
 };

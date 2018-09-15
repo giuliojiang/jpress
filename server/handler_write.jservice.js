@@ -51,6 +51,22 @@ module.exports.handlePost = async function(msgobj) {
         var titleField = mod.msgobj.getString(msgobj, "title");
         var bodyField = mod.msgobj.getString(msgobj, "body");
 
+        // Check for empty strings
+        if (titleField == "") {
+            return {
+                _t: "write_post",
+                status: false,
+                message: "Post title cannot be empty"
+            };
+        }
+        if (bodyField == "") {
+            return {
+                _t: "write_post",
+                status: false,
+                message: "Post body cannot be empty"
+            };
+        }
+
         // Insert into database
         await mod.mongoposts.newPost(titleField, bodyField);
 
@@ -66,7 +82,8 @@ module.exports.handlePost = async function(msgobj) {
         } else {
             return {
                 _t: "write_post",
-                status: false
+                status: false,
+                message: "Error when saving post"
             };
         }
     }

@@ -26,6 +26,10 @@ module.exports.is_string = function(data) {
     return typeof data === 'string';
 };
 
+module.exports.isNonEmptyString = function(data) {
+    return (module.exports.is_string(data)) && (data != "");
+};
+
 // is_string_array ============================================================
 
 module.exports.is_string_array = function(data) {
