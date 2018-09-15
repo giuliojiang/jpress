@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script>
+            jpress.main.loadCss(jpress.main.BASEURL + "/panel/panel.css");
+            jpress.main.loadJs(jpress.main.BASEURL + "/panel/panel.js");
+        </script>
+    </head>
+    <body ng-controller="mainController">
+        <div class="jgrid-layer jgrid-scroll-y">
+            <div class="jgrid-v jgrid-fullsize jgrid-cont-center">
+                <!-- Top row of links -->
+                <div class="jgrid-h jgrid-fullsize-x">
+                    <div class="jpress-panel-button">
+                        JPress
+                    </div>
+                    <div class="g-signin2 jgrid-padding" data-onsuccess="jpress_on_google_sign_in"></div>
+                </div>
+                <!-- New post button -->
+                <div class="jpress-panel-button">
+                    New Post
+                </div>
+                <!-- List of existing posts -->
+                <div class="jgrid-v jgrid-fullsize-x jpress-panel-postlist jgrid-scroll-y">
+                    <!-- For each post -->
+                    <div ng-repeat="x in d.posts" class="jgrid-h jgrid-fullsize-x jgrid-cont-space-between">
+                        <div>
+                            {{x.title}}
+                        </div>
+                        <div class="jgrid-h">
+                            <div ng-click="editClick(x)" class="jpress-panel-button">
+                                Edit
+                            </div>
+                            <div ng-click="deleteClick(x)" class="jpress-panel-button">
+                                Delete
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Edit by ID -->
+                <div class="jgrid-h">
+                    <div>
+                        Edit by ID
+                    </div>
+                    <input type="text" ng-model="d.editId">
+                    <div ng-click="editByIdClick()" class="jpress-panel-button">
+                        Go
+                    </div>
+                </div>
+                <!-- Delete by ID -->
+                <div class="jgrid-h">
+                    <div>
+                        Delete by ID
+                    </div>
+                    <input type="text" ng-model="d.DeleteId">
+                    <div ng-click="deleteByIdClick()" class="jpress-panel-button">
+                        Go
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

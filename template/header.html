@@ -16,7 +16,7 @@
                 <div class="jgrid-v jgrid-cont-center">
                     <div class="g-signin2 jgrid-padding" data-onsuccess="jpress_on_google_sign_in"></div>
                     <a onclick="jpress.gsignin.signOut()" class="jpress-flatbutton">Sign out</a>
-                    <a class="jpress-flatbutton">Admin panel</a>
+                    <a id="jpress-header-adminpanel-link" class="jpress-flatbutton">Admin panel</a>
                 </div>
             </div>
         </div>
@@ -30,6 +30,14 @@
                 accountElem.addEventListener("click", function(event) {
                     console.info("Enabling the layer for the account popup");
                     document.getElementById("jpress-header-account-layer").style.display = "unset";
+                });
+            }
+
+            // onclick event for the button to admin panel
+            {
+                var adminElem = document.getElementById("jpress-header-adminpanel-link");
+                adminElem.addEventListener("click", function(event) {
+                    jpress.main.gotoRelative("/panel");
                 });
             }
         </script>

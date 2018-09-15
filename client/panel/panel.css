@@ -1,0 +1,13 @@
+.jpress-panel-button {
+    padding: 10px;
+    background-color: #eeeeee;
+    cursor: pointer;
+}
+
+.jpress-panel-button:hover {
+    background-color: #dddddd;
+}
+
+.jpress-panel-postlist {
+    max-height: 90vh;
+}

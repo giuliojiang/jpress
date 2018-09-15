@@ -56,6 +56,10 @@ module.exports.createApp = function() {
         module.exports.processTemplate("./../template/write/write.html", req, res);
     });
 
+    app.get("/panel", function(req, res) {
+        module.exports.processTemplate("./../template/panel/panel.html", req, res);
+    });
+
     return app;
 
 }
@@ -86,11 +90,15 @@ module.exports.processTemplateDOM = async function(theDom, req, res) {
 
     // Insert header content
     var headerElem = mainDom.window.document.getElementById("jpress-header");
-    headerElem.innerHTML = headerDom.window.document.body.innerHTML;
+    if (headerElem) {
+        headerElem.innerHTML = headerDom.window.document.body.innerHTML;
+    }
 
     // Insert footer content
     var footerElem = mainDom.window.document.getElementById("jpress-footer");
-    footerElem.innerHTML = footerDom.window.document.body.innerHTML;
+    if (footerElem) {
+        footerElem.innerHTML = footerDom.window.document.body.innerHTML;
+    }
 
     var finalHtml = mainDom.serialize();
     res.send(finalHtml);
