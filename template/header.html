@@ -6,22 +6,40 @@
                     <!-- Content inserted at runtime -->
                 </div>
             </div>
-            <div ng-click="headerl1=true;" class="jpress-flatbutton">
+            <div id="jpress-header-account-btn" ng-click="headerl1=true;" class="jpress-flatbutton">
                 Account
             </div>
         </div>
         <!-- Popup layer -->
-        <div class="jgrid-layer jgrid-layer-top1" ng-show="headerl1" style="background-color: rgba(160, 160, 160, 0.47); display: none;" ng-click="headerl1=false">
+        <div id="jpress-header-account-layer" class="jgrid-layer jgrid-layer-top1" ng-show="headerl1" style="background-color: rgba(160, 160, 160, 0.47); display: none;" ng-click="headerl1=false">
             <div class="jgrid-layer-small jgrid-scroll" style="background-color: #00000012;" ng-click="$event.stopPropagation();">
                 <div class="jgrid-v jgrid-cont-center">
                     <div class="g-signin2 jgrid-padding" data-onsuccess="jpress_on_google_sign_in"></div>
-                    <button onclick="jpress.gsignin.signOut()" style="width: 150px;" class="jgrid-padding">Sign out</button>
+                    <a onclick="jpress.gsignin.signOut()" class="jpress-flatbutton">Sign out</a>
+                    <a id="jpress-header-adminpanel-link" class="jpress-flatbutton">Admin panel</a>
                 </div>
             </div>
         </div>
 
         <script>
             document.getElementById("jpress-main-title").innerHTML = jpress.main.BLOG_NAME;
+
+            // onclick event to enable layer
+            {
+                var accountElem = document.getElementById("jpress-header-account-btn");
+                accountElem.addEventListener("click", function(event) {
+                    console.info("Enabling the layer for the account popup");
+                    document.getElementById("jpress-header-account-layer").style.display = "unset";
+                });
+            }
+
+            // onclick event for the button to admin panel
+            {
+                var adminElem = document.getElementById("jpress-header-adminpanel-link");
+                adminElem.addEventListener("click", function(event) {
+                    jpress.main.gotoRelative("/panel");
+                });
+            }
         </script>
     </body>
 </html>

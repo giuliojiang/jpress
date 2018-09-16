@@ -25,10 +25,13 @@ module.exports.createApp = async function(jpressContext) {
     find_service("templatemainhandler");
     find_service("domutils");
     find_service("postsprocessor");
+    find_service("handler_panel");
+    find_service("writeprocessor");
     jservice.register("context", context.createContext(jpressContext));
 
     // Start eager services ---------------------------------------------------
     await jservice.get("handler_write");
+    await jservice.get("handler_panel");
 
     var theApp = await jservice.get("app");
     return theApp.createApp();

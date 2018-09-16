@@ -12,7 +12,8 @@ mainApp.controller("mainController", function($scope) {
             _t: "write_post",
             _tok: jpress.gsignin.token,
             title: $scope.d.title,
-            body: $scope.d.writeInput
+            body: $scope.d.writeInput,
+            postid: jpress.vars.writePostId
         };
         jpress.api.communicate(msgobj, function(resp) {
             if (resp._t == "general_unauthorized") {
@@ -44,6 +45,10 @@ mainApp.controller("mainController", function($scope) {
             }
         });
     };
+
+    // TODO
+    // If in edit-mode, fetch the existing post first
+    
 
 });
 

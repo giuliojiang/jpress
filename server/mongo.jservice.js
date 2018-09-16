@@ -103,3 +103,22 @@ module.exports.deleteMany = function(query) {
         });
     });
 }
+
+// ============================================================================
+// Update One document
+// Parameters:
+//     query: MongoDB query object
+//     doc: MongoDB update query object
+// Return:
+//     res: MongoDB update result object http://mongodb.github.io/node-mongodb-native/3.1/api/Collection.html#~updateWriteOpResult
+module.exports.updateOne = function(query, doc) {
+    return new Promise((resolve, reject) => {
+        priv.collection.updateOne(query, doc, function(err, res) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(res);
+            }
+        });
+    });
+};

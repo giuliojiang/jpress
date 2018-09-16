@@ -16,12 +16,12 @@ module.exports.createApp = function() {
 
     var app = express();
 
-    // Template engine. Overrides the static file server
-    app.use("/", mod.templatemainhandler.createApp());
-
     // Static file server. Serves other JS and CSS files that
     // do not require processing
     app.use("/", express.static(path.resolve("./../client")));
+
+    // Template engine. Overrides the static file server
+    app.use("/", mod.templatemainhandler.createApp());
 
     // JSON API handler
     app.use("/api", mod.apiMainHandler.createHandler());

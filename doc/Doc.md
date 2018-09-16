@@ -75,12 +75,30 @@ Sent by server when user attempts to do something he doesn't have the permission
     _t: "write_post",
     _tok: authentication token,
     title: string,
-    body: string
+    body: string,
+    postid: string  // db post id for editing a post. null for new post
 }
 
 {
     _t: "write_post",
-    status: true/false
+    status: true/false,
+    message: string, error message to be displayed to the user if present
+}
+```
+
+## Panel
+
+```
+{
+    _t: "panel_login",
+    _tok: authentication token
+}
+
+{ // OK
+    _t: "panel_login"
+}
+{ // Fail
+    _t: "general_unauthorized"
 }
 ```
 

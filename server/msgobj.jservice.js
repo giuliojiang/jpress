@@ -32,3 +32,13 @@ module.exports.getString = function(msgobj, key) {
     }
 
 }
+
+// ============================================================================
+
+module.exports.getNullableString = function(msgobj, key) {
+    if (!msgobj[key]) {
+        return null;
+    } else {
+        return module.exports.getString(msgobj, key);
+    }
+}

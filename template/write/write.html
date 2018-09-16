@@ -4,38 +4,31 @@
         <script>jpress.main.loadJs(jpress.main.BASEURL + "/write/write.js");</script>
     </head>
     <body ng-controller="mainController">
-        <!-- Header injection -->
-        <div id="jpress-header"></div>
-        <!-- Title -->
-        <div class="w3-row">
-            <input type="text" ng-model="d.title">
-        </div>
-        <!-- Writing area -->
-        <div class="w3-row">
-            <textarea ng-model="d.writeInput"></textarea>
-        </div>
-        <!-- Preview area -->
-        <div class="w3-row">
-            <div id="previewElement"></div>
-        </div>
-        <!-- File uploader -->
-        <div class="w3-row">
-            <p>TODO</p>
-        </div>
-        <!-- Uploaded files -->
-        <div class="w3-row">
-            <p>TODO</p>
-        </div>
-        <!-- Preview and submit buttons -->
-        <div class="w3-row">
-            <div class="w3-col s6">
-                <button ng-click="submitButton()">Submit</button>
-            </div>
-            <div class="w3-col s6">
-                <button ng-click="previewButton()">Preview</button>
+        <div class="jgrid-layer">
+            <div class="jgrid-h jgrid-fullsize">
+                <!-- Sidebar -->
+                <div class="jgrid-sidebar" id="jpress-header"></div>
+                <!-- Main area -->
+                <div class="jgrid-h jgrid-expand jgrid-fullsize-y jgrid-scroll-y jgrid-shrink">
+                    <!-- Left side -->
+                    <div class="jgrid-v jgrid-expand jgrid-cont-center">
+                        <!-- Title -->
+                        <input type="text" ng-model="d.title" placeholder="Title" class="jgrid-fullsize-x jgrid-padding">
+                        <!-- Body -->
+                        <textarea ng-model="d.writeInput" placeholder="Post body" class="jgrid-fullsize-x jgrid-padding"></textarea>
+                        <!-- Preview button -->
+                        <div ng-click="previewButton()" class="jpress-flatbutton">Preview</div>
+                        <!-- Submit button -->
+                        <div ng-click="submitButton()" class="jpress-flatbutton">Submit</div>
+                    </div>
+                    <!-- Right side -->
+                    <div class="jgrid-v jgrid-expand jgrid-cont-center jgrid-shrink">
+                        <!-- Preview -->
+                        <h2>Post preview</h2>
+                        <div id="previewElement" class="jgrid-fullsize-x"></div>
+                    </div>
+                </div>
             </div>
         </div>
-        <!-- Footer injection -->
-        <div id="jpress-footer"></div>
     </body>
 </html>

@@ -2,6 +2,7 @@
 
 window.jpress = {};
 jpress.main = {};
+jpress.vars = {};
 
 // ============================================================================
 // Inject constants
@@ -37,14 +38,13 @@ jpress.main.gotoRelative = function(relUrl) {
 // Load the other JS files
 jpress.main.init = function() {
     setTimeout(function() {
-        jpress.main.loadJs(jpress.main.BASEURL + "/lib/api.js");
-        jpress.main.loadJs(jpress.main.BASEURL + "/lib/gsignin.js");
-        jpress.main.loadJs(jpress.main.BASEURL + "/lib/style.js");
-    
         jpress.main.loadCss("https://fonts.googleapis.com/css?family=PT+Serif");
         jpress.main.loadCss("https://unpkg.com/purecss@1.0.0/build/pure-min.css");
         jpress.main.loadCss(jpress.main.BASEURL + "/css/base.css");
         jpress.main.loadCss(jpress.main.BASEURL + "/css/jgrid.css");
+
+        jpress.main.loadJs(jpress.main.BASEURL + "/lib/api.js");
+        jpress.main.loadJs(jpress.main.BASEURL + "/lib/gsignin.js");
     }, 10);
     
 }

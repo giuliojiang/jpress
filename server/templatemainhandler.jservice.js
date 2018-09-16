@@ -19,6 +19,7 @@ module.exports.init = async function(jservice) {
     mod.domutils = await jservice.get("domutils");
     mod.postsprocessor = await jservice.get("postsprocessor");
     mod.log = await jservice.get("log");
+    mod.writeprocessor = await jservice.get("writeprocessor");
 }
 
 // ============================================================================
@@ -45,15 +46,36 @@ module.exports.createApp = function() {
         var postId = req.params.postid;
         var dom = await mod.postsprocessor.getSinglePost(req.baseUrl, postId);
         if (dom == null) {
-            mod.log.info("templatemainhandler: get post. Dom is null");
+            mod.log.info("templatemainhandler: /post/:postid Dom is null");
             res.sendStatus(404);
         } else {
             await module.exports.processTemplateDOM(dom, req, res);
         }
     });
 
-    app.get("/write", function(req, res) {
-        module.exports.processTemplate("./../template/write/write.html", req, res);
+    app.get("/write/:postid", async function(req, res) {
+        var postId = req.params.postid;
+        var dom = await mod.writeprocessor.generateDOM(req.baseUrl, postId);
+        if (dom == null) {
+            mod.log.info("templatemainhandler: /write/:postid DOM is null");
+            res.sendStatus(404);
+        } else {
+            await module.exports.processTemplateDOM(dom, req, res);
+        }
+    });
+
+    app.get("/write/", async function(req, res) {
+        var dom = await mod.writeprocessor.generateDOM(req.baseUrl, null);
+        if (dom == null) {
+            mod.log.info("templatemainhandler: /write DOM is null");
+            res.sendStatus(404);
+        } else {
+            await module.exports.processTemplateDOM(dom, req, res);
+        }
+    });
+
+    app.get("/panel", function(req, res) {
+        module.exports.processTemplate("./../template/panel/panel.html", req, res);
     });
 
     return app;
@@ -86,11 +108,15 @@ module.exports.processTemplateDOM = async function(theDom, req, res) {
 
     // Insert header content
     var headerElem = mainDom.window.document.getElementById("jpress-header");
-    headerElem.innerHTML = headerDom.window.document.body.innerHTML;
+    if (headerElem) {
+        headerElem.innerHTML = headerDom.window.document.body.innerHTML;
+    }
 
     // Insert footer content
     var footerElem = mainDom.window.document.getElementById("jpress-footer");
-    footerElem.innerHTML = footerDom.window.document.body.innerHTML;
+    if (footerElem) {
+        footerElem.innerHTML = footerDom.window.document.body.innerHTML;
+    }
 
     var finalHtml = mainDom.serialize();
     res.send(finalHtml);
