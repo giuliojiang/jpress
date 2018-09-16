@@ -17,7 +17,7 @@
                     <div class="g-signin2 jgrid-padding" data-onsuccess="jpress_on_google_sign_in"></div>
                 </div>
                 <!-- New post button -->
-                <div ng-show="d.loggedIn" class="jpress-panel-button">
+                <div onclick="jpress.main.gotoRelative('/write')" ng-show="d.loggedIn" class="jpress-panel-button">
                     New Post
                 </div>
                 <!-- List of existing posts -->
