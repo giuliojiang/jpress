@@ -2,6 +2,7 @@
 
 window.jpress = {};
 jpress.main = {};
+jpress.vars = {};
 
 // ============================================================================
 // Inject constants
