@@ -2,7 +2,7 @@
 
 var mod = {};
 var priv = {};
-priv.purgeSafeDuration = 1 * 24 * 60 * 60 * 1000; // Entries older than 1 day
+priv.purgeSafeDuration = 24 * 60 * 60 * 1000; // Entries older than 1 day
 
 // ============================================================================
 module.exports.init = async function(jservice) {
@@ -14,7 +14,7 @@ module.exports.init = async function(jservice) {
     now = now - priv.purgeSafeDuration; // Subtract 1 day
     var purgedNumber = await module.exports.purgeOld(now);
     mod.log.info("mongoauth: Removed ["+ purgedNumber +"] entries from authentication cache");
-}
+};
 
 // ============================================================================
 // Parameters:
@@ -26,9 +26,8 @@ module.exports.get = async function(googleToken) {
         googleToken: googleToken
     };
     var limit = 1;
-    var results = await mod.mongo.find(query, limit);
-    return results;
-}
+    return await mod.mongo.find(query, limit);
+};
 
 // ============================================================================
 // Purges entries older than the threshold time
@@ -40,9 +39,8 @@ module.exports.purgeOld = async function(thresholdTime) {
     var query = {
         loginTime: {$lt: thresholdTime}
     };
-    var numberDeleted = await mod.mongo.deleteMany(query);
-    return numberDeleted;
-}
+    return await mod.mongo.deleteMany(query);
+};
 
 // ============================================================================
 // Remove an entry by document ID
@@ -54,9 +52,8 @@ module.exports.removeById = async function(docId) {
     var query = {
         _id: docId
     };
-    var numberDeleted = await mod.mongo.deleteMany(query);
-    return numberDeleted;
-}
+    return await mod.mongo.deleteMany(query);
+};
 
 // ============================================================================
 // Insert new document in database
@@ -73,4 +70,4 @@ module.exports.insert = async function(googleToken, userId, name, isAdmin, login
     };
     var res = await mod.mongo.insertOne(newDoc);
     return res.insertedId;
-}
+};

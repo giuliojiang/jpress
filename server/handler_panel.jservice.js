@@ -12,7 +12,7 @@ module.exports.init = async function(jservice) {
 
     mod.handlers.register("panel_login", 2, module.exports.panelLogin);
 
-}
+};
 
 // ============================================================================
 
@@ -21,4 +21,4 @@ module.exports.panelLogin = async function(msgobj) {
     return {
         _t: "panel_login"
     };
-}
+};

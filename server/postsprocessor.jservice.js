@@ -17,7 +17,7 @@ module.exports.init = async function(jservice) {
     mod.log = await jservice.get("log");
     mod.context = await jservice.get("context");
 
-}
+};
 
 // ============================================================================
 // Parameters:
@@ -34,7 +34,7 @@ module.exports.getPosts = async function(pageNumber, baseUrl) {
     var posts = await mod.mongoposts.getLastPosts(priv.pageLimit, pageNumber * priv.pageLimit);
 
     // Case when there are no posts at this page number
-    if (posts.length == 0) {
+    if (posts.length === 0) {
         return await module.exports.generateLinkbackPage(mainDom, baseUrl);
     }
 
@@ -54,7 +54,7 @@ module.exports.getPosts = async function(pageNumber, baseUrl) {
     moreElem.setAttribute("href", baseUrl + "/more/" + (pageNumber + 1));
 
     // Set page title
-    if (pageNumber == 0) {
+    if (pageNumber === 0) {
         mainDom.window.document.title = mod.context.getContext().blogName + " - Home";
     } else {
         mainDom.window.document.title = 
@@ -62,7 +62,7 @@ module.exports.getPosts = async function(pageNumber, baseUrl) {
     }
 
     return mainDom;
-}
+};
 
 // ============================================================================
 module.exports.createPostElement = function(dom, title, bodyMd, baseUrl, postId) {
@@ -92,7 +92,7 @@ module.exports.createPostElement = function(dom, title, bodyMd, baseUrl, postId)
     parent.appendChild(bodySection);
 
     return parent;
-}
+};
 
 // ============================================================================
 // Return:
@@ -121,7 +121,7 @@ module.exports.generateLinkbackPage = async function(dom, baseUrl) {
     dom.window.document.title = mod.context.getContext().blogName + " - Not found";
 
     return dom;
-}
+};
 
 // ============================================================================
 // Return:
@@ -129,7 +129,7 @@ module.exports.generateLinkbackPage = async function(dom, baseUrl) {
 module.exports.getSinglePost = async function(baseUrl, postId) {
     var docs = await mod.mongoposts.getSinglePost(postId);
     mod.log.info("postsprocessor: getSinglePost. Number of documents: " + docs.length);
-    if (docs.length == 1) {
+    if (docs.length === 1) {
         return await module.exports.getSinglePostExists(baseUrl, docs[0]);
     } else {
         return null;

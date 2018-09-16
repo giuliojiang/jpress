@@ -24,7 +24,7 @@ var jpress_on_google_sign_in = function(googleUser) {
     var id_token = googleUser.getAuthResponse().id_token;
     console.info("Login success");
     jpress.gsignin.token = id_token;
-}
+};
 
 // ============================================================================
 jpress.gsignin.signOut = function() {
@@ -33,4 +33,4 @@ jpress.gsignin.signOut = function() {
     auth2.signOut().then(function () {
         console.log('Signed out');
     });
-}
+};

@@ -17,8 +17,7 @@ module.exports.createHandler = function() {
     app.use("/", bodyParser.json());
 
     app.post("/", async function(req, res) {
-        var body = req.body;
-        var msgobj = body;
+        var msgobj = req.body;
         
         var resp;
         try {
@@ -30,7 +29,7 @@ module.exports.createHandler = function() {
         }
 
         res.send(JSON.stringify(resp));
-        return;
+
 
     });
 

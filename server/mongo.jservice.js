@@ -102,7 +102,7 @@ module.exports.deleteMany = function(query) {
             }
         });
     });
-}
+};
 
 // ============================================================================
 // Update One document

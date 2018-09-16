@@ -9,14 +9,13 @@ var priv = {};
 // ============================================================================
 module.exports.init = async function(jservice) {
     mod.utilasync = await jservice.get("utilasync");
-}
+};
 
 // ============================================================================
 // Load an HTML file as jsdom DOM object
 module.exports.loadDom = async function(htmlPath) {
 
     var content = await mod.utilasync.fsReadFile(htmlPath, "utf8");
-    var dom = new JSDOM(content);
-    return dom;
+    return new JSDOM(content);
 
-}
+};

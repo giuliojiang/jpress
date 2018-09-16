@@ -5,7 +5,7 @@ var fs = require("fs");
 
 module.exports.init = async function() {
 
-}
+};
 
 module.exports.createHandler = function() {
 

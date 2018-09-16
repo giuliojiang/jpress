@@ -10,7 +10,7 @@ var priv = {};
 
 module.exports.init = async function(jservice) {
 
-}
+};
 
 // ============================================================================
 
@@ -31,7 +31,7 @@ module.exports.getString = function(msgobj, key) {
         throw new module.exports.MsgobjKeyError();
     }
 
-}
+};
 
 // ============================================================================
 
@@ -41,4 +41,4 @@ module.exports.getNullableString = function(msgobj, key) {
     } else {
         return module.exports.getString(msgobj, key);
     }
-}
+};

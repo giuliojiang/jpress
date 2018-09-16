@@ -26,13 +26,13 @@ jpress.main.loadCss = function(srcUrl) {
     elem.setAttribute("rel", "stylesheet");
     elem.setAttribute("href", srcUrl);
     document.head.appendChild(elem);
-}
+};
 
 // ============================================================================
 
 jpress.main.gotoRelative = function(relUrl) {
     document.location = jpress.main.BASEURL + relUrl;
-}
+};
 
 // ============================================================================
 // Load the other JS files
@@ -47,7 +47,7 @@ jpress.main.init = function() {
         jpress.main.loadJs(jpress.main.BASEURL + "/lib/gsignin.js");
     }, 10);
     
-}
+};
 
 // ============================================================================
 jpress.main.init();

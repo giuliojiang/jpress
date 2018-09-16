@@ -15,7 +15,7 @@ module.exports.init = async function(jservice) {
 module.exports.fsStat = async function(thePath) {
     var promiseStat = util.promisify(fs.stat);
     return await promiseStat(thePath);
-}
+};
 
 // ============================================================================
 // async read file

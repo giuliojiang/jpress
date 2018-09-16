@@ -50,8 +50,8 @@ module.exports.updatePost = async function(postid, title, body) {
     var res = await mod.mongo.updateOne(query, doc);
     var numberUpdated = res.result.nModified;
     mod.log.info("mongoposts: Number of rows modified: ["+ numberUpdated +"]");
-    return (numberUpdated == 1);
-}
+    return (numberUpdated === 1);
+};
 
 // ============================================================================
 // Get last few posts for the homepage feed
@@ -62,17 +62,16 @@ module.exports.getLastPosts = async function(limit, skip) {
     var sort = {
         datePosted: -1
     };
-    var docs = await mod.mongo.findLimitSkipSort(query, skip, limit, sort);
-    return docs;
-}
+    return await mod.mongo.findLimitSkipSort(query, skip, limit, sort);
+};
 
 // ============================================================================
 module.exports.getSinglePost = async function(postId) {
     var query = {
         _id: new ObjectId(postId)
-    }
+    };
     mod.log.info("mongoposts: getSinglePost. Query is " + JSON.stringify(query));
     var docs = await mod.mongo.find(query, 1);
     mod.log.info("mongoposts: getSinglePost. docs are " + JSON.stringify(docs));
     return docs;
-}
+};

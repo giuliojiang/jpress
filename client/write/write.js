@@ -16,7 +16,7 @@ mainApp.controller("mainController", function($scope) {
             postid: jpress.vars.writePostId
         };
         jpress.api.communicate(msgobj, function(resp) {
-            if (resp._t == "general_unauthorized") {
+            if (resp._t === "general_unauthorized") {
                 alert("Unauthorized");
                 return;
             }
@@ -37,11 +37,10 @@ mainApp.controller("mainController", function($scope) {
             text: $scope.d.writeInput
         };
         jpress.api.communicate(msgobj, function(resp) {
-            if (resp._t == "general_unauthorized") {
+            if (resp._t === "general_unauthorized") {
                 alert("Unauthorized");
             } else {
-                var htmlString = resp.html;
-                document.getElementById("previewElement").innerHTML = htmlString;
+                document.getElementById("previewElement").innerHTML = resp.html;
             }
         });
     };
