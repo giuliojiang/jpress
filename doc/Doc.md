@@ -75,7 +75,8 @@ Sent by server when user attempts to do something he doesn't have the permission
     _t: "write_post",
     _tok: authentication token,
     title: string,
-    body: string
+    body: string,
+    postid: string  // db post id for editing a post. null for new post
 }
 
 {

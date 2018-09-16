@@ -19,6 +19,7 @@ mainApp.controller("mainController", function($scope) {
 
     $scope.editByIdClick = function() {
         console.info("editByIdClick()");
+        jpress.main.gotoRelative("/write/" + $scope.d.editId);
     };
 
     $scope.deleteByIdClick = function() {

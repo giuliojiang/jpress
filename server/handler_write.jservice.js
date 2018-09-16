@@ -50,6 +50,7 @@ module.exports.handlePost = async function(msgobj) {
     try {
         var titleField = mod.msgobj.getString(msgobj, "title");
         var bodyField = mod.msgobj.getString(msgobj, "body");
+        var postidField = mod.msgobj.getNullableString(msgobj, "postid");
 
         // Check for empty strings
         if (titleField == "") {
@@ -67,13 +68,20 @@ module.exports.handlePost = async function(msgobj) {
             };
         }
 
-        // Insert into database
-        await mod.mongoposts.newPost(titleField, bodyField);
+        var status = false;
+        if (postidField == null) {
+            // New post
+            await mod.mongoposts.newPost(titleField, bodyField);
+            status = true;
+        } else {
+            // Update existing post
+            status = await mod.mongoposts.updatePost(postidField, titleField, bodyField);
+        }
 
         // Send OK
         return {
             _t: "write_post",
-            status: true
+            status: status
         };
     } catch (err) {
         if (err instanceof mod.msgobj.MsgobjKeyError) {

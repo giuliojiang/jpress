@@ -34,6 +34,26 @@ module.exports.newPost = async function(title, body) {
 };
 
 // ============================================================================
+// Return:
+//     status: true if successful, false if error
+module.exports.updatePost = async function(postid, title, body) {
+    mod.log.info("mongoposts: Updating post ["+ postid +"]");
+    var query = {
+        _id: new ObjectId(postid)
+    };
+    var doc = {
+        $set: {
+            title: title,
+            body: body
+        }
+    };
+    var res = await mod.mongo.updateOne(query, doc);
+    var numberUpdated = res.result.nModified;
+    mod.log.info("mongoposts: Number of rows modified: ["+ numberUpdated +"]");
+    return (numberUpdated == 1);
+}
+
+// ============================================================================
 // Get last few posts for the homepage feed
 module.exports.getLastPosts = async function(limit, skip) {
     var query = {
