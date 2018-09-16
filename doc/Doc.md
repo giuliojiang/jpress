@@ -85,6 +85,22 @@ Sent by server when user attempts to do something he doesn't have the permission
 }
 ```
 
+## Panel
+
+```
+{
+    _t: "panel_login",
+    _tok: authentication token
+}
+
+{ // OK
+    _t: "panel_login"
+}
+{ // Fail
+    _t: "general_unauthorized"
+}
+```
+
 # Database
 
 Based on MongoDB

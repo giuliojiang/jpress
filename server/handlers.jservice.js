@@ -21,6 +21,7 @@ module.exports.init = async function(jservice) {
     mod.log = await jservice.get("log");
 }
 
+// ============================================================================
 module.exports.register = function(key, authenticationLevel, handler) {
     if (registeredHandlers.hasOwnProperty(key)) {
         throw new Error("Key ["+ key +"] already has a handler");

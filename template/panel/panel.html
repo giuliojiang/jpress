@@ -17,11 +17,11 @@
                     <div class="g-signin2 jgrid-padding" data-onsuccess="jpress_on_google_sign_in"></div>
                 </div>
                 <!-- New post button -->
-                <div class="jpress-panel-button">
+                <div ng-show="d.loggedIn" class="jpress-panel-button">
                     New Post
                 </div>
                 <!-- List of existing posts -->
-                <div class="jgrid-v jgrid-fullsize-x jpress-panel-postlist jgrid-scroll-y">
+                <div ng-show="d.loggedIn" class="jgrid-v jgrid-fullsize-x jpress-panel-postlist jgrid-scroll-y">
                     <!-- For each post -->
                     <div ng-repeat="x in d.posts" class="jgrid-h jgrid-fullsize-x jgrid-cont-space-between">
                         <div>
@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <!-- Edit by ID -->
-                <div class="jgrid-h">
+                <div ng-show="d.loggedIn" class="jgrid-h">
                     <div>
                         Edit by ID
                     </div>
@@ -48,14 +48,22 @@
                     </div>
                 </div>
                 <!-- Delete by ID -->
-                <div class="jgrid-h">
+                <div ng-show="d.loggedIn" class="jgrid-h">
                     <div>
                         Delete by ID
                     </div>
-                    <input type="text" ng-model="d.DeleteId">
+                    <input type="text" ng-model="d.deleteId">
                     <div ng-click="deleteByIdClick()" class="jpress-panel-button">
                         Go
                     </div>
+                </div>
+                <!-- Message when user is not logged in yet -->
+                <div ng-hide="d.loggedIn">
+                    Log in as admin to enable Admin Panel
+                </div>
+                <!-- Other messages to user -->
+                <div ng-hide="d.loggedIn">
+                    {{d.errorMsg}}
                 </div>
             </div>
         </div>
