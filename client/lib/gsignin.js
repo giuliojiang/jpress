@@ -28,9 +28,17 @@ var jpress_on_google_sign_in = function(googleUser) {
 
 // ============================================================================
 jpress.gsignin.signOut = function() {
-    jpress.gsignin.token = null;
+    // Send sign out message to server
+    jpress.api.communicate({
+        _t: "general_logout",
+        _tok: jpress.gsignin.token
+    }, function(msgobj) {
+        // Do nothing
+    });
+
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
+        jpress.gsignin.token = null;
         console.log('Signed out');
     });
 };

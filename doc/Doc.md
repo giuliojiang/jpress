@@ -32,7 +32,6 @@ The template engine also injects the contents of `template/jpress.js` into the H
 
 ## General
 
-TODO
 User logs out. The message is also sent to the server to avoid an attacker being able to keep using a token stored in cache.
 ```
 {

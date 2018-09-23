@@ -71,3 +71,18 @@ module.exports.insert = async function(googleToken, userId, name, isAdmin, login
     var res = await mod.mongo.insertOne(newDoc);
     return res.insertedId;
 };
+
+// ============================================================================
+// Removes by token
+// Parameters:
+//     googleToken: string, google authentication token
+// Return:
+//     (undefined)
+module.exports.removeByToken = async function(googleToken) {
+    mod.log.info("mongoauth: removeByToken. Removing token ["+ googleToken +"]");
+    var query = {
+        googleToken: googleToken
+    };
+    var res = await mod.mongo.deleteMany(query);
+    mod.log.info("mongoauth: removeByToken. Removed ["+ res +"] entries from db");
+};
