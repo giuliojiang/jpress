@@ -2,7 +2,7 @@
     <body>
         <div class="jgrid-v">
             <div>
-                <div id="jpress-main-title" class="jgrid-padding" onclick="jpress.main.gotoRelative('/')">
+                <div id="jpress-main-title" class="jgrid-padding jcolor-light background" onclick="jpress.main.gotoRelative('/')">
                     <!-- Content inserted at runtime -->
                 </div>
             </div>
@@ -11,8 +11,8 @@
             </div>
         </div>
         <!-- Popup layer -->
-        <div id="jpress-header-account-layer" class="jgrid-layer jgrid-layer-top1" ng-show="headerl1" style="background-color: rgba(160, 160, 160, 0.47); display: none;" ng-click="headerl1=false">
-            <div class="jgrid-layer-small jgrid-scroll" style="background-color: #00000012;" ng-click="$event.stopPropagation();">
+        <div id="jpress-header-account-layer" class="jgrid-layer jgrid-layer-top1 jcolor-alpha background" ng-show="headerl1" style="display: none;" ng-click="headerl1=false">
+            <div class="jgrid-layer-small jgrid-scroll jcolor-popup background" ng-click="$event.stopPropagation();">
                 <div class="jgrid-v jgrid-cont-center">
                     <div class="g-signin2 jgrid-padding" data-onsuccess="jpress_on_google_sign_in"></div>
                     <a onclick="jpress.gsignin.signOut()" class="jpress-flatbutton">Sign out</a>

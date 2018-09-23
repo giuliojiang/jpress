@@ -1,0 +1,47 @@
+/* defaults */
+
+* {
+    color: #000500;
+}
+
+/* color definitions */
+
+.jcolor-main.foreground {
+    color: #000500;
+}
+.jcolor-main.background {
+    background-color: #000500;
+}
+
+
+.jcolor-secondary.foreground {
+    color: #362417;
+}
+.jcolor-secondary.background {
+    background-color: #362417;
+}
+
+.jcolor-light.foreground {
+    color: #92817A;
+}
+.jcolor-light.background {
+    background-color: #92817A;
+}
+
+.jcolor-popup.foreground {
+    color: #F1DABF;
+}
+.jcolor-popup.background {
+    background-color: #F1DABF;
+}
+
+.jcolor-back.foreground {
+    color: #FFFBFF;
+}
+.jcolor-back.background {
+    background-color: #FFFBFF;
+}
+
+.jcolor-alpha.background {
+    background-color: rgba(0, 0, 0, 0.5);
+}

@@ -35,7 +35,11 @@ var main = async function() {
     var app = express();
 
     var theJpressApp = await jpressIndex.createApp({
-        googleClientId: "Your ID"
+        googleClientId: "<YOUR GOOGLE OAUTH CLIENT ID>",
+        blogName: "<THE NAME OF YOUR BLOG>",
+        mongoConnectionUrl: "<YOUR CONNECTION URL>",
+        mongoCollectionName: "<THE MONGODB COLLECTION TO BE USED>",
+        enableLogging: true
     });
 
     app.use("/jpress", theJpressApp);
