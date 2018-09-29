@@ -5,6 +5,7 @@ mainApp.controller("mainController", function($scope) {
     $scope.d = {};
     $scope.d.writeInput = "";
     $scope.d.title = "";
+    // jpress.vars.writePostId is injected by the server
 
     // ========================================================================
     $scope.submitButton = function() {
@@ -16,7 +17,7 @@ mainApp.controller("mainController", function($scope) {
             postid: jpress.vars.writePostId
         };
         jpress.api.communicate(msgobj, function(resp) {
-            if (resp._t == "general_unauthorized") {
+            if (resp._t === "general_unauthorized") {
                 alert("Unauthorized");
                 return;
             }
@@ -37,18 +38,40 @@ mainApp.controller("mainController", function($scope) {
             text: $scope.d.writeInput
         };
         jpress.api.communicate(msgobj, function(resp) {
-            if (resp._t == "general_unauthorized") {
+            if (resp._t === "general_unauthorized") {
                 alert("Unauthorized");
             } else {
-                var htmlString = resp.html;
-                document.getElementById("previewElement").innerHTML = htmlString;
+                document.getElementById("previewElement").innerHTML = resp.html;
             }
         });
     };
 
-    // TODO
+    var fetchPost = function() {
+        console.info("Fetching existing edit post");
+        var msgobj = {
+            _t: "write_fetch",
+            _tok: jpress.gsignin.token,
+            postid: jpress.vars.writePostId
+        };
+        jpress.api.communicate(msgobj, function(resp) {
+            if (resp._t === "post") {
+                console.info("Received an existing post");
+                $scope.d.title = resp.title;
+                $scope.d.writeInput = resp.body;
+                $scope.$apply();
+            } else if (resp._t === "nopost") {
+                console.info("No post received, it's a new post")
+            } else {
+                console.info(JSON.stringify(resp));
+                alert("Unauthorized");
+            }
+        })
+    };
+
     // If in edit-mode, fetch the existing post first
-    
+    this.$onInit = function() {
+        jpress.gsignin.callWhenLoginSuccessful(fetchPost);
+    };
 
 });
 

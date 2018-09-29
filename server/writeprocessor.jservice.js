@@ -25,4 +25,4 @@ module.exports.generateDOM = async function(baseUrl, postId) {
     dom.window.document.head.appendChild(scriptElem);
 
     return dom;
-}
+};

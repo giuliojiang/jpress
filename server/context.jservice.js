@@ -4,7 +4,7 @@ var checkKey = function(theObj, theKey) {
     if (!theObj.hasOwnProperty(theKey)) {
         throw new Error("Key ["+ theKey +"] is not defined. This is required in jpress Context");
     }
-}
+};
 
 module.exports.createContext = function(jpressContext) {
 

@@ -20,7 +20,7 @@ module.exports.init = async function(jservice) {
     mod.postsprocessor = await jservice.get("postsprocessor");
     mod.log = await jservice.get("log");
     mod.writeprocessor = await jservice.get("writeprocessor");
-}
+};
 
 // ============================================================================
 module.exports.createApp = function() {
@@ -80,7 +80,7 @@ module.exports.createApp = function() {
 
     return app;
 
-}
+};
 
 module.exports.processTemplateDOM = async function(theDom, req, res) {
 
@@ -120,8 +120,8 @@ module.exports.processTemplateDOM = async function(theDom, req, res) {
 
     var finalHtml = mainDom.serialize();
     res.send(finalHtml);
-    return;
-}
+
+};
 
 // ============================================================================
 // Parameters:

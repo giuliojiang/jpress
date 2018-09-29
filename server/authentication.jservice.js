@@ -49,7 +49,7 @@ module.exports.authenticateDirect = async function(googleToken) {
 module.exports.authenticate = async function(googleToken) {
     mod.log.info("authentication: token " + googleToken);
     var cachedUsers = await mod.mongoauth.get(googleToken);
-    if (cachedUsers.length == 1) {
+    if (cachedUsers.length === 1) {
         // Cache hit
         mod.log.info("authentication: Cache hit");
         return cachedUsers[0];
@@ -72,7 +72,7 @@ module.exports.authenticate = async function(googleToken) {
             return userData;
         }
     } 
-}
+};
 
 // ============================================================================
 priv.scheduleRemoval = function(docId) {
@@ -81,4 +81,4 @@ priv.scheduleRemoval = function(docId) {
         var numberDeleted = await mod.mongoauth.removeById(docId);
         mod.log.info("authentication: Scheduled removal of document ID ["+ docId +"]: ["+ numberDeleted +"]");
     }, priv.CACHE_DURATION);
-}
+};

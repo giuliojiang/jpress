@@ -6,7 +6,7 @@ var priv = {};
 // ============================================================================
 module.exports.init = async function(jservice) {
     mod.mongo = await jservice.get("mongo");
-}
+};
 
 // ============================================================================
 // Parameters:
@@ -19,5 +19,5 @@ module.exports.userExists = async function(userId) {
         userId: userId
     };
     var docs = await mod.mongo.find(query, 1);
-    return docs.length == 1;
-}
+    return docs.length === 1;
+};

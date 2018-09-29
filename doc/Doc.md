@@ -32,7 +32,6 @@ The template engine also injects the contents of `template/jpress.js` into the H
 
 ## General
 
-TODO
 User logs out. The message is also sent to the server to avoid an attacker being able to keep using a token stored in cache.
 ```
 {
@@ -51,6 +50,13 @@ Sent by server when user attempts to do something he doesn't have the permission
 
 {
     _t: "general_unauthorized"
+}
+```
+
+Sent by the server upon internal error
+```
+{
+    _t: "general_error"
 }
 ```
 
@@ -86,6 +92,25 @@ Sent by server when user attempts to do something he doesn't have the permission
 }
 ```
 
+```
+Fetch an existing post when editing in the write panel
+{
+    _t: "write_fetch",
+    _tok: authentication token,
+    postid: string
+}
+
+{
+    _t: "post"
+    title: string,
+    body: string
+}
+OR
+{
+    _t: "nopost"
+}
+```
+
 ## Panel
 
 ```
@@ -99,6 +124,22 @@ Sent by server when user attempts to do something he doesn't have the permission
 }
 { // Fail
     _t: "general_unauthorized"
+}
+```
+
+```
+{
+    _t: "panel_delete_by_id",
+    _tok: authentication token,
+    postid: string
+}
+
+{
+    status: "ok"
+}
+OR
+{
+    status: "fail"
 }
 ```
 

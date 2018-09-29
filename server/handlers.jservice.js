@@ -19,7 +19,7 @@ module.exports.init = async function(jservice) {
     mod.util = await jservice.get("util");
     mod.authentication = await jservice.get("authentication");
     mod.log = await jservice.get("log");
-}
+};
 
 // ============================================================================
 module.exports.register = function(key, authenticationLevel, handler) {
@@ -28,7 +28,7 @@ module.exports.register = function(key, authenticationLevel, handler) {
     }
     registeredHandlers[key] = handler;
     authenticationLevels[key] = authenticationLevel;
-}
+};
 
 // ============================================================================
 // Returns: boolean
@@ -41,7 +41,7 @@ priv.checkAuthenticationLevel = async function(msgobj, key) {
         var requiredLevel = authenticationLevels[key];
 
         // Level 0 does not require any authentication
-        if (requiredLevel == 0) {
+        if (requiredLevel === 0) {
             return true;
         }
 
@@ -107,7 +107,15 @@ module.exports.handle = async function(msgobj) {
         // Get and call the handler
         if (registeredHandlers.hasOwnProperty(key)) {
             var theHandler = registeredHandlers[key];
-            return await theHandler(msgobj);
+            try {
+                return await theHandler(msgobj);
+            } catch (err) {
+                console.info("handlers: Error in handler");
+                console.info(err);
+                return {
+                    _t: "general_error"
+                }
+            }
         } else {
             console.info("handlers: No handler for key ["+ key +"]");
             return null;
@@ -116,4 +124,4 @@ module.exports.handle = async function(msgobj) {
         console.error("handlers: Unexpected error: ", err);
         return null;
     }
-}
+};

@@ -27,7 +27,7 @@ module.exports.is_string = function(data) {
 };
 
 module.exports.isNonEmptyString = function(data) {
-    return (module.exports.is_string(data)) && (data != "");
+    return (module.exports.is_string(data)) && (data !== "");
 };
 
 // is_string_array ============================================================
@@ -49,7 +49,7 @@ module.exports.is_string_array = function(data) {
 // Is object
 module.exports.isObject = function(theObj) {
     return theObj !== null && typeof theObj === 'object';
-}
+};
 
 // mkdir_sync =================================================================
 
@@ -150,7 +150,7 @@ module.exports.aforeach = function(func, list, callback) {
 
     one();
 
-}
+};
 
 // ============================================================================
 // String replace function
@@ -175,7 +175,7 @@ module.exports.sanitizeURL = function(inputURL) {
 module.exports.splitext = function(filestring) {
 
     var splt = filestring.split(".");
-    if (splt.length == 0) {
+    if (splt.length === 0) {
         return "";
     } else {
         var len = splt.length;

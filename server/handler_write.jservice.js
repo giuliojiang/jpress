@@ -16,8 +16,9 @@ module.exports.init = async function(jservice) {
 
     mod.handlers.register("write_preview", 2, module.exports.handlePreview);
     mod.handlers.register("write_post", 2, module.exports.handlePost);
+    mod.handlers.register("write_fetch", 2, module.exports.handleFetch);
 
-}
+};
 
 // ============================================================================
 
@@ -28,11 +29,10 @@ module.exports.handlePreview = async function(msgobj) {
         var compiledHtml = converter.makeHtml(textField);
         // HTML is not sanitized because only site admin
         // can create blog posts, and site admin is trusted
-        var resp = {
+        return {
             _t: "write_preview",
             html: compiledHtml
         };
-        return resp;
     } catch (err) {
         if (err instanceof mod.msgobj.MsgobjKeyError) {
             return null;
@@ -41,7 +41,7 @@ module.exports.handlePreview = async function(msgobj) {
         }
     }
 
-}
+};
 
 // ============================================================================
 
@@ -53,14 +53,14 @@ module.exports.handlePost = async function(msgobj) {
         var postidField = mod.msgobj.getNullableString(msgobj, "postid");
 
         // Check for empty strings
-        if (titleField == "") {
+        if (titleField === "") {
             return {
                 _t: "write_post",
                 status: false,
                 message: "Post title cannot be empty"
             };
         }
-        if (bodyField == "") {
+        if (bodyField === "") {
             return {
                 _t: "write_post",
                 status: false,
@@ -96,4 +96,32 @@ module.exports.handlePost = async function(msgobj) {
         }
     }
 
-}
+};
+
+// ============================================================================
+
+module.exports.handleFetch = async function(msgobj) {
+    var postid = mod.msgobj.getNullableString(msgobj, "postid");
+
+    // No postid, writing a new post
+    if (!postid) {
+        return {
+            _t: "nopost"
+        }
+    }
+
+    // Get post from database
+    var thePost = await mod.mongoposts.getSinglePost(postid);
+    if (thePost.length === 1) {
+        var doc = thePost[0];
+        return {
+            _t: "post",
+            title: doc.title,
+            body: doc.body
+        }
+    } else {
+        return {
+            _t: "nopost"
+        };
+    }
+};

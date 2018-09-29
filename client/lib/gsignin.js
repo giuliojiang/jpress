@@ -24,13 +24,31 @@ var jpress_on_google_sign_in = function(googleUser) {
     var id_token = googleUser.getAuthResponse().id_token;
     console.info("Login success");
     jpress.gsignin.token = id_token;
-}
+};
 
 // ============================================================================
 jpress.gsignin.signOut = function() {
-    jpress.gsignin.token = null;
+    // Send sign out message to server
+    jpress.api.communicate({
+        _t: "general_logout",
+        _tok: jpress.gsignin.token
+    }, function(msgobj) {
+        // Do nothing
+    });
+
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
+        jpress.gsignin.token = null;
         console.log('Signed out');
     });
-}
+};
+
+// ============================================================================
+jpress.gsignin.callWhenLoginSuccessful = function(func) {
+    var handle = setInterval(function() {
+        if (jpress.gsignin.token) {
+            clearInterval(handle);
+            func();
+        }
+    }, 250);
+};
