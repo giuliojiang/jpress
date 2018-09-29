@@ -24,6 +24,20 @@ mainApp.controller("mainController", function($scope) {
 
     $scope.deleteByIdClick = function() {
         console.info("deleteByIdClick()");
+        var msgobj = {
+            _t: "panel_delete_by_id",
+            _tok: jpress.gsignin.token,
+            postid: $scope.d.deleteId
+        };
+        jpress.api.communicate(msgobj, function(resp) {
+            if (resp.status === "ok") {
+                alert("Post deleted");
+            } else if (resp.status === "fail") {
+                alert("Error: post not found");
+            } else {
+                alert("Unauthorized")
+            }
+        });
     };
 
     this.$onInit = function() {

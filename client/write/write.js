@@ -68,7 +68,6 @@ mainApp.controller("mainController", function($scope) {
         })
     };
 
-    // TODO issue: this function is called before the sign in completes, so the server says that it's unauthorized.
     // If in edit-mode, fetch the existing post first
     this.$onInit = function() {
         jpress.gsignin.callWhenLoginSuccessful(fetchPost);

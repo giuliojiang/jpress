@@ -127,6 +127,22 @@ OR
 }
 ```
 
+```
+{
+    _t: "panel_delete_by_id",
+    _tok: authentication token,
+    postid: string
+}
+
+{
+    status: "ok"
+}
+OR
+{
+    status: "fail"
+}
+```
+
 # Database
 
 Based on MongoDB

@@ -77,3 +77,16 @@ module.exports.getSinglePost = async function(postId) {
     mod.log.info("mongoposts: getSinglePost. docs are " + JSON.stringify(docs));
     return docs;
 };
+
+// ============================================================================
+// Parameters:
+//     postId: _id field of the post to be deleted
+// Return:
+//     delete: boolean, true if a post was deleted, false otherwise
+module.exports.deleteById = async function(postId) {
+    var query = {
+        _id: new ObjectId(postId)
+    };
+    var numberDeleted = await mod.mongo.deleteMany(query);
+    return numberDeleted === 1;
+};
