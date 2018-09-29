@@ -66,6 +66,8 @@ module.exports.getLastPosts = async function(limit, skip) {
 };
 
 // ============================================================================
+// Return:
+//     docs: array of documents
 module.exports.getSinglePost = async function(postId) {
     var query = {
         _id: new ObjectId(postId)

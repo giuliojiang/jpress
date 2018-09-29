@@ -16,6 +16,7 @@ module.exports.init = async function(jservice) {
 
     mod.handlers.register("write_preview", 2, module.exports.handlePreview);
     mod.handlers.register("write_post", 2, module.exports.handlePost);
+    mod.handlers.register("write_fetch", 2, module.exports.handleFetch);
 
 };
 
@@ -95,4 +96,32 @@ module.exports.handlePost = async function(msgobj) {
         }
     }
 
+};
+
+// ============================================================================
+
+module.exports.handleFetch = async function(msgobj) {
+    var postid = mod.msgobj.getNullableString(msgobj, "postid");
+
+    // No postid, writing a new post
+    if (!postid) {
+        return {
+            _t: "nopost"
+        }
+    }
+
+    // Get post from database
+    var thePost = await mod.mongoposts.getSinglePost(postid);
+    if (thePost.length === 1) {
+        var doc = thePost[0];
+        return {
+            _t: "post",
+            title: doc.title,
+            body: doc.body
+        }
+    } else {
+        return {
+            _t: "nopost"
+        };
+    }
 };

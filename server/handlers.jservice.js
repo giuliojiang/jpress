@@ -107,7 +107,15 @@ module.exports.handle = async function(msgobj) {
         // Get and call the handler
         if (registeredHandlers.hasOwnProperty(key)) {
             var theHandler = registeredHandlers[key];
-            return await theHandler(msgobj);
+            try {
+                return await theHandler(msgobj);
+            } catch (err) {
+                console.info("handlers: Error in handler");
+                console.info(err);
+                return {
+                    _t: "general_error"
+                }
+            }
         } else {
             console.info("handlers: No handler for key ["+ key +"]");
             return null;

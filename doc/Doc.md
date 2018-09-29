@@ -53,6 +53,13 @@ Sent by server when user attempts to do something he doesn't have the permission
 }
 ```
 
+Sent by the server upon internal error
+```
+{
+    _t: "general_error"
+}
+```
+
 
 ## Write
 
@@ -82,6 +89,25 @@ Sent by server when user attempts to do something he doesn't have the permission
     _t: "write_post",
     status: true/false,
     message: string, error message to be displayed to the user if present
+}
+```
+
+```
+Fetch an existing post when editing in the write panel
+{
+    _t: "write_fetch",
+    _tok: authentication token,
+    postid: string
+}
+
+{
+    _t: "post"
+    title: string,
+    body: string
+}
+OR
+{
+    _t: "nopost"
 }
 ```
 
