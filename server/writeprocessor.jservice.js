@@ -1,8 +1,9 @@
 "use strict";
 
+var path = require("path");
 var mod = {};
 var priv = {};
-priv.htmlPath = "./../template/write/write.html";
+priv.htmlPath = path.join(__dirname, "../template/write/write.html");
 
 module.exports.init = async function(jservice) {
     mod.domutils = await jservice.get("domutils");

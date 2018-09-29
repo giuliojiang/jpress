@@ -1,5 +1,5 @@
 var path = require("path");
-var context = require("./context.jservice.js");
+var context = require(path.join(__dirname, "context.jservice.js"));
 var jservice = require(path.join(__dirname, "jservice.js"));
 
 var find_service = function(name) {

@@ -3,12 +3,12 @@
 var mod = {};
 var priv = {};
 var expect = require("chai").expect;
-var quick = require("./lib/quick.js");
-var jservice = require("./../jservice.js");
+var quick = require(path.join(__dirname, "lib/quick.js"));
+var jservice = require(path.join(__dirname, "../jservice.js"));
 
 module.exports.run = async function() {
 
-    jservice.register("msgobj", require("./../msgobj.jservice.js"));
+    jservice.register("msgobj", require(path.join(__dirname, "../msgobj.jservice.js")));
 
     mod.msgobj = await jservice.get("msgobj");
 

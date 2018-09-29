@@ -18,7 +18,7 @@ module.exports.createApp = function() {
 
     // Static file server. Serves other JS and CSS files that
     // do not require processing
-    app.use("/", express.static(path.resolve("./../client")));
+    app.use("/", express.static(path.resolve(path.join(__dirname, "../client"))));
 
     // Template engine. Overrides the static file server
     app.use("/", mod.templatemainhandler.createApp());

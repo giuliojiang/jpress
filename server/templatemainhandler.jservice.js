@@ -3,11 +3,12 @@
 // This express app is the template engine to serve
 // dynamic HTML files
 
+var path = require("path");
 var mod = {};
 var priv = {};
-priv.jsPath = "./../template/jpress.js";
-priv.headerPath = "./../template/header.html";
-priv.footerPath = "./../template/footer.html";
+priv.jsPath = path.join(__dirname, "../template/jpress.js");
+priv.headerPath = path.join(__dirname, "../template/header.html");
+priv.footerPath = path.join(__dirname, "../template/footer.html");
 
 var express = require("express");
 
@@ -75,7 +76,7 @@ module.exports.createApp = function() {
     });
 
     app.get("/panel", function(req, res) {
-        module.exports.processTemplate("./../template/panel/panel.html", req, res);
+        module.exports.processTemplate(path.join(__dirname, "../template/panel/panel.html"), req, res);
     });
 
     return app;

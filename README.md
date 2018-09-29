@@ -19,8 +19,8 @@ var express = require("express");
 var https = require('https');
 var path = require("path");
 var fs = require("fs");
-var privateKey  = fs.readFileSync("./key.pem", 'utf8');
-var certificate = fs.readFileSync("./cert.pem", 'utf8');
+var privateKey  = fs.readFileSync(path.join(__dirname, "key.pem", 'utf8'));
+var certificate = fs.readFileSync(path.join(__dirname, "cert.pem", 'utf8'));
 
 var jpressIndex = require("jpress");
 

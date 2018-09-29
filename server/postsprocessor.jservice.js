@@ -3,11 +3,12 @@
 const showdown = require("showdown");
 const converter = new showdown.Converter();
 
+var path = require("path");
 var mod = {};
 var priv = {};
 priv.pageLimit = 10; // Number of posts per page
-priv.blogTemplatePath = "./../template/index/index.html";
-priv.singlePostTemplatePath = "./../template/post/post.html";
+priv.blogTemplatePath = path.join(__dirname, "../template/index/index.html");
+priv.singlePostTemplatePath = path.join(__dirname, "../template/post/post.html");
 
 // ============================================================================
 module.exports.init = async function(jservice) {

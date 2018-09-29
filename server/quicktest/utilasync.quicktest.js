@@ -3,12 +3,12 @@
 var mod = {};
 var priv = {};
 var expect = require('chai').expect;
-var quick = require("./lib/quick.js");
-var jservice = require("./../jservice.js");
+var quick = require(path.join(__dirname, "lib/quick.js"));
+var jservice = require(path.join(__dirname, "../jservice.js"));
 
 module.exports.run = async function() {
 
-    jservice.register("utilasync", require("./../utilasync.jservice.js"));
+    jservice.register("utilasync", require(path.join(__dirname, "../utilasync.jservice.js")));
     
     mod.utilasync = await jservice.get("utilasync");
 
@@ -17,13 +17,13 @@ module.exports.run = async function() {
         var foo = "bar";
         expect(foo).to.be.a('string');
 
-        var stat = await mod.utilasync.fsStat("./etc/afile");
+        var stat = await mod.utilasync.fsStat(path.join(__dirname, "etc/afile"));
         expect(stat.isFile()).to.be.true;
     }
 
     // ------------------------------------------------------------------------
     {
-        var fileContents = await mod.utilasync.fsReadFile("./etc/afile", "utf8");
+        var fileContents = await mod.utilasync.fsReadFile(path.join(__dirname, "etc/afile", "utf8"));
         expect(fileContents).to.equal("some content");
     }
 
