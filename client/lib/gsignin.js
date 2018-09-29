@@ -42,3 +42,13 @@ jpress.gsignin.signOut = function() {
         console.log('Signed out');
     });
 };
+
+// ============================================================================
+jpress.gsignin.callWhenLoginSuccessful = function(func) {
+    var handle = setInterval(function() {
+        if (jpress.gsignin.token) {
+            clearInterval(handle);
+            func();
+        }
+    }, 250);
+};
