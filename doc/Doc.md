@@ -190,3 +190,15 @@ Actual registered users (that can write posts)
     userId: unique google user id
 }
 ```
+
+## Token
+
+Single-use tokens
+
+```
+{
+    _id
+    table: "token",
+    token: string
+}
+```
