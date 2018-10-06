@@ -11,7 +11,7 @@ var util = require("util");
 var readline = require("readline");
 
 // Edit this for connection + password string
-var uri = require("./url.js").url;
+var uri = require(path.join(__dirname, "url.js")).url;
 
 // Edit the name of the collection
 var collectionName = "jpress";

@@ -2,7 +2,7 @@ var MongoClient = require('mongodb').MongoClient;
 var util = require("util");
 
 // Edit this for connection + password string
-var uri = require("./url.js").url;
+var uri = require(path.join(__dirname, "url.js")).url;
 
 // Edit the name of the collection
 var collectionName = "jpress";

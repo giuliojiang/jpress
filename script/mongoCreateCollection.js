@@ -1,7 +1,7 @@
 var MongoClient = require('mongodb').MongoClient;
 var util = require("util");
 
-var uri = require("./url.js").url;
+var uri = require(path.join(__dirname, "url.js")).url;
 
 var main = async function() {
 
@@ -14,7 +14,7 @@ var main = async function() {
     console.info("Got a db? " + !!db);
 
     // Create the collection
-    db.createCollection("jpress", function(err, res) {
+    db.createCollection("prod-blog-jstudios", function(err, res) {
         if (err) {
             console.error(err);
             return;
