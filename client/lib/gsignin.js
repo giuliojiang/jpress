@@ -1,5 +1,7 @@
 "use strict";
 
+// based on https://developers.google.com/identity/sign-in/web/backend-auth
+
 jpress.gsignin = {};
 jpress.gsignin.token = null; // Will hold the token when user is signed in
 jpress.gsignin.signOut = null; // Function to sign out
